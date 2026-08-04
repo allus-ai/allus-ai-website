@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Allus AI industrial foundation models and model-powered solutions prototype.">
+  <meta name="theme-color" content="#f3f2ee">
+  <title>Allus AI — Industrial Intelligence</title>
+  <link rel="icon" href="./assets/allus-icon-navy.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=29.4">
+</head>
+<body>
+  <!--
+    PROTOTYPE ASSUMPTIONS
+    - The information architecture and supplied copy are preserved.
+    - Only the supplied Allus AI logo files are used from the logo package.
+    - Typography, scale, layout, and the Morandi palette are independent prototype decisions.
+    - Original simulated industrial visuals illustrate the product concept; verified customer footage and metrics remain pending.
+    - Simulated scenes are clearly labeled and are not evidence of shipping functionality or measured outcomes.
+    - Hash routing keeps the prototype deployable as static files.
+  -->
+  <button class="skip-link" id="skipLink" type="button">Skip to content</button>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#/" aria-label="Allus AI home">
+      <img class="brand-logo" src="./assets/allus-logo-navy.svg" width="2000" height="431" alt="Allus AI">
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation">
+      <span id="menuLabel">Menu</span><span class="menu-lines" aria-hidden="true"></span>
+    </button>
+
+    <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
+      <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
+
+      <div class="nav-item nav-item--submenu" data-nav-item="model">
+        <div class="nav-primary">
+          <a class="nav-primary-link" href="#/model" data-nav="model" data-index="01" aria-label="Model"><span class="nav-label" data-label="Model">Model</span></a>
+          <button class="nav-disclosure" type="button" aria-expanded="false" aria-controls="submenu-model" aria-label="Show Model pages"><span aria-hidden="true"></span></button>
+        </div>
+        <div class="nav-submenu" id="submenu-model" aria-label="Model pages" aria-hidden="true" inert>
+          <div class="nav-submenu-panel">
+            <div class="nav-submenu-intro">
+              <p class="eyebrow">MODEL SYSTEM</p>
+              <h2>Three model roles.<br><em>One intelligence foundation.</em></h2>
+              <a class="nav-submenu-overview" href="#/model" data-route="/model">Model overview <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="nav-submenu-columns nav-submenu-columns--one">
+              <div class="nav-submenu-group">
+                <h3>Models</h3>
+                <a class="nav-submenu-link" href="#/model/allusone" data-route="/model/allusone"><span>01</span><strong>AllusONE</strong><i aria-hidden="true">↗</i></a>
+                <a class="nav-submenu-link" href="#/model/allusedge" data-route="/model/allusedge"><span>02</span><strong>AllusEdge</strong><i aria-hidden="true">↗</i></a>
+                <a class="nav-submenu-link" href="#/model/allusflow" data-route="/model/allusflow"><span>03</span><strong>AllusFlow</strong><i aria-hidden="true">↗</i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-item nav-item--submenu" data-nav-item="solutions">
+        <div class="nav-primary">
+          <a class="nav-primary-link" href="#/solutions" data-nav="solutions" data-index="02" aria-label="Solutions"><span class="nav-label" data-label="Solutions">Solutions</span></a>
+          <button class="nav-disclosure" type="button" aria-expanded="false" aria-controls="submenu-solutions" aria-label="Show Solutions pages"><span aria-hidden="true"></span></button>
+        </div>
+        <div class="nav-submenu nav-submenu--wide" id="submenu-solutions" aria-label="Solutions and industries" aria-hidden="true" inert>
+          <div class="nav-submenu-panel">
+            <div class="nav-submenu-intro">
+              <p class="eyebrow">SOLUTIONS &amp; INDUSTRIES</p>
+              <h2>Start with the problem.<br><em>Configure for the operation.</em></h2>
+              <a class="nav-submenu-overview" href="#/solutions" data-route="/solutions">Solutions overview <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="nav-submenu-columns nav-submenu-columns--two">
+              <div class="nav-submenu-group nav-submenu-group--stacked">
+                <div class="nav-submenu-cluster">
+                  <h3>Work &amp; Process</h3>
+                  <a class="nav-submenu-link" href="#/solutions/operational-knowledge-guidance" data-route="/solutions/operational-knowledge-guidance"><span>01</span><strong>Operational Knowledge &amp; Guidance</strong><i aria-hidden="true">↗</i></a>
+                  <a class="nav-submenu-link" href="#/solutions/production-process-intelligence" data-route="/solutions/production-process-intelligence"><span>02</span><strong>Production &amp; Process Intelligence</strong><i aria-hidden="true">↗</i></a>
+                </div>
+                <div class="nav-submenu-cluster">
+                  <h3>Assets &amp; Sites</h3>
+                  <a class="nav-submenu-link" href="#/solutions/equipment-asset-intelligence" data-route="/solutions/equipment-asset-intelligence"><span>03</span><strong>Equipment &amp; Asset Intelligence</strong><i aria-hidden="true">↗</i></a>
+                  <a class="nav-submenu-link" href="#/solutions/industrial-safety-site-intelligence" data-route="/solutions/industrial-safety-site-intelligence"><span>04</span><strong>Industrial Safety &amp; Site Intelligence</strong><i aria-hidden="true">↗</i></a>
+                </div>
+              </div>
+              <div class="nav-submenu-group">
+                <h3>Industries</h3>
+                <a class="nav-submenu-link" href="#/industries/electronics-assembly" data-route="/industries/electronics-assembly"><span>01</span><strong>Electronics Assembly</strong><i aria-hidden="true">↗</i></a>
+                <a class="nav-submenu-link" href="#/industries/fmcg" data-route="/industries/fmcg"><span>02</span><strong>FMCG</strong><i aria-hidden="true">↗</i></a>
+                <a class="nav-submenu-link" href="#/industries/food-beverage" data-route="/industries/food-beverage"><span>03</span><strong>Food &amp; Beverage</strong><i aria-hidden="true">↗</i></a>
+                <a class="nav-submenu-link" href="#/industries/advanced-materials" data-route="/industries/advanced-materials"><span>04</span><strong>Advanced Materials</strong><i aria-hidden="true">↗</i></a>
+                <a class="nav-submenu-link" href="#/industries/automotive" data-route="/industries/automotive"><span>05</span><strong>Automotive</strong><i aria-hidden="true">↗</i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-item nav-item--submenu" data-nav-item="resource">
+        <div class="nav-primary">
+          <a class="nav-primary-link" href="#/resource" data-nav="resource" data-index="03" aria-label="Resource"><span class="nav-label" data-label="Resource">Resource</span></a>
+          <button class="nav-disclosure" type="button" aria-expanded="false" aria-controls="submenu-resource" aria-label="Show Resource pages"><span aria-hidden="true"></span></button>
+        </div>
+        <div class="nav-submenu" id="submenu-resource" aria-label="Resource pages" aria-hidden="true" inert>
+          <div class="nav-submenu-panel">
+            <div class="nav-submenu-intro">
+              <p class="eyebrow">RESOURCE</p>
+              <h2>Use cases,<br><em>assurance and trust.</em></h2>
+              <a class="nav-submenu-overview" href="#/resource" data-route="/resource">Resource overview <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="nav-submenu-columns nav-submenu-columns--two">
+              <div class="nav-submenu-group">
+                <h3>Use Cases</h3>
+                <a class="nav-submenu-link" href="#/resource/use-cases" data-route="/resource/use-cases"><span>01</span><strong>All Customer Stories</strong><i aria-hidden="true">↗</i></a>
+                <div class="nav-tertiary-list" aria-label="Customer case studies">
+                  <a href="#/resource/use-cases/advanced-materials" data-route="/resource/use-cases/advanced-materials"><span>01.1</span><strong>Advanced Materials</strong><i aria-hidden="true">↗</i></a>
+                  <a href="#/resource/use-cases/electronics-assembly" data-route="/resource/use-cases/electronics-assembly"><span>01.2</span><strong>Electronics Assembly</strong><i aria-hidden="true">↗</i></a>
+                  <a href="#/resource/use-cases/biscuit-production" data-route="/resource/use-cases/biscuit-production"><span>01.3</span><strong>Biscuit Production</strong><i aria-hidden="true">↗</i></a>
+                </div>
+              </div>
+              <div class="nav-submenu-group">
+                <h3>Trust Center</h3>
+                <a class="nav-submenu-link" href="#/resource/trust" data-route="/resource/trust"><span>02</span><strong>Security, Privacy &amp; AI Governance</strong><i aria-hidden="true">↗</i></a>
+                <p class="nav-submenu-note">Assurance roadmap · control domains · responsible AI</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-item nav-item--direct">
+        <div class="nav-primary">
+          <a class="nav-primary-link" href="#/company" data-nav="company" data-index="04" aria-label="Company"><span class="nav-label" data-label="Company">Company</span></a>
+        </div>
+      </div>
+      <a class="mobile-nav-cta" href="#/connect" data-nav="connect" data-index="05" aria-label="Connect"><span class="nav-label" data-label="Connect">Connect</span><span aria-hidden="true">↗</span></a>
+    </nav>
+
+    <a class="header-cta" href="#/connect" data-nav="connect">Connect <span aria-hidden="true">↗</span></a>
+  </header>
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+  <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
+
+  <main id="main" tabindex="-1"></main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+
+  <div class="prototype-badge">INTERACTIVE PROTOTYPE · CONTENT &amp; METRICS REQUIRE VALIDATION</div>
+
+  <script src="./app.js?v=29.4"></script>
+</body>
+</html>
