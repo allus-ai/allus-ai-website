@@ -22,10 +22,10 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Allus AI","url":"https://allus-ai.github.io/allus-ai-website/","logo":"https://allus-ai.github.io/allus-ai-website/assets/allus-logo-navy.svg","sameAs":[],"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","email":"contact@allus.ai","contactType":"sales"}}</script>
-<script>(function(){var d={"allusone":["AllusONE — Industrial Perception & Reasoning","The core vision foundation model for multimodal industrial perception and structured reasoning across image, video and plant context.","assets/media/allusone-industrial-reasoning.webp"],"allusflow":["AllusFlow — Video to Steps, Timing and Evidence","Turn recorded industrial work into reviewable steps, cycle times, interruptions and source-linked evidence.","assets/media/allusflow-temporal-model.webp"],"allusedge":["AllusEdge — Optimize and Deploy on Edge Hardware","Optimize, validate and package Allus models for controlled deployment on target edge hardware.","assets/media/allusedge-local-intelligence.webp"]};var k=new URLSearchParams(location.search).get('model'),x=d[k];if(!x)return;var c=document.querySelector('link[rel="canonical"]'),u=c.href.split('?')[0]+'?model='+encodeURIComponent(k),img=new URL(x[2],c.href).href,t=x[0]+' | Allus AI',set=function(s,v){var e=document.querySelector(s);if(e)e.content=v;};document.title=t;c.href=u;set('meta[name="description"]',x[1]);set('meta[property="og:title"]',t);set('meta[property="og:description"]',x[1]);set('meta[property="og:url"]',u);set('meta[property="og:image"]',img);set('meta[name="twitter:title"]',t);set('meta[name="twitter:description"]',x[1]);set('meta[name="twitter:image"]',img);})();</script>
+<script>(function(){var t={"allusone":"AllusONE — Industrial Perception & Reasoning","allusflow":"AllusFlow — Video to Steps, Timing and Evidence","allusedge":"AllusEdge — Optimize and Deploy on Edge Hardware"};var v=new URLSearchParams(location.search).get('model');if(v&&t[v]){document.title=t[v]+' | Allus AI';var og=document.querySelector('meta[property="og:title"]');if(og)og.content=document.title;var c=document.querySelector('link[rel=canonical]');if(c)c.href=c.href.split('?')[0]+'?model='+v;}})();</script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://formspree.io https://api.hsforms.com https://hooks.zapier.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io mailto:;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="stylesheet" href="responsive.css?v=4">
+<link rel="stylesheet" href="responsive.css">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -183,7 +183,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
           <p style="max-width: 40ch; color: #5f687a; font-size: 17px; line-height: 1.55;">{{ m.howCaption }}</p>
         </header>
         <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 20px; align-items: stretch; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;" onMouseEnter="{{ pause }}" onMouseLeave="{{ resume }}" onKeyDown="{{ stepKeys }}">
-          <figure id="model-step-panel" role="tabpanel" aria-live="polite" style="position: relative; margin: 0; min-height: 460px; overflow: hidden; border-radius: 26px; background: #111318;">
+          <figure style="position: relative; margin: 0; min-height: 460px; overflow: hidden; border-radius: 26px; background: #111318;">
             <img data-dc-src="{{ m.image }}" alt="{{ m.alt }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%;" loading="eager" fetchpriority="high" decoding="async">
             <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.05) 40%, rgba(13,20,36,.8) 100%);"></span>
             <figcaption style="position: absolute; right: 26px; bottom: 24px; left: 26px; display: grid; gap: 8px; color: #fff;">
@@ -195,7 +195,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
           <ol role="tablist" style="display: grid; margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(16,24,40,.16);">
             <sc-for list="{{ m.stages }}" as="st" hint-placeholder-count="4">
               <li style="display: contents;">
-                <button type="button" role="tab" aria-selected="{{ st.active }}" aria-controls="model-step-panel" tabIndex="{{ st.tabIndex }}" onClick="{{ st.select }}" style="{{ st.style }}">
+                <button type="button" role="tab" onClick="{{ st.select }}" style="{{ st.style }}">
                   <span style="{{ st.numStyle }}">{{ st.num }}</span>
                   <span style="display: grid; gap: 6px; text-align: left;">
                     <strong style="font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1;">{{ st.title }}</strong>
@@ -297,7 +297,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;model&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;allusone&quot;,&quot;options&quot;:[&quot;allusone&quot;,&quot;allusflow&quot;,&quot;allusedge&quot;],&quot;tsType&quot;:&quot;'allusone' | 'allusflow' | 'allusedge'&quot;,&quot;section&quot;:&quot;Page&quot;},&quot;autoCycle&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
 class Component extends DCLogic {
-  renderVals() { const v = this.renderBase(); v.stepKeys = e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); const next = (this.state.step + d + 4) % 4; this.setState(s => ({ step: next, cycle: s.cycle + 1 }), () => { const tabs = e.currentTarget.querySelectorAll('[role="tab"]'); if (tabs[next]) tabs[next].focus(); }); }; return v; }
+  renderVals() { const v = this.renderBase(); v.stepKeys = e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); this.setState(s => ({ step: Math.max(0, s.step + d) % 4, cycle: s.cycle + 1 })); }; return v; }
   state = { model: null, step: 0, hover: null, paused: false, cycle: 0 };
   componentDidMount() { this.start(); }
   componentWillUnmount() { clearInterval(this._t); }
@@ -376,8 +376,6 @@ class Component extends DCLogic {
         const active = i === step;
         return {
           title, note, num: num(i),
-          active,
-          tabIndex: active ? 0 : -1,
           select: () => this.setState({ step: i, cycle: this.state.cycle + 1 }),
           style: { position: 'relative', display: 'grid', gridTemplateColumns: '44px 1fr', gap: 14, alignItems: 'start', width: '100%', padding: '22px 18px', border: 0, borderBottom: '1px solid rgba(16,24,40,.16)', background: active ? 'rgba(255,255,255,.72)' : 'transparent', color: 'inherit', textAlign: 'left', cursor: 'pointer', transition: 'background .3s ease', overflow: 'hidden' },
           numStyle: { color: active ? '#2459d3' : '#5f687a', fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, letterSpacing: '.08em', paddingTop: 6 },

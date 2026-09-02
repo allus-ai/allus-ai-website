@@ -24,7 +24,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Allus AI","url":"https://allus-ai.github.io/allus-ai-website/","logo":"https://allus-ai.github.io/allus-ai-website/assets/allus-logo-navy.svg","sameAs":[],"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","email":"contact@allus.ai","contactType":"sales"}}</script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://formspree.io https://api.hsforms.com https://hooks.zapier.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io mailto:;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="stylesheet" href="responsive.css?v=4">
+<link rel="stylesheet" href="responsive.css">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -239,14 +239,14 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
               <span aria-hidden="true" style="{{ journeyFillStyle }}"></span>
               <sc-for list="{{ journey }}" as="j" hint-placeholder-count="6">
                 <li style="display: contents;">
-                  <button type="button" role="tab" aria-selected="{{ j.active }}" aria-controls="model-journey-panel" tabIndex="{{ j.tabIndex }}" onClick="{{ j.select }}" style="{{ j.style }}">
+                  <button type="button" role="tab" onClick="{{ j.select }}" style="{{ j.style }}">
                     <span style="{{ j.dotStyle }}">{{ j.num }}</span>
                     <span style="{{ j.labelStyle }}">{{ j.title }}</span>
                   </button>
                 </li>
               </sc-for>
             </ol>
-            <div id="model-journey-panel" role="tabpanel" aria-live="polite" style="display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: center; padding: 18px 20px; border-radius: 16px; background: rgba(16,24,40,.04);">
+            <div style="display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: center; padding: 18px 20px; border-radius: 16px; background: rgba(16,24,40,.04);">
               <span style="display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #2459d3; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 12px;">{{ stepNum }}</span>
               <div style="display: grid; gap: 2px;"><strong style="font-size: 15px; font-weight: 600; letter-spacing: -.02em;">{{ stepTitle }}</strong><span style="color: #5f687a; font-size: 14px; line-height: 1.5;">{{ journeyNote }}</span></div>
             </div>
@@ -336,8 +336,6 @@ class Component extends DCLogic {
       ],
       journey: journeyData.map(([title], i) => ({
         title, num: '0' + (i + 1),
-        active: i === step,
-        tabIndex: i === step ? 0 : -1,
         select: () => this.setState({ step: i }),
         style: { display: 'grid', gap: 14, justifyItems: 'center', padding: 0, border: 0, background: 'transparent', color: 'inherit', cursor: 'pointer', textAlign: 'center' },
         dotStyle: { position: 'relative', zIndex: 1, display: 'grid', placeItems: 'center', width: 32, height: 32, borderRadius: '50%', border: '1px solid ' + (i <= step ? '#2459d3' : 'rgba(16,24,40,.16)'), background: i === step ? '#2459d3' : '#fff', color: i === step ? '#fff' : (i < step ? '#2459d3' : '#5f687a'), fontFamily: "'IBM Plex Mono', monospace", fontSize: 10, boxShadow: i === step ? '0 0 0 6px rgba(63,122,254,.14)' : '0 0 0 6px #fff', transition: 'background .3s ease, border-color .3s ease, color .3s ease, box-shadow .3s ease' },
@@ -350,7 +348,7 @@ class Component extends DCLogic {
       stepCounter: '0' + (step + 1) + ' / 06',
       pauseJourney: () => { this._paused = true; },
       resumeJourney: () => { this._paused = false; },
-      stepKeys: e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); const next = (this.state.step + d + 6) % 6; this.setState({ step: next }, () => { const tabs = e.currentTarget.querySelectorAll('[role="tab"]'); if (tabs[next]) tabs[next].focus(); }); },
+      stepKeys: e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); this.setState(s => ({ step: (s.step + d + 6) % 6 })); },
       modes: [['Edge', 'Next to cameras and machines'], ['On-Premise', 'Inside your own facility'], ['Private Cloud', 'Inside your private cloud'], ['Hybrid', 'Local execution, coordinated centrally']].map(([title, note], i) => ({ title, note, style: { display: 'grid', gap: 8, alignContent: 'center', minHeight: 104, padding: '20px 22px', borderLeft: i ? '1px solid rgba(16,24,40,.12)' : 0 } })),
       footerGroups: [
         { title: 'Models', links: [['AllusONE', 'model-detail.html?model=allusone'], ['AllusFlow', 'model-detail.html?model=allusflow'], ['AllusEdge', 'model-detail.html?model=allusedge']] },

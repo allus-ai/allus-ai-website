@@ -24,7 +24,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Allus AI","url":"https://allus-ai.github.io/allus-ai-website/","logo":"https://allus-ai.github.io/allus-ai-website/assets/allus-logo-navy.svg","sameAs":[],"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","email":"contact@allus.ai","contactType":"sales"}}</script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://formspree.io https://api.hsforms.com https://hooks.zapier.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io mailto:;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="stylesheet" href="responsive.css?v=4">
+<link rel="stylesheet" href="responsive.css">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -244,7 +244,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;autoCycle&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
 class Component extends DCLogic {
-  renderVals() { const v = this.renderBase(); v.stepKeys = e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); this.setState(s => ({ step: (s.step + d + 5) % 5, cycle: s.cycle + 1 })); }; return v; }
+  renderVals() { const v = this.renderBase(); v.stepKeys = e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); this.setState(s => ({ step: Math.max(0, s.step + d) % 5, cycle: s.cycle + 1 })); }; return v; }
   state = { step: 0, paused: false, cycle: 0 };
   componentDidMount() { this.start(); }
   componentWillUnmount() { clearInterval(this._t); }

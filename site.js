@@ -71,9 +71,9 @@
     if (pref === 'off') reduce();
     if (!document.getElementById('motion-toggle')) {
       const b = document.createElement('button'); b.id = 'motion-toggle'; b.type = 'button';
-      b.setAttribute('aria-pressed', pref === 'off');
+      b.setAttribute('aria-pressed', pref === 'off'); b.title = 'Pause animations';
       b.style.cssText = 'position:fixed;right:20px;bottom:20px;z-index:55;display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid rgba(16,24,40,.16);border-radius:10px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);color:#101828;font:600 12px Manrope,sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(16,24,40,.1)';
-      const label = () => { const off = (localStorage.getItem(MKEY) || pref) === 'off'; b.innerHTML = off ? '<span aria-hidden="true">▶</span> Motion off' : '<span aria-hidden="true">❚❚</span> Motion on'; b.setAttribute('aria-label', off ? 'Resume animations' : 'Pause animations'); b.title = off ? 'Resume animations' : 'Pause animations'; };
+      const label = () => b.innerHTML = (localStorage.getItem(MKEY) || pref) === 'off' ? '<span aria-hidden="true">▶</span> Motion off' : '<span aria-hidden="true">❚❚</span> Motion on';
       label();
       b.addEventListener('click', () => { const cur = (localStorage.getItem(MKEY) || pref) === 'off' ? 'on' : 'off'; localStorage.setItem(MKEY, cur); b.setAttribute('aria-pressed', cur === 'off'); label(); if (cur === 'off') reduce(); else location.reload(); });
       document.body.appendChild(b);

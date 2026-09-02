@@ -23,19 +23,20 @@ Local preview:
 - `formEndpoint`: POST URL for the contact form (Formspree / HubSpot / your API). Empty → falls back to a pre-filled mailto:. Honeypot field `website` is included.
 - `ga4Id` / `plausibleDomain`: analytics. When set, a cookie-consent banner appears automatically; trackers load only after Accept.
 - `approvedMetrics`: the figures in `allus-content.js` (78%, 77%, 32%, 10×, 99% …) are placeholders borrowed from public deployments. Replace them, then set this to `true`. While `false`, pages show qualitative claims instead of numbers.
-- `terms.html` is a noindex holding page. Current product, pilot and evaluation terms are supplied through the applicable written agreement; publish full terms only after counsel approval.
+- `terms.html` is a draft — have counsel review before launch.
 
 ## What's included for launch
 - SEO: per-page `<title>`/description/canonical/Open Graph/Twitter, Organization JSON-LD, `sitemap.xml`, `robots.txt`, `<noscript>` fallback. Parameterised pages update their title/canonical from the URL.
 - Clean URLs: `_redirects` (Netlify) and `vercel.json` map `/model/allusflow`, `/solutions/…`, `/industries/…`, `/stories/…` to the pages. Update `sitemap.xml` to those paths if you use them.
 - Security headers + caching: `_headers` (Netlify) / `vercel.json`. CSP allows Google Fonts, GA4, Plausible, Formspree, HubSpot — trim to what you use.
 - Performance: all photos are WebP (≤1600px, ~2.9 MB total vs 11 MB), lazy-loaded; hero videos `preload="none"` and only the active + next clip carry a `src`. **Still to do:** re-encode the 5 MP4s (8.6 MB) to H.264 CRF 28 / WebM at 1280px — needs ffmpeg.
-- Accessibility: skip link, `<main>` landmark, pause-motion toggle (persisted, honours `prefers-reduced-motion`), hero reel pause button, keyboard menus and tabsets, mobile dialog focus handling, 44px mobile touch targets, contrast lifted on faint greys, and alt text on all images.
+- Accessibility: skip link, `<main>` landmark, pause-motion toggle (persisted, honours `prefers-reduced-motion`), hero reel pause button, keyboard menus (Enter/Space/↓ open, ↑↓ move, Esc closes), contrast lifted on faint greys, alt text on all images.
 - Browser fallbacks: no scroll-driven animations (Safari/Firefox) → content shows immediately, progress bar hidden; no `backdrop-filter` → solid panels; low-memory devices → blur removed.
 - Ops: `404.html`, favicon set + `site.webmanifest`, analytics via `site-config.js` (cookie banner shown only when a tracker is configured), CTA + form events (`cta_click`, `form_submit`).
 
 ## Not done here (needs your stack)
+- Mobile layouts (pages are desktop-first, min-width 1244px).
 - Static pre-rendering / framework port for first-paint HTML and crawler-visible content.
-- Real customer metrics, testimonials and counsel-approved public terms.
+- Real customer metrics, testimonials, final legal review.
 - Fonts load from Google Fonts (needs internet); everything else is local.
 - Each page is a Design Component (`<x-dc>` + `support.js` runtime). For a framework port, the inline-styled markup maps 1:1 to sections.
