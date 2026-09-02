@@ -29,7 +29,7 @@ export/
 ## 2. Hosting requirements
 
 - **Must be served over HTTP(S).** `file://` will not work — pages load `support.js` and `allus-content.js` as ES modules and import `AllusNav.dc.html` via fetch.
-- Any static host works: Vercel, Netlify, Cloudflare Pages, S3 + CloudFront, GitHub Pages, nginx.
+- Any static host works: Vercel, Netlify, Cloudflare Pages, S3 + CloudFront, GitHub Pages, nginx. GitHub Pages ignores `_headers` and `vercel.json`; use a host/CDN that supports response headers if CSP/HSTS and frame protection must be enforced at the HTTP layer.
 - Entry point: `index.html`. 404 page: `404.html`.
 - Clean URLs (`/model/allusflow` → `model-detail.html?model=allusflow`) are defined in `_redirects` (Netlify/CF) and `vercel.json` (Vercel). For nginx/S3+CloudFront, replicate these rewrites; if you skip them, the `?param=` URLs still work.
 - Headers (CSP, HSTS, X-Frame-Options, cache-control) are in `_headers` / `vercel.json`. Apply the equivalents on other hosts. CSP allows: self, Google Fonts, and the analytics origins in `site-config.js`. If you add a form endpoint or analytics domain, **add it to `connect-src` / `script-src`** or requests will be blocked.
@@ -47,13 +47,13 @@ npx serve .          # or: python3 -m http.server 8080
 | P0-1 | Mobile layout broken (min-width 1244) | `responsive.css` (linked from every page): breakpoints 1180 / 900 / 480 / 360, drawer nav in `AllusNav.dc.html`, poster-only hero video on ≤900. Verified 320/390/768/1024 × 11 routes: no horizontal overflow, 44px targets. |
 | P0-2 | Form: no `required`, mailto shown as success | Runtime now honours boolean attrs; email/first/last/company are `required` + `autocomplete`; native validation with focused error summary; endpoint success only on 2xx; **mailto fallback shows guidance, not a success state**, and the button reads "Open email to send" while `formEndpoint` is empty. |
 | P1-3 | canonical/OG/sitemap → 404 domain | All URLs now point to the live GitHub Pages origin. When `www.allus.ai` is bound and returns 200 everywhere, search-replace `https://allus-ai.github.io/allus-ai-website` → `https://www.allus.ai` in `*.html`, `sitemap.xml`, `robots.txt`, `site-config.js`. |
-| P1-4 | Terms is a legal draft | Removed from footer, consent line and sitemap; `terms.html` is `noindex` and `robots.txt` disallows it. Re-add the links after legal sign-off. |
+| P1-4 | Terms was an unapproved legal draft | Replaced with a noindex holding page that directs visitors to the applicable written agreement; `robots.txt` still disallows it. Publish full terms only after counsel sign-off. |
 | P1-6 | `<html lang>` missing | `lang="en"` on every page. |
 | P2-7 | Literal `{{…}}` resource requests + console warnings | Template URLs are `data-dc-src`/`data-dc-poster` (resolved by the runtime, never fetched by the parser); dev warnings silenced unless `ALLUS_CONFIG.debug = true`. |
 | P2-8 | Headers not applied on GitHub Pages | Added `<meta http-equiv="Content-Security-Policy">` + referrer meta on every page (`frame-ancestors`/HSTS still need a real host — see §2). |
 | P2-9 | Intent copy mismatch | Single `INTENT_COPY` table in `connect.html` covers all six intents; unknown → demo. |
 
-P1-5 approvals: **done** — `approvedMetrics: true`, quantitative results shown site-wide; Terms re-linked in footer and sitemap.
+P1-5 approvals remain gated: `approvedMetrics: false`, so unapproved quantitative results stay hidden. Full public terms remain unpublished pending counsel approval.
 
 Still open (nice-to-have): video re-encode (§7), self-hosting React/Babel (§9), pre-rendering for SEO (§9).
 
@@ -66,12 +66,13 @@ Edit this one file; nothing else needs code changes.
 | `formEndpoint` | URL the Connect form POSTs to (JSON body). Empty → falls back to `mailto:contact@allus.ai`. | `""` |
 | `ga4Id` | GA4 measurement ID. Loads gtag **only after cookie consent**. | `""` |
 | `plausibleDomain` | Plausible site domain (cookieless alternative). | `""` |
-| `approvedMetrics` | `true` (approved). Set `false` to fall back to qualitative words (Safer / Faster / Fewer / Leaner). | `true` |
+| `approvedMetrics` | Set `true` only after replacing placeholder figures with approved Allus metrics. While `false`, qualitative claims are shown. | `false` |
 | `siteUrl` | Canonical origin (also hard-coded in canonical/OG/JSON-LD tags and sitemap — search-replace when the domain changes). | GitHub Pages origin |
 | `debug` | `true` → runtime template warnings in the console. Keep `false` in production. | `false` |
 
 Also before launch:
-- [x] `terms.html` and `privacy.html` reviewed by legal.
+- [ ] Have counsel approve public terms before replacing the current noindex holding page.
+- [ ] Confirm the privacy page with counsel before production launch.
 - [ ] Replace `assets/og-default.png` if you want a custom share image.
 - [ ] Confirm `contact@allus.ai` is monitored (mailto fallback + privacy contact).
 
@@ -122,4 +123,4 @@ If `ga4Id` or `plausibleDomain` is set, these events fire (name → props):
 3. Submit `/connect` with test data — check the endpoint receives it (or mailto opens if endpoint is empty).
 4. Accept cookie banner → analytics script loads (check network tab).
 5. Visit a bogus path → `404.html`.
-6. Lighthouse mobile: expect Performance ≥ 85, A11y ≥ 95, SEO 100.
+6. Run Lighthouse mobile and record the actual Performance, Accessibility and SEO scores; do not treat unmeasured targets as verified.
