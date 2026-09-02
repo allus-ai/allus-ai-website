@@ -6,7 +6,7 @@ export const solutions = {
     v2Tagline: 'turns real work into knowledge people can use.',
     note: 'Expert demonstrations and approved procedures become searchable guidance at the point of work',
     color: '#3f7afe',
-    image: 'assets/media/allus-knowledge-guidance.jpg', image2: 'assets/media/allus-guided-work-handoff.jpg', image3: 'assets/media/allus-completed-work-evidence.jpg',
+    image: 'assets/media/allus-knowledge-guidance.webp', image2: 'assets/media/allus-guided-work-handoff.webp', image3: 'assets/media/allus-completed-work-evidence.webp',
     stages: [['Capture', 'Expert demo + SOP'], ['Approve', 'Steps + evidence'], ['Guide', 'Right work context'], ['Return', 'Completion + feedback']],
     stageCaption: 'Record once. Approve. Guide. Learn.',
     visualEyebrow: 'ILLUSTRATIVE KNOWLEDGE LOOP', visualMeta: 'Fixture changeover · AX-4 · Line 04',
@@ -27,7 +27,7 @@ export const solutions = {
     v2Tagline: 'shows how work actually happens, over time.',
     note: 'Video, procedures and production context become structured events and measurable process insight',
     color: '#6eb8a9',
-    image: 'assets/media/allus-temporal-process.jpg', image2: 'assets/media/allus-process-evidence-review.jpg', image3: 'assets/media/allus-process-sequence-context.jpg',
+    image: 'assets/media/allus-temporal-process.webp', image2: 'assets/media/allus-process-evidence-review.webp', image3: 'assets/media/allus-process-sequence-context.webp',
     stages: [['Material arrives', 'Input enters the cell'], ['Action begins', 'Step boundary marked'], ['State changes', 'Transition recorded'], ['Interruption', 'Waiting linked to cause'], ['Resume & transfer', 'Handoff preserved']],
     stageCaption: 'Actions become events. Events become context.',
     visualEyebrow: 'TEMPORAL SEQUENCE', visualMeta: 'Action boundaries · process states · interruption · resume',
@@ -52,7 +52,7 @@ export const solutions = {
     v2Tagline: 'connects what equipment looks like with what to do next.',
     note: 'Visual observations, approved knowledge and system context in one maintenance workflow',
     color: '#df855d',
-    image: 'assets/media/allus-equipment-intelligence.jpg', image2: 'assets/media/allus-asset-service-continuity.jpg', image3: 'assets/media/allus-equipment-intelligence.jpg',
+    image: 'assets/media/allus-equipment-intelligence.webp', image2: 'assets/media/allus-asset-service-continuity.webp', image3: 'assets/media/allus-equipment-intelligence.webp',
     stages: [['Observe State', 'Indicators, gauges, visible condition'], ['Connect Context', 'Sensor, EAM and production events'], ['Ground Service Work', 'Approved procedures and knowledge'], ['Preserve Evidence', 'Source-linked service record']],
     stageCaption: 'Visible state, approved knowledge, one service record.',
     visualEyebrow: 'ASSET CONTEXT', visualMeta: 'Configured asset · qualified review',
@@ -73,7 +73,7 @@ export const solutions = {
     v2Tagline: 'supports governed, human-reviewed site response.',
     note: 'Governed video and approved response knowledge for human-reviewed site events',
     color: '#8c7ac9',
-    image: 'assets/media/allus-governed-site.jpg', image2: 'assets/media/allus-governed-event-review.jpg', image3: 'assets/media/allus-governed-site.jpg',
+    image: 'assets/media/allus-governed-site.webp', image2: 'assets/media/allus-governed-event-review.webp', image3: 'assets/media/allus-governed-site.webp',
     stages: [['Govern Sources', 'Access, zones, retention first'], ['Review Events', 'Configured patterns, human review'], ['Ground Response', 'Approved procedures suggested'], ['Preserve Context', 'Timeline and decision retained']],
     stageCaption: 'Governed context. Approved procedures. Human-reviewed response.',
     visualEyebrow: 'SITE CONTEXT', visualMeta: 'Permitted sources · configured zones',
@@ -120,20 +120,37 @@ export const homeFaq = [
   ['How long does a first deployment take?', 'Weeks: define the boundary, build a reviewed evidence set, configure, review.']
 ];
 
-// Storytelling layer (DeepHow-style industry/solution template). Metrics are ILLUSTRATIVE placeholders
-// borrowed from comparable public deployments; replace with approved Allus figures before launch.
-export const sqdc = [
+// ─── METRICS ────────────────────────────────────────────────────────────────────────
+// The numbers below are PLACEHOLDERS borrowed from comparable public deployments.
+// Replace them with Allus-approved figures, then set approvedMetrics: true in site-config.js.
+// Until then, pages render the qualitative fallbacks defined right after each array.
+const APPROVED = typeof window !== 'undefined' && window.ALLUS_CONFIG && window.ALLUS_CONFIG.approvedMetrics === true;
+const sqdcRaw = [
   ['Safety', 'Verified standard work', 78, '%', 'fewer safety incidents.'],
   ['Quality', 'Deviations caught in-cycle', 32, '%', 'fewer defects.'],
   ['Delivery', 'Faster time to competence', 77, '%', 'less onboarding time.'],
   ['Cost', 'Continuous time & motion', 10, '×', 'faster than stopwatch studies.']
 ];
-export const solutionStats = {
+const sqdcQual = [
+  ['Safety', 'Verified standard work', 'Fewer', '', 'incidents.'],
+  ['Quality', 'Deviations caught in-cycle', 'Fewer', '', 'defects.'],
+  ['Delivery', 'Faster time to competence', 'Faster', '', 'onboarding.'],
+  ['Cost', 'Continuous time & motion', 'Less', '', 'waste.']
+];
+export const sqdc = APPROVED ? sqdcRaw : sqdcQual;
+const solutionStatsRaw = {
   'operational-knowledge-guidance': [['77%', 'less onboarding time', 'Guidance at the point of work.'], ['60+', 'languages', 'In the operator\'s language.']],
   'production-process-intelligence': [['10×', 'faster than manual studies', 'Every station, every shift.'], ['99%', 'task-level detection accuracy', 'Across individual SOP steps.']],
   'equipment-asset-intelligence': [['Zero', 'shot state reading', 'Indicators read out of the box.'], ['Anytime', 'on-demand verification', 'Any camera already on the line.']],
   'industrial-safety-site-intelligence': [['78%', 'fewer safety incidents', 'Evidence tied to approved response.'], ['24/7', 'governed review', 'Within your retention rules.']]
 };
+const solutionStatsQual = {
+  'operational-knowledge-guidance': [['Faster', 'onboarding', 'Guidance at the point of work.'], ['60+', 'languages', 'In the operator\'s language.']],
+  'production-process-intelligence': [['Continuous', 'time & motion', 'Every station, every shift.'], ['Source-linked', 'evidence', 'Every step back to its moment.']],
+  'equipment-asset-intelligence': [['Zero', 'shot state reading', 'Indicators read out of the box.'], ['Anytime', 'on-demand verification', 'Any camera already on the line.']],
+  'industrial-safety-site-intelligence': [['Governed', 'review', 'Within your retention rules.'], ['Human', 'in the loop', 'People confirm every response.']]
+};
+export const solutionStats = APPROVED ? solutionStatsRaw : solutionStatsQual;
 export const solutionIcons = { 'operational-knowledge-guidance': '▶', 'production-process-intelligence': '◔', 'equipment-asset-intelligence': '◍', 'industrial-safety-site-intelligence': '◈' };
 export const solutionShort = { 'operational-knowledge-guidance': 'Knowledge & Guidance', 'production-process-intelligence': 'Process Intelligence', 'equipment-asset-intelligence': 'Asset Intelligence', 'industrial-safety-site-intelligence': 'Site Intelligence' };
 export const solutionTagline = { 'operational-knowledge-guidance': 'Turn expert recordings into structured, searchable guidance.', 'production-process-intelligence': 'Structure every cycle into steps, timing and evidence.', 'equipment-asset-intelligence': 'Read visible condition into the maintenance record.', 'industrial-safety-site-intelligence': 'Governed, human-reviewed site events.' };
@@ -144,10 +161,10 @@ export const industryStory = {
   'advanced-materials': { words: ['Expertise.', 'Consistency.', 'Traceability.', 'Yield.'], headline: 'From hard-won expertise into source-linked process context.', sub: 'Specialist decisions preserved; long-cycle transitions connected across handoffs.' },
   'automotive': { words: ['Takt.', 'Quality.', 'Safety.', 'Flow.'], headline: 'From tribal knowledge into verified, optimized execution.', sub: 'Build knowledge captured, standard work verified, plant context connected.' }
 };
-export const proofStats = [['78%', 'Decrease in safety incidents'], ['77%', 'Reduction in onboarding time'], ['32%', 'Fewer defects'], ['5%', 'Increase in productivity']];
+export const proofStats = APPROVED ? [['78%', 'Decrease in safety incidents'], ['77%', 'Reduction in onboarding time'], ['32%', 'Fewer defects'], ['5%', 'Increase in productivity']] : [['Safer', 'Verified standard work'], ['Faster', 'Time to competence'], ['Fewer', 'Defects and deviations'], ['Leaner', 'Continuous time & motion']];
 export const proofQuote = 'Instructions never matched the floor. Source-linked guidance fixed that — and surfaced safety issues we had missed.';
-export const proofNote = 'Illustrative results from comparable public deployments · Allus customer metrics withheld under engagement agreements';
-export const storyStats = { 'advanced-materials': ['40+', 'years of specialist expertise, preserved'], 'electronics-assembly': ['99%', 'task-level detection accuracy'], 'biscuit-production': ['80%', 'faster upskilling across lines'] };
+export const proofNote = APPROVED ? 'Results from Allus customer deployments' : '';
+export const storyStats = APPROVED ? { 'advanced-materials': ['40+', 'years of specialist expertise, preserved'], 'electronics-assembly': ['99%', 'task-level detection accuracy'], 'biscuit-production': ['80%', 'faster upskilling across lines'] } : { 'advanced-materials': ['Preserved', 'specialist process expertise'], 'electronics-assembly': ['Verified', 'variant and rework context'], 'biscuit-production': ['Connected', 'changeover, sanitation, packaging'] };
 export const solutionOrder = ['operational-knowledge-guidance', 'production-process-intelligence', 'equipment-asset-intelligence', 'industrial-safety-site-intelligence'];
 
 export const industries = {
@@ -155,7 +172,7 @@ export const industries = {
     title: 'Electronics Assembly', tagline: 'Knowledge and Process Intelligence for High-Mix Assembly', v2Tagline: 'for high-mix assembly.',
     summary: 'High-mix assembly knowledge, station guidance and process insight.',
     note: 'Industrial intelligence for high-mix assembly',
-    image: 'assets/media/allus-electronics-assembly-workstation.jpg', image2: 'assets/media/allus-electronics-assembly.jpg',
+    image: 'assets/media/allus-electronics-assembly-workstation.webp', image2: 'assets/media/allus-electronics-assembly.webp',
     sections: [
       ['Expert Build Knowledge', 'Demonstrations, procedures and rework knowledge for every variant'],
       ['Station Guidance', 'Task- and station-specific instructions in video, image and text'],
@@ -164,13 +181,13 @@ export const industries = {
       ['Traceability', 'Execution evidence linked to production records']
     ],
     mix: ['operational-knowledge-guidance', 'production-process-intelligence', 'equipment-asset-intelligence', 'industrial-safety-site-intelligence'],
-    story: { title: 'Connecting High-Mix Assembly Knowledge to the Station Where Work Happens.', href: '#/resource/use-cases/electronics-assembly' }
+    story: { title: 'Connecting High-Mix Assembly Knowledge to the Station Where Work Happens.', href: 'story.html?story=electronics-assembly' }
   },
   'fmcg': {
     title: 'FMCG', tagline: 'Adaptable Intelligence for Fast-Moving Production', v2Tagline: 'for fast-moving production.',
     summary: 'Changeovers, line guidance and high-speed production context.',
     note: 'Adaptable intelligence for fast lines and frequent changeovers',
-    image: 'assets/media/allus-fmcg-packaging-line.jpg', image2: 'assets/media/allus-fmcg-changeover-context.jpg',
+    image: 'assets/media/allus-fmcg-packaging-line.webp', image2: 'assets/media/allus-fmcg-changeover-context.webp',
     sections: [
       ['Changeover Knowledge', 'Approved setup, cleaning and restart procedures, preserved'],
       ['Line-Side Guidance', 'Role-, line- and SKU-specific instructions at the point of work'],
@@ -187,7 +204,7 @@ export const industries = {
     title: 'Food & Beverage', tagline: 'Operational Knowledge from Sanitation to Packaging', v2Tagline: 'from sanitation to packaging.',
     summary: 'Sanitation, packaging and governed process knowledge.',
     note: 'Knowledge and process intelligence from sanitation to packaging',
-    image: 'assets/media/allus-food-beverage-production.jpg', image2: 'assets/media/allus-food-beverage.jpg',
+    image: 'assets/media/allus-food-beverage-production.webp', image2: 'assets/media/allus-food-beverage.webp',
     sections: [
       ['Sanitation & Changeover Knowledge', 'Sanitation, allergen and changeover procedures with version history'],
       ['Work Guidance', 'Video, image and text instructions, localized'],
@@ -196,13 +213,13 @@ export const industries = {
       ['Cycle & Environment', 'Cycle variation with line, batch and cold-chain context']
     ],
     mix: ['operational-knowledge-guidance', 'production-process-intelligence', 'equipment-asset-intelligence', 'industrial-safety-site-intelligence'],
-    story: { title: 'Keeping Biscuit-Line Changeover, Sanitation and Packaging Knowledge Connected.', href: '#/resource/use-cases/biscuit-production' }
+    story: { title: 'Keeping Biscuit-Line Changeover, Sanitation and Packaging Knowledge Connected.', href: 'story.html?story=biscuit-production' }
   },
   'advanced-materials': {
     title: 'Advanced Materials', tagline: 'Preserve Expertise Across Complex Material Processes', v2Tagline: 'across complex material processes.',
     summary: 'Expert knowledge across multi-stage material processes.',
     note: 'Industrial intelligence for multi-stage material processes and critical assets',
-    image: 'assets/media/allus-advanced-materials-facility-context.jpg', image2: 'assets/media/allus-advanced-materials-run-context.jpg',
+    image: 'assets/media/allus-advanced-materials-facility-context.webp', image2: 'assets/media/allus-advanced-materials-run-context.webp',
     sections: [
       ['Expert Process Knowledge', 'Hard-to-replace demonstrations and decisions, preserved'],
       ['Material Transformation', 'Multi-stage processes as searchable steps, states and transitions'],
@@ -214,13 +231,13 @@ export const industries = {
       contexts: [['PHYSICAL', 'Stage Evidence', 'Observed stages and transitions, source moments preserved.'], ['TEMPORAL', 'Reviewable Handoffs', 'Long-cycle transitions, linked across shifts.'], ['HUMAN REVIEW', 'Run Record', 'Specialist decisions recorded against the evidence.']],
       caption: 'One run, reviewable from handoff to handoff.' },
     mix: ['operational-knowledge-guidance', 'production-process-intelligence', 'equipment-asset-intelligence', 'industrial-safety-site-intelligence'],
-    story: { title: 'Preserving Critical Process Knowledge Across Rare-Earth Materials Production.', href: '#/resource/use-cases/advanced-materials' }
+    story: { title: 'Preserving Critical Process Knowledge Across Rare-Earth Materials Production.', href: 'story.html?story=advanced-materials' }
   },
   'automotive': {
     title: 'Automotive', tagline: 'Operational Intelligence Across Complex Automotive Production', v2Tagline: 'across complex automotive production.',
     summary: 'Assembly, material flow, equipment and plant operations.',
     note: 'Industrial intelligence for assembly, material flow, equipment and plant operations',
-    image: 'assets/media/allus-automotive-body-shop.jpg', image2: 'assets/media/allus-automotive.jpg',
+    image: 'assets/media/allus-automotive-body-shop.webp', image2: 'assets/media/allus-automotive.webp',
     sections: [
       ['Assembly & Variant Knowledge', 'Build, service and changeover knowledge by line and role'],
       ['Production & Material Flow', 'Sequence, cycle state and material movement over time'],
@@ -236,7 +253,7 @@ export const industryOrder = ['electronics-assembly', 'fmcg', 'food-beverage', '
 
 export const stories = {
   'advanced-materials': {
-    index: '01', industry: 'Advanced Materials', industrySlug: 'advanced-materials', image: 'assets/media/allus-advanced-materials-facility-context.jpg',
+    index: '01', industry: 'Advanced Materials', industrySlug: 'advanced-materials', image: 'assets/media/allus-advanced-materials-facility-context.webp',
     title: 'Preserving Critical Process Knowledge Across Rare-Earth Materials Production.',
     dek: 'Long-cycle process video, approved knowledge and specialist decisions in one source-linked context.',
     background: 'Multi-stage rare-earth processes. Knowledge spread across specialists, procedures, equipment context and hours of video. Key transitions happen far apart; the reasoning behind an intervention is hard to reconstruct after a handoff.',
@@ -247,7 +264,7 @@ export const stories = {
     evaluation: ['Source-moment retrieval', 'Phase and transition consistency', 'Evidence traceability', 'Human-review workflow', 'Runtime behavior and recovery']
   },
   'electronics-assembly': {
-    index: '02', industry: 'Electronics Assembly', industrySlug: 'electronics-assembly', image: 'assets/media/allus-electronics-assembly-workstation.jpg',
+    index: '02', industry: 'Electronics Assembly', industrySlug: 'electronics-assembly', image: 'assets/media/allus-electronics-assembly-workstation.webp',
     title: 'Connecting High-Mix Assembly Knowledge to the Station Where Work Happens.',
     dek: 'Variant, station and rework context — from documents, demonstrations and experienced operators — at the station.',
     background: 'Many variants, station handoffs and rework paths. Approved instructions sit beside demonstrations, engineering updates and operator know-how; the right context is hard to reach at the moment it is needed.',
@@ -258,7 +275,7 @@ export const stories = {
     evaluation: ['Station and variant retrieval', 'Source-linked guidance', 'Supported sequence boundaries', 'Human escalation', 'Edge latency and recovery']
   },
   'biscuit-production': {
-    index: '03', industry: 'Food & Beverage', industrySlug: 'food-beverage', image: 'assets/media/allus-food-beverage-production.jpg',
+    index: '03', industry: 'Food & Beverage', industrySlug: 'food-beverage', image: 'assets/media/allus-food-beverage-production.webp',
     title: 'Keeping Biscuit-Line Changeover, Sanitation and Packaging Knowledge Connected.',
     dek: 'Approved procedures and operating video in one reviewable context across a biscuit line.',
     background: 'Preparation, baking, cooling, sanitation, changeovers, packaging. Knowledge spans procedures, training video and line teams; the right source changes with format, station and state.',
@@ -325,15 +342,15 @@ export const company = {
 };
 
 export const footerGroups6 = [
-  { title: 'Models', links: [['AllusONE', '#/model/allusone'], ['AllusFlow', '#/model/allusflow'], ['AllusEdge', '#/model/allusedge']] },
-  { title: 'Solutions', links: solutionOrder.map(s => [solutions[s].title, '#/solutions/' + s]) },
-  { title: 'Industries', links: industryOrder.map(s => [industries[s].title, '#/industries/' + s]) },
-  { title: 'Use Cases', links: [['Advanced Materials', '#/resource/use-cases/advanced-materials'], ['Advanced Materials', '#/resource/use-cases/advanced-materials'], ['Electronics Assembly', '#/resource/use-cases/electronics-assembly'], ['Biscuit Production', '#/resource/use-cases/biscuit-production']] },
-  { title: 'Company', links: [['About Us', '#/company'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy and Security', '#/company/privacy-security']] },
-  { title: 'Connect', links: [['Contact Us', '#/connect?intent=demo']] }
+  { title: 'Models', links: [['AllusONE', 'model-detail.html?model=allusone'], ['AllusFlow', 'model-detail.html?model=allusflow'], ['AllusEdge', 'model-detail.html?model=allusedge']] },
+  { title: 'Solutions', links: solutionOrder.map(s => [solutions[s].title, 'solution.html?solution=' + s]) },
+  { title: 'Industries', links: industryOrder.map(s => [industries[s].title, 'industry.html?industry=' + s]) },
+  { title: 'Use Cases', links: [['Advanced Materials', 'story.html?story=advanced-materials'], ['Electronics Assembly', 'story.html?story=electronics-assembly'], ['Biscuit Production', 'story.html?story=biscuit-production']] },
+  { title: 'Company', links: [['About Us', 'company.html'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy and Security', 'privacy.html']] },
+  { title: 'Connect', links: [['Contact Us', 'connect.html?intent=demo']] }
 ].map(g => ({ title: g.title, links: g.links.map(([label, href]) => ({ label, href })) }));
 
 export const footerGroups4 = [
   footerGroups6[0], footerGroups6[1], footerGroups6[2],
-  { title: 'Company', links: [['About Us', '#/company'], ['Customer Stories', '#/resource/use-cases/advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy and Security', '#/company/privacy-security'], ['Contact Us', '#/connect?intent=demo']].map(([label, href]) => ({ label, href })) }
+  { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy and Security', 'privacy.html'], ['Contact Us', 'connect.html?intent=demo']].map(([label, href]) => ({ label, href })) }
 ];

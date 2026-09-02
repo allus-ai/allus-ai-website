@@ -1,0 +1,20 @@
+{
+  "name": "Allus AI",
+  "short_name": "Allus",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#111318",
+  "background_color": "#ffffff",
+  "display": "browser",
+  "start_url": "/"
+}

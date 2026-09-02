@@ -3,12 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request a Demo | Allus AI</title>
+<meta name="description" content="Tell us your line. We'll bring the model. Request a demo, start a pilot or partner with Allus AI.">
+<link rel="canonical" href="https://www.allus.ai/connect.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Allus AI">
+<meta property="og:title" content="Request a Demo | Allus AI">
+<meta property="og:description" content="Tell us your line. We'll bring the model. Request a demo, start a pilot or partner with Allus AI.">
+<meta property="og:url" content="https://www.allus.ai/connect.html">
+<meta property="og:image" content="https://www.allus.ai/assets/media/allus-electronics-assembly-workstation.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Request a Demo | Allus AI">
+<meta name="twitter:description" content="Tell us your line. We'll bring the model. Request a demo, start a pilot or partner with Allus AI.">
+<meta name="twitter:image" content="https://www.allus.ai/assets/media/allus-electronics-assembly-workstation.webp">
+<meta name="theme-color" content="#111318">
+<link rel="icon" href="assets/allus-icon-navy.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Allus AI","url":"https://www.allus.ai","logo":"https://www.allus.ai/assets/allus-logo-navy.svg","sameAs":[],"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","email":"contact@allus.ai","contactType":"sales"}}</script>
 <script src="./support.js"></script>
 </head>
 <body>
+<noscript><div style="max-width:720px;margin:64px auto;padding:0 24px;font-family:sans-serif;color:#101828"><h1>Request a Demo | Allus AI</h1><p>Tell us your line. We'll bring the model. Request a demo, start a pilot or partner with Allus AI.</p><p><a href="connect.html">Request a demo</a> · <a href="mailto:contact@allus.ai">contact@allus.ai</a></p></div></noscript>
 <x-dc>
 <helmet>
-<title>Connect — Allus AI (v2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet">
 <style>
 html { background: #fff; }
@@ -91,6 +112,8 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
 </style>
 <script>document.addEventListener('pointerdown', e => { const b = e.target.closest && e.target.closest('[data-btn]'); if (!b) return; const r = b.getBoundingClientRect(); b.style.setProperty('--px', ((e.clientX - r.left) / r.width * 100) + '%'); b.style.setProperty('--py', ((e.clientY - r.top) / r.height * 100) + '%'); }, { passive: true });</script>
 <script>document.addEventListener('pointermove', e => { const r = document.documentElement.style; r.setProperty('--mx', e.clientX + 'px'); r.setProperty('--my', e.clientY + 'px'); }, { passive: true });</script>
+<script src="site-config.js"></script>
+<script src="site.js" defer></script>
 </helmet>
 <div data-screen-label="Connect v2" style="min-width: 1244px; position: relative;">
   <div aria-hidden="true" style="position: fixed; top: 0; left: 0; right: 0; z-index: 40; height: 2px; background: #3f7afe; transform-origin: left; animation: progress linear both; animation-timeline: scroll(root);"></div>
@@ -113,13 +136,16 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
     <section style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding: 40px 0 112px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 48px; align-items: start; animation: fade-up .9s cubic-bezier(.16,1,.3,1) .35s both;">
       <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
         <form onSubmit="{{ submit }}" style="display: grid; gap: 18px;">
+          <input type="hidden" name="intent" value="{{ intentSlug }}">
+          <div aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;"><label>Website<input type="text" name="website" tabIndex="-1" autoComplete="off"></label></div>
           <label style="display: grid; gap: 8px;"><span style="font-size: 14px; font-weight: 600;">Work email<span style="color: #d14343;">*</span></span><input required type="email" name="email" placeholder="name@company.com" style="height: 48px; padding: 0 14px; border: 1px solid rgba(17,19,24,.16); border-radius: 12px; background: #fff; font-size: 15px; outline: none;" style-focus="border-color: #3f7afe; box-shadow: 0 0 0 3px rgba(63,122,254,.18);"></label>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;"><label style="display: grid; gap: 8px;"><span style="font-size: 14px; font-weight: 600;">First name<span style="color: #d14343;">*</span></span><input required name="first" placeholder="First name" style="height: 48px; padding: 0 14px; border: 1px solid rgba(17,19,24,.16); border-radius: 12px; background: #fff; font-size: 15px; outline: none;" style-focus="border-color: #3f7afe; box-shadow: 0 0 0 3px rgba(63,122,254,.18);"></label><label style="display: grid; gap: 8px;"><span style="font-size: 14px; font-weight: 600;">Last name<span style="color: #d14343;">*</span></span><input required name="last" placeholder="Last name" style="height: 48px; padding: 0 14px; border: 1px solid rgba(17,19,24,.16); border-radius: 12px; background: #fff; font-size: 15px; outline: none;" style-focus="border-color: #3f7afe; box-shadow: 0 0 0 3px rgba(63,122,254,.18);"></label></div>
           <label style="display: grid; gap: 8px;"><span style="font-size: 14px; font-weight: 600;">Company<span style="color: #d14343;">*</span></span><input required name="company" placeholder="Company" style="height: 48px; padding: 0 14px; border: 1px solid rgba(17,19,24,.16); border-radius: 12px; background: #fff; font-size: 15px; outline: none;" style-focus="border-color: #3f7afe; box-shadow: 0 0 0 3px rgba(63,122,254,.18);"></label>
           <label style="display: grid; gap: 8px;"><span style="font-size: 14px; font-weight: 600;">Briefly describe your inquiry</span><textarea name="context" rows="4" placeholder="The operation, available data, deployment environment and timeline." style="min-height: 110px; padding: 12px 14px; border: 1px solid rgba(17,19,24,.16); border-radius: 12px; background: #fff; font-size: 15px; outline: none; resize: vertical;" style-focus="border-color: #3f7afe; box-shadow: 0 0 0 3px rgba(63,122,254,.18);"></textarea></label>
           <div style="display: grid; gap: 12px; justify-items: start; padding-top: 6px;">
-            <button type="submit" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 8px 0 18px; color: #fcfbf8; border: 0; border-radius: 12px; background: #2459d3; font-size: 14px; font-weight: 600; cursor: pointer;" data-btn="primary">{{ active.submit }} <span aria-hidden="true" style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,.16); color: #fff; font-size: 14px; line-height: 1;">→</span></button>
-            <p style="max-width: 52ch; color: #5f687a; font-size: 12px; line-height: 1.5;">By submitting this form you agree to our <a href="privacy.html" style="color: #2459d3;">Privacy Policy</a>. Prototype only — nothing is transmitted or stored.</p>
+            <button type="submit" disabled="{{ sending }}" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 8px 0 18px; color: #fcfbf8; border: 0; border-radius: 12px; background: #2459d3; font-size: 14px; font-weight: 600; cursor: pointer;" data-btn="primary">{{ submitLabel }} <span aria-hidden="true" style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,.16); color: #fff; font-size: 14px; line-height: 1;">→</span></button>
+            <p style="max-width: 52ch; color: #5f687a; font-size: 12px; line-height: 1.5;">By submitting this form you agree to our <a href="privacy.html" style="color: #2459d3;">Privacy Policy</a> and <a href="terms.html" style="color: #2459d3;">Terms</a>.</p>
+            <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}"><p role="alert" style="color: #b42318; font-size: 13px;">Something went wrong sending your request. Email us at <a href="mailto:contact@allus.ai" style="color: #2459d3;">contact@allus.ai</a>.</p></sc-if>
           </div>
         </form>
       </sc-if>
@@ -141,22 +167,22 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
   <footer style="color: #fcfbf8; background: #111318; border-top: 1px solid rgba(255,255,255,.08);">
     <div style="display: grid; gap: 48px; width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding-block: 64px 32px;">
       <div style="display: grid; grid-template-columns: minmax(200px, 1.1fr) repeat(4, minmax(0, 1fr)); gap: 40px 28px;">
-        <div style="display: grid; gap: 18px; align-content: start;"><a href="index.html" style="display: block; width: max-content;"><img src="assets/allus-logo-white.svg" alt="" style="display: block; width: 132px; height: auto;"></a><p style="max-width: 26ch; color: rgba(255,255,255,.58); font-size: 15px; line-height: 1.45;">Industrial foundation models and model-powered solutions for the physical world.</p><p style="color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">Cupertino · Atlanta</p></div>
+        <div style="display: grid; gap: 18px; align-content: start;"><a href="index.html" style="display: block; width: max-content;"><img src="assets/allus-logo-white.svg" alt="Allus AI" style="display: block; width: 132px; height: auto;"></a><p style="max-width: 26ch; color: rgba(255,255,255,.58); font-size: 15px; line-height: 1.45;">Industrial foundation models and model-powered solutions for the physical world.</p><p style="color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">Cupertino · Atlanta</p></div>
         <sc-for list="{{ footerGroups }}" as="g" hint-placeholder-count="4"><div style="display: grid; align-content: start; gap: 8px;"><h3 style="margin: 0 0 6px; color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase;">{{ g.title }}</h3><sc-for list="{{ g.links }}" as="l" hint-placeholder-count="3"><a href="{{ l.href }}" style="display: block; min-height: 26px; color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.35;" style-hover="color: #fff;">{{ l.label }}</a></sc-for></div></sc-for>
       </div>
-      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;"><span>© 2026 Allus AI</span><div style="display: flex; gap: 20px;"><a href="privacy.html">Privacy and Security</a><a href="https://trust.allus.ai">Trust Center</a></div></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;"><span>© 2026 Allus AI Inc. · Atlanta, Georgia</span><div style="display: flex; gap: 20px;"><a href="privacy.html">Privacy and Security</a><a href="terms.html" style-hover="color: #fff;">Terms</a><a href="https://trust.allus.ai">Trust Center</a></div></div>
     </div>
   </footer>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;intent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;demo&quot;,&quot;options&quot;:[&quot;demo&quot;,&quot;model-access&quot;,&quot;pilot&quot;,&quot;sales&quot;,&quot;partnerships&quot;,&quot;support&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page&quot;}}">
 class Component extends DCLogic {
-  state = { data: null, intent: null, sent: false };
+  state = { data: null, intent: null, sent: false, sending: false, error: false };
   componentDidMount() { import('./allus-content.js').then(data => this.setState({ data })); }
   renderVals() {
     const d = this.state.data;
     const navItems = [['Model', 'model.html'], ['Solutions', 'solutions.html'], ['Industries', 'solutions.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Company', 'company.html']].map(([label, href]) => ({ label, href, style: { display: 'flex', alignItems: 'center', height: 40, padding: '0 14px', borderRadius: 999, fontSize: 13, fontWeight: 500, color: '#25324a' } }));
-    if (!d) return { navItems, intents: [], active: {}, sent: false, notSent: true, footerGroups: [] };
+    if (!d) return { navItems, intents: [], active: { eyebrow: '', pitch: '', title: '', formTitle: '', submit: '' }, sent: false, notSent: true, sending: false, error: false, intentSlug: 'demo', submitLabel: 'Send', footerGroups: [] };
     const slug = this.state.intent || new URLSearchParams(location.search).get('intent') || this.props.intent || 'demo';
     const row = d.connectIntents.find(r => r[0] === slug) || d.connectIntents[0];
     return {
@@ -165,7 +191,8 @@ class Component extends DCLogic {
         select: () => this.setState({ intent: key }),
         style: { height: 40, border: 0, borderRadius: 9, background: sel ? '#fff' : 'transparent', color: sel ? '#101828' : '#5f687a', fontSize: 13, fontWeight: 600, cursor: 'pointer', boxShadow: sel ? '0 2px 8px rgba(16,24,40,.08)' : 'none', transition: 'background .25s ease, color .25s ease, box-shadow .25s ease' } }; }),
       active: { title: row[1], formTitle: row[3], submit: row[4], eyebrow: slug === 'demo' ? 'Book a demo' : slug === 'pilot' ? 'Start a pilot' : 'Partnerships', pitch: slug === 'demo' ? "See the model on your own line — preserve expertise, verify standard work, run inside your boundary." : slug === 'pilot' ? 'Bring one line, one workload and a data boundary. We scope, configure and review together — in weeks, not quarters.' : 'Hardware, cameras, industrial systems, integrators and research — everything a foundation model needs around it in a plant.', benefits: (slug === 'demo' ? ['Faster onboarding time', 'Standardized expert know-how', 'Verified standard work, every cycle', 'Safer, more confident operators', 'Runs inside your data boundary'] : slug === 'pilot' ? ['Scoped evaluation on your workload', 'Customer-reviewed evidence set', 'Edge, on-prem or private cloud', 'Clear path from pilot to plant'] : ['Joint go-to-market', 'Validated hardware and runtime', 'Integration and deployment capability', 'Research collaboration']).map((text, i) => ({ text, num: '0' + (i + 1) })) },
-      submit: e => { e.preventDefault(); this.setState({ sent: true }); },
+      submit: e => { e.preventDefault(); const form = e.currentTarget; this.setState({ sending: true, error: false }); (window.allusSubmitForm ? window.allusSubmitForm(form) : Promise.resolve(true)).then(() => this.setState({ sent: true, sending: false })).catch(() => this.setState({ sending: false, error: true })); },
+      intentSlug: slug, sending: this.state.sending, error: this.state.error, submitLabel: this.state.sending ? 'Sending…' : row[4],
       reset: () => this.setState({ sent: false }),
       sent: this.state.sent, notSent: !this.state.sent,
       footerGroups: d.footerGroups4

@@ -3,12 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Allus AI — Industrial Intelligence for Manufacturing</title>
+<meta name="description" content="Vision foundation models that see the work, understand it over time and run where the work happens. Built for real-world latency, reliability and compute constraints.">
+<link rel="canonical" href="https://www.allus.ai/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Allus AI">
+<meta property="og:title" content="Allus AI — Industrial Intelligence for Manufacturing">
+<meta property="og:description" content="Vision foundation models that see the work, understand it over time and run where the work happens. Built for real-world latency, reliability and compute constraints.">
+<meta property="og:url" content="https://www.allus.ai/">
+<meta property="og:image" content="https://www.allus.ai/assets/media/allus-hero-1.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Allus AI — Industrial Intelligence for Manufacturing">
+<meta name="twitter:description" content="Vision foundation models that see the work, understand it over time and run where the work happens. Built for real-world latency, reliability and compute constraints.">
+<meta name="twitter:image" content="https://www.allus.ai/assets/media/allus-hero-1.webp">
+<meta name="theme-color" content="#111318">
+<link rel="icon" href="assets/allus-icon-navy.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Allus AI","url":"https://www.allus.ai","logo":"https://www.allus.ai/assets/allus-logo-navy.svg","sameAs":[],"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","email":"contact@allus.ai","contactType":"sales"}}</script>
 <script src="./support.js"></script>
 </head>
 <body>
+<noscript><div style="max-width:720px;margin:64px auto;padding:0 24px;font-family:sans-serif;color:#101828"><h1>Allus AI — Industrial Intelligence for Manufacturing</h1><p>Vision foundation models that see the work, understand it over time and run where the work happens. Built for real-world latency, reliability and compute constraints.</p><p><a href="connect.html">Request a demo</a> · <a href="mailto:contact@allus.ai">contact@allus.ai</a></p></div></noscript>
 <x-dc>
 <helmet>
-<title>Allus AI — Industrial Intelligence (v2)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet">
@@ -97,6 +116,8 @@ li[style*="border-radius: 999px"]:hover { border-color: rgba(16,24,40,.32) !impo
 img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
 </style>
 <script>document.addEventListener('pointermove', e => { const r = document.documentElement.style; r.setProperty('--mx', e.clientX + 'px'); r.setProperty('--my', e.clientY + 'px'); }, { passive: true });document.addEventListener('pointerdown', e => { const b = e.target.closest && e.target.closest('[data-btn]'); if (!b) return; const r = b.getBoundingClientRect(); b.style.setProperty('--px', ((e.clientX - r.left) / r.width * 100) + '%'); b.style.setProperty('--py', ((e.clientY - r.top) / r.height * 100) + '%'); }, { passive: true });</script>
+<script src="site-config.js"></script>
+<script src="site.js" defer></script>
 </helmet>
 
 <div data-screen-label="Home v2" style="min-width: 1244px; position: relative;">
@@ -139,11 +160,12 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
           <div style="position: relative; width: 100%; overflow: hidden; aspect-ratio: 16 / 9; background: #111318;">
             <sc-for list="{{ heroSlides }}" as="s" hint-placeholder-count="1">
               <div style="{{ s.style }}">
-                <video muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" preload="metadata" poster="{{ s.poster }}" src="{{ s.src }}" aria-label="{{ s.label }} manufacturing scene" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;"></video>
+                <video muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" preload="none" poster="{{ s.poster }}" src="{{ s.liveSrc }}" aria-label="{{ s.label }} manufacturing scene" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;"></video>
               </div>
             </sc-for>
             <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(13,20,36,.42), transparent 26%, transparent 70%, rgba(13,20,36,.55));"></div>
           </div>
+          <button type="button" onClick="{{ toggleReel }}" aria-pressed="{{ reelHeld }}" aria-label="{{ reelBtnLabel }}" style="position: absolute; top: 20px; right: 20px; z-index: 3; display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.25); border-radius: 12px; background: rgba(10,14,22,.38); color: #fff; font-size: 13px; cursor: pointer; backdrop-filter: blur(10px);">{{ reelBtnIcon }}</button>
           <div role="tablist" aria-label="Industry scenes" onKeyDown="{{ reelKeys }}" style="position: absolute; top: 20px; left: 50%; z-index: 3; display: flex; gap: 8px; padding: 6px; border-radius: 999px; background: rgba(10,14,22,.38); backdrop-filter: blur(10px); transform: translateX(-50%);">
             <sc-for list="{{ heroSlides }}" as="s" hint-placeholder-count="4">
               <button type="button" role="tab" onClick="{{ s.select }}" style="{{ s.tabStyle }}"><span style="position: relative; z-index: 1;">{{ s.label }}</span>{{ s.progress }}</button>
@@ -250,8 +272,10 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
     <!-- Proof band -->
     <section aria-label="Results" style="padding-block: 96px 0;">
       <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 40px; align-items: center; padding: 40px; border-radius: 28px; background: #ebf1fb; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
-        <div style="display: grid; gap: 14px; align-content: start;"><span style="justify-self: start; padding: 6px 12px; border-radius: 999px; background: #fff; color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase;">Proven results</span><h2 style="font-family: 'Manrope', sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -.045em; line-height: 1.04;">Safety. Quality. Delivery. Cost.</h2><p style="color: #5f687a; font-size: 15px; line-height: 1.5;">The numbers plants track every shift.</p><span style="color: #8a92a3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .06em;">Illustrative figures · replace with approved results</span></div>
-        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-self: center;"><div style="display: grid; gap: 0; align-content: space-between; min-height: 176px; padding: 20px 22px; border-radius: 18px; background: #fff; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; animation: rise-in .8s cubic-bezier(.16,1,.3,1) 0ms both;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Safety</span><span style="display: grid; gap: 6px;"><span style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">78</strong><span style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.02em;">%</span></span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">Fewer safety incidents</span></span></div><div style="display: grid; gap: 0; align-content: space-between; min-height: 176px; padding: 20px 22px; border-radius: 18px; background: #fff; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; animation: rise-in .8s cubic-bezier(.16,1,.3,1) 90ms both;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Delivery</span><span style="display: grid; gap: 6px;"><span style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">77</strong><span style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.02em;">%</span></span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">Faster onboarding</span></span></div><div style="display: grid; gap: 0; align-content: space-between; min-height: 176px; padding: 20px 22px; border-radius: 18px; background: #fff; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; animation: rise-in .8s cubic-bezier(.16,1,.3,1) 180ms both;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Quality</span><span style="display: grid; gap: 6px;"><span style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">32</strong><span style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.02em;">%</span></span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">Fewer defects</span></span></div><div style="display: grid; gap: 0; align-content: space-between; min-height: 176px; padding: 20px 22px; border-radius: 18px; background: #fff; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; animation: rise-in .8s cubic-bezier(.16,1,.3,1) 270ms both;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Cost</span><span style="display: grid; gap: 6px;"><span style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">5</strong><span style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.02em;">%</span></span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">More productivity</span></span></div></div>
+        <div style="display: grid; gap: 14px; align-content: start;"><span style="justify-self: start; padding: 6px 12px; border-radius: 999px; background: #fff; color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase;">Proven results</span><h2 style="font-family: 'Manrope', sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -.045em; line-height: 1.04;">Safety. Quality. Delivery. Cost.</h2><p style="color: #5f687a; font-size: 15px; line-height: 1.5;">The numbers plants track every shift.</p></div>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-self: center;">
+          <sc-for list="{{ proof }}" as="pr" hint-placeholder-count="4"><div style="{{ pr.style }}" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">{{ pr.kicker }}</span><span style="display: grid; gap: 6px;"><span style="{{ pr.numStyle }}">{{ pr.value }}</span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">{{ pr.label }}</span></span></div></sc-for>
+        </div>
       </div>
     </section>
     <!-- 03 Solutions showcase -->
@@ -279,7 +303,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
           </div>
           <a href="{{ activeSolution.href }}" style="position: relative; display: block; min-height: 520px; overflow: hidden; border-radius: 26px; background: #111318; isolation: isolate;">
             <sc-for list="{{ solutions }}" as="s" hint-placeholder-count="1">
-              <img src="{{ s.image }}" alt="{{ s.alt }}" style="{{ s.imageStyle }}">
+              <img src="{{ s.image }}" alt="{{ s.alt }}" style="{{ s.imageStyle }}" loading="eager" fetchpriority="high" decoding="async">
             </sc-for>
             <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.05) 30%, rgba(13,20,36,.82) 100%);"></div>
             <div style="position: absolute; right: 28px; bottom: 26px; left: 28px; display: flex; justify-content: space-between; align-items: end; gap: 24px; color: #fff;">
@@ -308,7 +332,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
       <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
         <sc-for list="{{ industries }}" as="ind" hint-placeholder-count="5">
           <a href="{{ ind.href }}" style="position: relative; display: grid; align-content: end; min-height: 380px; padding: 20px; overflow: hidden; border-radius: 22px; background: #111318; color: #fff; isolation: isolate; transition: transform .45s cubic-bezier(.16,1,.3,1);" style-hover="transform: translateY(-6px);">
-            <img src="{{ ind.image }}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; opacity: .92; transition: transform 1s cubic-bezier(.16,1,.3,1);">
+            <img src="{{ ind.image }}" alt="{{ ind.title }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; opacity: .92; transition: transform 1s cubic-bezier(.16,1,.3,1);" loading="lazy" decoding="async">
             <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.1) 35%, rgba(13,20,36,.86) 100%);"></span>
             <span style="position: relative; margin-bottom: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; color: rgba(255,255,255,.7);">{{ ind.num }}</span>
             <strong style="position: relative; font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1;">{{ ind.title }}</strong>
@@ -382,7 +406,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
     <div style="display: grid; gap: 48px; width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding-block: 64px 32px;">
       <div style="display: grid; grid-template-columns: minmax(200px, 1.1fr) repeat(4, minmax(0, 1fr)); gap: 40px 28px;">
         <div style="display: grid; gap: 18px; align-content: start;">
-          <a href="index.html" aria-label="Allus AI home" style="display: block; width: max-content;"><img src="assets/allus-logo-white.svg" alt="" style="display: block; width: 132px; height: auto;"></a>
+          <a href="index.html" aria-label="Allus AI home" style="display: block; width: max-content;"><img src="assets/allus-logo-white.svg" alt="Allus AI" style="display: block; width: 132px; height: auto;"></a>
           <p style="max-width: 26ch; color: rgba(255,255,255,.58); font-size: 15px; letter-spacing: -.01em; line-height: 1.45;">Industrial foundation models and model-powered solutions for the physical world.</p>
           <p style="color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">Cupertino · Atlanta</p>
         </div>
@@ -396,9 +420,9 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
         </sc-for>
       </div>
       <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px 30px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">
-        <span>© 2026 Allus AI</span>
+        <span>© 2026 Allus AI Inc. · Atlanta, Georgia</span>
         <div style="display: flex; gap: 8px 20px;">
-          <a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a>
+          <a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a><a href="terms.html" style-hover="color: #fff;">Terms</a>
           <a href="https://trust.allus.ai" target="_blank" rel="noreferrer" style-hover="color: #fff;">Trust Center</a>
           
         </div>
@@ -410,7 +434,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
 <script type="text/x-dc" data-dc-script data-props="{&quot;autoCycle&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;heroHeadline&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;manufacturing&quot;,&quot;options&quot;:[&quot;manufacturing&quot;,&quot;physical-world&quot;],&quot;tsType&quot;:&quot;'manufacturing' | 'physical-world'&quot;,&quot;section&quot;:&quot;Copy&quot;},&quot;showBackedBy&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
 class Component extends DCLogic {
   renderVals() { const v = this.renderBase(); const k = (key, n) => e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); this.setState(s => ({ [key]: (s[key] + d + n) % n, cycle: s.cycle + 1 })); }; v.solKeys = k('sol', 4); v.reelKeys = k('heroTab', 4); return v; }
-  state = { heroTab: 0, reelPaused: false, sol: 0, solPaused: false, cycle: 0, word: 0, wordIn: true, faqOpen: 0 };
+  state = { heroTab: 0, reelPaused: false, reelHeld: false, sol: 0, solPaused: false, cycle: 0, word: 0, wordIn: true, faqOpen: 0 };
   gridRef = React.createRef();
 
   componentDidMount() {
@@ -440,7 +464,7 @@ class Component extends DCLogic {
   startTimers() {
     clearInterval(this._t1); clearInterval(this._t2);
     if (!(this.props.autoCycle ?? true)) return;
-    this._t1 = setInterval(() => { if (!this.state.reelPaused) this.setState(s => ({ heroTab: (s.heroTab + 1) % 4 })); }, 7000);
+    this._t1 = setInterval(() => { if (!this.state.reelPaused && !this.state.reelHeld) this.setState(s => ({ heroTab: (s.heroTab + 1) % 4 })); }, 7000);
     this._t2 = setInterval(() => { if (!this.state.solPaused) this.setState(s => ({ sol: (s.sol + 1) % 4, cycle: s.cycle + 1 })); }, 5200);
     this._t3 = setInterval(() => { this.setState({ wordIn: false }); setTimeout(() => this.setState(s => ({ word: (s.word + 1) % 4, wordIn: true })), 320); }, 2600);
   }
@@ -450,26 +474,27 @@ class Component extends DCLogic {
     const auto = this.props.autoCycle ?? true;
     const h = React.createElement;
     const scenes = [
-      { label: 'Robotics', kicker: 'Robotics · Assembly cell', title: 'Robot, fixture and part state read in one pass.', src: 'assets/media/allus-hero-1.mp4', poster: 'assets/media/allus-hero-1.jpg' },
-      { label: 'Beverages', kicker: 'Beverages · Filling line', title: 'Fill, cap and label steps become timed events.', src: 'assets/media/allus-hero-2.mp4', poster: 'assets/media/allus-hero-2.jpg' },
-      { label: 'Utilities', kicker: 'Utilities · Gauge wall', title: 'Gauges and indicators read as reviewable readings.', src: 'assets/media/allus-hero-3.mp4', poster: 'assets/media/allus-hero-3.jpg' },
-      { label: 'Food', kicker: 'Food · Production line', title: 'Sanitation and changeover steps linked to procedure.', src: 'assets/media/allus-hero-4.mp4', poster: 'assets/media/allus-hero-4.jpg' }
+      { label: 'Robotics', kicker: 'Robotics · Assembly cell', title: 'Robot, fixture and part state read in one pass.', src: 'assets/media/allus-hero-1.mp4', poster: 'assets/media/allus-hero-1.webp' },
+      { label: 'Beverages', kicker: 'Beverages · Filling line', title: 'Fill, cap and label steps become timed events.', src: 'assets/media/allus-hero-2.mp4', poster: 'assets/media/allus-hero-2.webp' },
+      { label: 'Utilities', kicker: 'Utilities · Gauge wall', title: 'Gauges and indicators read as reviewable readings.', src: 'assets/media/allus-hero-3.mp4', poster: 'assets/media/allus-hero-3.webp' },
+      { label: 'Food', kicker: 'Food · Production line', title: 'Sanitation and changeover steps linked to procedure.', src: 'assets/media/allus-hero-4.mp4', poster: 'assets/media/allus-hero-4.webp' }
     ];
     const heroSlides = scenes.map((s, i) => {
       const active = i === this.state.heroTab;
       return {
         ...s,
+        liveSrc: (i === this.state.heroTab || i === (this.state.heroTab + 1) % scenes.length) ? s.src : undefined,
         select: () => this.setState({ heroTab: i }),
         style: { position: 'absolute', inset: 0, opacity: active ? 1 : 0, transform: active ? 'scale(1)' : 'scale(1.03)', transition: 'opacity .7s cubic-bezier(.22,1,.36,1), transform 1.2s cubic-bezier(.22,1,.36,1)', pointerEvents: active ? 'auto' : 'none' },
         tabStyle: { position: 'relative', overflow: 'hidden', minHeight: 34, padding: '0 16px', border: 0, borderRadius: 999, background: active ? 'rgba(255,255,255,.14)' : 'transparent', color: '#fff', fontSize: 13, fontWeight: 500, letterSpacing: '.01em', cursor: 'pointer', transition: 'background .3s ease' },
-        progress: active && auto && !this.state.reelPaused ? h('span', { key: 'p' + i + '-' + this.state.heroTab, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: '#fff', transformOrigin: 'left', animation: 'progress 7s linear both' } }) : null
+        progress: active && auto && !this.state.reelPaused && !this.state.reelHeld ? h('span', { key: 'p' + i + '-' + this.state.heroTab, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: '#fff', transformOrigin: 'left', animation: 'progress 7s linear both' } }) : null
       };
     });
     const solutionData = [
-      ['PEOPLE & KNOWLEDGE', 'Operational Knowledge & Guidance', 'Turn expert work into searchable, step-linked guidance.', 'Expert know-how, delivered at the station.', 'operational-knowledge-guidance', 'assets/media/allus-guided-work-handoff.jpg', 'Two technicians at a fixture beside a guidance display'],
-      ['PROCESS & EXECUTION', 'Production & Process Intelligence', 'Structure work video into reviewable process evidence.', 'Every cycle, step and interruption — on a timeline.', 'production-process-intelligence', 'assets/media/allus-process-sequence-context.jpg', 'Industrial work sequence with source-linked moments'],
-      ['EQUIPMENT & ASSETS', 'Equipment & Asset Intelligence', 'Connect what equipment looks like with what to do next.', 'Visible condition, tied to the maintenance record.', 'equipment-asset-intelligence', 'assets/media/allus-asset-service-continuity.jpg', 'Technician consulting a terminal beside an industrial pump'],
-      ['SAFETY & SITES', 'Industrial Safety & Site Intelligence', 'Governed, human-reviewed context for configured site events.', 'Site events, reviewed by people, within your rules.', 'industrial-safety-site-intelligence', 'assets/media/allus-governed-event-review.jpg', 'Operations coordinator reviewing a site event']
+      ['PEOPLE & KNOWLEDGE', 'Operational Knowledge & Guidance', 'Turn expert work into searchable, step-linked guidance.', 'Expert know-how, delivered at the station.', 'operational-knowledge-guidance', 'assets/media/allus-guided-work-handoff.webp', 'Two technicians at a fixture beside a guidance display'],
+      ['PROCESS & EXECUTION', 'Production & Process Intelligence', 'Structure work video into reviewable process evidence.', 'Every cycle, step and interruption — on a timeline.', 'production-process-intelligence', 'assets/media/allus-process-sequence-context.webp', 'Industrial work sequence with source-linked moments'],
+      ['EQUIPMENT & ASSETS', 'Equipment & Asset Intelligence', 'Connect what equipment looks like with what to do next.', 'Visible condition, tied to the maintenance record.', 'equipment-asset-intelligence', 'assets/media/allus-asset-service-continuity.webp', 'Technician consulting a terminal beside an industrial pump'],
+      ['SAFETY & SITES', 'Industrial Safety & Site Intelligence', 'Governed, human-reviewed context for configured site events.', 'Site events, reviewed by people, within your rules.', 'industrial-safety-site-intelligence', 'assets/media/allus-governed-event-review.webp', 'Operations coordinator reviewing a site event']
     ];
     const solutions = solutionData.map(([domain, title, note, outcome, slug, image, alt], i) => {
       const active = i === this.state.sol;
@@ -486,14 +511,15 @@ class Component extends DCLogic {
       };
     });
     const industries = [
-      ['Electronics Assembly', 'electronics-assembly', 'High-mix assembly knowledge and station guidance.', 'assets/media/allus-electronics-assembly-workstation.jpg'],
-      ['FMCG', 'fmcg', 'Changeovers and high-speed line context.', 'assets/media/allus-fmcg-packaging-line.jpg'],
-      ['Food & Beverage', 'food-beverage', 'Sanitation to packaging, governed.', 'assets/media/allus-food-beverage-production.jpg'],
-      ['Advanced Materials', 'advanced-materials', 'Expert knowledge across long material cycles.', 'assets/media/allus-advanced-materials-facility-context.jpg'],
-      ['Automotive', 'automotive', 'Assembly, material flow and plant operations.', 'assets/media/allus-automotive-body-shop.jpg']
+      ['Electronics Assembly', 'electronics-assembly', 'High-mix assembly knowledge and station guidance.', 'assets/media/allus-electronics-assembly-workstation.webp'],
+      ['FMCG', 'fmcg', 'Changeovers and high-speed line context.', 'assets/media/allus-fmcg-packaging-line.webp'],
+      ['Food & Beverage', 'food-beverage', 'Sanitation to packaging, governed.', 'assets/media/allus-food-beverage-production.webp'],
+      ['Advanced Materials', 'advanced-materials', 'Expert knowledge across long material cycles.', 'assets/media/allus-advanced-materials-facility-context.webp'],
+      ['Automotive', 'automotive', 'Assembly, material flow and plant operations.', 'assets/media/allus-automotive-body-shop.webp']
     ];
     const pulse = (kf, color) => h('span', { 'aria-hidden': true, style: { position: 'absolute', top: -3, width: 7, height: 7, borderRadius: '50%', background: color, boxShadow: '0 0 0 3px rgba(63,122,254,.18)', animation: kf + ' 2.6s cubic-bezier(.4,0,.6,1) infinite' } });
     return {
+      proof: ((window.ALLUS_CONFIG && window.ALLUS_CONFIG.approvedMetrics) ? [['78%', 'Decrease in safety incidents'], ['77%', 'Reduction in onboarding time'], ['32%', 'Fewer defects'], ['5%', 'Increase in productivity']] : [['Safer', 'Verified standard work'], ['Faster', 'Time to competence'], ['Fewer', 'Defects and deviations'], ['Leaner', 'Continuous time & motion']]).map(([value, label], i) => ({ value, label, kicker: ['Safety', 'Delivery', 'Quality', 'Cost'][i], style: { display: 'grid', gap: 0, alignContent: 'space-between', minHeight: 176, padding: '20px 22px', borderRadius: 18, background: '#fff', transition: 'transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease', animation: 'rise-in .8s cubic-bezier(.16,1,.3,1) ' + (i * 90) + 'ms both' }, numStyle: { color: '#2459d3', fontFamily: "'Manrope', sans-serif", fontSize: /\d/.test(value) ? 52 : 40, fontWeight: 600, letterSpacing: '-.04em', lineHeight: 1 } })),
       heroSubline: (this.props.heroHeadline ?? 'manufacturing') === 'physical-world' ? 'for the physical world.' : 'for Manufacturing.',
       showBacked: this.props.showBackedBy ?? true,
       rotWord: ['the work.', 'the line.', 'the asset.', 'the site.'][this.state.word],
@@ -506,6 +532,8 @@ class Component extends DCLogic {
       activeSceneKicker: scenes[this.state.heroTab].kicker,
       activeSceneTitle: scenes[this.state.heroTab].title,
       pauseReel: () => this.setState({ reelPaused: true }),
+      toggleReel: () => { const held = !this.state.reelHeld; this.setState({ reelHeld: held }); document.querySelectorAll('video').forEach(v => held ? v.pause() : v.play().catch(() => {})); },
+      reelHeld: this.state.reelHeld, reelBtnLabel: this.state.reelHeld ? 'Play scenes' : 'Pause scenes', reelBtnIcon: this.state.reelHeld ? '▶' : '❚❚',
       resumeReel: () => this.setState({ reelPaused: false }),
       runsOn: [['Edge', 'next to cameras and machines'], ['On-Premise', 'inside your facility'], ['Private Cloud', 'in your own tenant'], ['Hybrid', 'local execution, central control']].map(([label, note]) => ({ label, note })),
       pulseIn: pulse('flow-x', '#2459d3'),

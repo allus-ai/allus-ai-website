@@ -1,0 +1,5 @@
+/model/:m   /model-detail.html?model=:m   200
+/solutions/:s   /solution.html?solution=:s   200
+/industries/:i   /industry.html?industry=:i   200
+/stories/:st   /story.html?story=:st   200
+/*   /404.html   404

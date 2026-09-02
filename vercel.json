@@ -1,0 +1,54 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/model/:m",
+      "destination": "/model-detail.html?model=:m"
+    },
+    {
+      "source": "/solutions/:s",
+      "destination": "/solution.html?solution=:s"
+    },
+    {
+      "source": "/industries/:i",
+      "destination": "/industry.html?industry=:i"
+    },
+    {
+      "source": "/stories/:st",
+      "destination": "/story.html?story=:st"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

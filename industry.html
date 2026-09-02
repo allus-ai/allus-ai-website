@@ -3,12 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Industries — Industrial Intelligence by Sector | Allus AI</title>
+<meta name="description" content="Electronics assembly, FMCG, food &amp; beverage, advanced materials and automotive — configured for how each industry actually works.">
+<link rel="canonical" href="https://www.allus.ai/industry.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Allus AI">
+<meta property="og:title" content="Industries — Industrial Intelligence by Sector | Allus AI">
+<meta property="og:description" content="Electronics assembly, FMCG, food &amp; beverage, advanced materials and automotive — configured for how each industry actually works.">
+<meta property="og:url" content="https://www.allus.ai/industry.html">
+<meta property="og:image" content="https://www.allus.ai/assets/media/allus-automotive-body-shop.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Industries — Industrial Intelligence by Sector | Allus AI">
+<meta name="twitter:description" content="Electronics assembly, FMCG, food &amp; beverage, advanced materials and automotive — configured for how each industry actually works.">
+<meta name="twitter:image" content="https://www.allus.ai/assets/media/allus-automotive-body-shop.webp">
+<meta name="theme-color" content="#111318">
+<link rel="icon" href="assets/allus-icon-navy.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Allus AI","url":"https://www.allus.ai","logo":"https://www.allus.ai/assets/allus-logo-navy.svg","sameAs":[],"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","email":"contact@allus.ai","contactType":"sales"}}</script>
+<script>(function(){var t={"electronics-assembly":"Electronics Assembly","fmcg":"FMCG","food-beverage":"Food & Beverage","advanced-materials":"Advanced Materials","automotive":"Automotive"};var v=new URLSearchParams(location.search).get('industry');if(v&&t[v]){document.title=t[v]+' | Allus AI';var og=document.querySelector('meta[property="og:title"]');if(og)og.content=document.title;var c=document.querySelector('link[rel=canonical]');if(c)c.href=c.href.split('?')[0]+'?industry='+v;}})();</script>
 <script src="./support.js"></script>
 </head>
 <body>
+<noscript><div style="max-width:720px;margin:64px auto;padding:0 24px;font-family:sans-serif;color:#101828"><h1>Industries — Industrial Intelligence by Sector | Allus AI</h1><p>Electronics assembly, FMCG, food &amp; beverage, advanced materials and automotive — configured for how each industry actually works.</p><p><a href="connect.html">Request a demo</a> · <a href="mailto:contact@allus.ai">contact@allus.ai</a></p></div></noscript>
 <x-dc>
 <helmet>
-<title>Industry story — Allus AI (v3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet">
 <style>
 html { background: #fff; }
@@ -94,6 +116,8 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
 </style>
 <script>document.addEventListener('pointerdown', e => { const b = e.target.closest && e.target.closest('[data-btn]'); if (!b) return; const r = b.getBoundingClientRect(); b.style.setProperty('--px', ((e.clientX - r.left) / r.width * 100) + '%'); b.style.setProperty('--py', ((e.clientY - r.top) / r.height * 100) + '%'); }, { passive: true });</script>
 <script>document.addEventListener('pointermove', e => { const r = document.documentElement.style; r.setProperty('--mx', e.clientX + 'px'); r.setProperty('--my', e.clientY + 'px'); }, { passive: true });</script>
+<script src="site-config.js"></script>
+<script src="site.js" defer></script>
 </helmet>
 <div data-screen-label="Industry story v3" style="min-width: 1244px; position: relative;">
   <div aria-hidden="true" style="position: fixed; top: 0; left: 0; right: 0; z-index: 40; height: 2px; background: #3f7afe; transform-origin: left; animation: progress linear both; animation-timeline: scroll(root);"></div>
@@ -124,7 +148,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
       <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 64px; animation: fade-up .9s cubic-bezier(.16,1,.3,1) .4s both;">
         <sc-for list="{{ entries }}" as="e" hint-placeholder-count="4">
           <a href="{{ e.href }}" onClick="{{ e.jump }}" style="position: relative; display: grid; align-content: end; gap: 8px; min-height: 300px; padding: 22px; overflow: hidden; border-radius: 22px; background: #111318; color: #fff; transition: transform .45s cubic-bezier(.16,1,.3,1);" style-hover="transform: translateY(-6px);">
-            <img src="{{ e.image }}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; opacity: .9;">
+            <img src="{{ e.image }}" alt="{{ e.short }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; opacity: .9;" loading="eager" fetchpriority="high" decoding="async">
             <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.05) 30%, rgba(13,20,36,.9) 100%);"></span>
             <span style="position: relative; margin-bottom: auto; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: rgba(255,255,255,.14); backdrop-filter: blur(6px); font-size: 16px;">{{ e.icon }}</span>
             <strong style="position: relative; font-size: 20px; font-weight: 600; letter-spacing: -.025em; line-height: 1.15;">{{ e.short }}</strong>
@@ -145,13 +169,12 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
           <div style="display: grid; gap: 10px; align-content: start; min-height: 250px; padding: 22px; border-radius: 18px; background: #fff;">
             <span style="color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">{{ m.label }}</span>
             <strong style="font-size: 16px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3;">{{ m.title }}</strong>
-            <span style="margin-top: 6px; color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">{{ m.shown }}<span style="font-size: 32px;">{{ m.unit }}</span></span>
+            <span style="{{ m.numStyle }}">{{ m.shown }}<span style="font-size: 32px;">{{ m.unit }}</span></span>
             <span style="color: #5f687a; font-size: 13px; line-height: 1.5;">{{ m.note }}</span>
           </div>
         </sc-for>
       </div>
-      <p style="margin-top: 16px; color: #8a92a3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .06em;">Illustrative figures from comparable public deployments · replace with approved Allus results before launch</p>
-    </section>
+          </section>
 
     <!-- 4. Sticky storytelling -->
     <section aria-labelledby="ops-title" style="padding-block: 112px 64px;">
@@ -184,7 +207,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
                   </div>
                 </sc-if>
                 <sc-if value="{{ c.isPhoto }}" hint-placeholder-val="{{ true }}">
-                  <figure style="position: relative; margin: 0; min-height: 420px; overflow: hidden; border-radius: 20px; background: #111318;"><img src="{{ c.image }}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%;"><span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(13,20,36,.75) 100%);"></span><figcaption style="position: absolute; right: 18px; bottom: 16px; left: 18px; display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{ c.chips }}" as="ch" hint-placeholder-count="3"><span style="padding: 6px 10px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; background: rgba(17,19,24,.45); color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; backdrop-filter: blur(6px);">{{ ch.text }}</span></sc-for></figcaption></figure>
+                  <figure style="position: relative; margin: 0; min-height: 420px; overflow: hidden; border-radius: 20px; background: #111318;"><img src="{{ c.image }}" alt="{{ c.title }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%;" loading="lazy" decoding="async"><span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(13,20,36,.75) 100%);"></span><figcaption style="position: absolute; right: 18px; bottom: 16px; left: 18px; display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{ c.chips }}" as="ch" hint-placeholder-count="3"><span style="padding: 6px 10px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; background: rgba(17,19,24,.45); color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; backdrop-filter: blur(6px);">{{ ch.text }}</span></sc-for></figcaption></figure>
                 </sc-if>
               </article>
             </sc-for>
@@ -210,10 +233,10 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
   <footer style="color: #fcfbf8; background: #111318; border-top: 1px solid rgba(255,255,255,.08);">
     <div style="display: grid; gap: 48px; width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding-block: 64px 32px;">
       <div style="display: grid; grid-template-columns: minmax(200px, 1.1fr) repeat(4, minmax(0, 1fr)); gap: 40px 28px;">
-        <div style="display: grid; gap: 18px; align-content: start;"><a href="index.html" style="display: block; width: max-content;"><img src="assets/allus-logo-white.svg" alt="" style="display: block; width: 132px; height: auto;"></a><p style="max-width: 26ch; color: rgba(255,255,255,.58); font-size: 15px; line-height: 1.45;">Industrial foundation models and model-powered solutions for the physical world.</p><p style="color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">Cupertino · Atlanta</p></div>
+        <div style="display: grid; gap: 18px; align-content: start;"><a href="index.html" style="display: block; width: max-content;"><img src="assets/allus-logo-white.svg" alt="Allus AI" style="display: block; width: 132px; height: auto;"></a><p style="max-width: 26ch; color: rgba(255,255,255,.58); font-size: 15px; line-height: 1.45;">Industrial foundation models and model-powered solutions for the physical world.</p><p style="color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">Cupertino · Atlanta</p></div>
         <sc-for list="{{ footerGroups }}" as="g" hint-placeholder-count="4"><div style="display: grid; align-content: start; gap: 8px;"><h3 style="margin: 0 0 6px; color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase;">{{ g.title }}</h3><sc-for list="{{ g.links }}" as="l" hint-placeholder-count="3"><a href="{{ l.href }}" style="display: block; min-height: 26px; color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.35;" style-hover="color: #fff;">{{ l.label }}</a></sc-for></div></sc-for>
       </div>
-      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;"><span>© 2026 Allus AI</span><div style="display: flex; gap: 20px;"><a href="privacy.html">Privacy and Security</a><a href="https://trust.allus.ai">Trust Center</a></div></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;"><span>© 2026 Allus AI Inc. · Atlanta, Georgia</span><div style="display: flex; gap: 20px;"><a href="privacy.html">Privacy and Security</a><a href="terms.html" style-hover="color: #fff;">Terms</a><a href="https://trust.allus.ai">Trust Center</a></div></div>
     </div>
   </footer>
 </div>
@@ -279,7 +302,7 @@ class Component extends DCLogic {
       storyHref: ind.story ? ind.story.href : 'story.html?story=advanced-materials',
       rail: d.industryOrder.map(key => { const cur = key === id; return { title: d.industries[key].title, href: 'industry.html?industry=' + key, select: e => { e.preventDefault(); this.setState({ industry: key, word: 0, typed: 0, active: 0 }); }, style: { display: 'inline-flex', alignItems: 'center', minHeight: 44, padding: '0 20px', borderRadius: 999, background: cur ? '#111318' : 'transparent', color: cur ? '#fff' : '#25324a', fontSize: 15, fontWeight: 600, transition: 'background .25s ease, color .25s ease' } }; }),
       entries: mix.map(slug => ({ short: d.solutionShort[slug], tagline: d.solutionTagline[slug], icon: d.solutionIcons[slug], image: d.solutions[slug].image2, href: '#ch-' + slug, jump: jumpTo('ch-' + slug) })),
-      sqdc: d.sqdc.map(([label, title, value, unit, note]) => ({ label, title, unit, note, shown: Math.round(value * p) })),
+      sqdc: d.sqdc.map(([label, title, value, unit, note]) => ({ label, title, unit, note, shown: typeof value === 'number' ? Math.round(value * p) : value, numStyle: { marginTop: 6, color: '#2459d3', fontFamily: "'Manrope', sans-serif", fontSize: typeof value === 'number' ? 52 : 36, fontWeight: 600, letterSpacing: '-.04em', lineHeight: 1 } })),
       ticker: [...mix.map(s => d.solutions[s].outcome), 'Runs inside your boundary', 'People stay in the decision', ...mix.map(s => d.solutions[s].outcome), 'Runs inside your boundary', 'People stay in the decision'].map(text => ({ text })),
       caps: mix.map(slug => ({ title: d.solutionShort[slug], tagline: d.solutionTagline[slug], icon: d.solutionIcons[slug], href: 'solution.html?solution=' + slug })),
       footerGroups: d.footerGroups4

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /AllusNav.dc.html
+Sitemap: https://www.allus.ai/sitemap.xml
