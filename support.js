@@ -425,6 +425,8 @@
         hintSize = value;
         continue;
       }
+      if (key.startsWith("data-dc-") && key !== "data-dc-tpl") key = key.slice(8);
+      if (kind === "dom" && value === "" && (key === "required" || key === "disabled" || key === "checked" || key === "autofocus" || key === "multiple")) { propGetters.push([key, () => true]); continue; }
       if (key.startsWith("style-")) {
         pseudoClasses.push(host.pseudoClass(key.slice(6), value));
         continue;
@@ -561,6 +563,7 @@
   }
   var warnedHoles = /* @__PURE__ */ new Set();
   function warnUnresolved(ctx, what) {
+    if (typeof window !== "undefined" && window.ALLUS_CONFIG && !window.ALLUS_CONFIG.debug) return;
     const key = (ctx?.__name || "?") + "\0" + what;
     if (warnedHoles.has(key)) return;
     warnedHoles.add(key);

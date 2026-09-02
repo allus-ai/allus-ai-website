@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Operational Knowledge &amp; Guidance | Allus AI</title>
 <meta name="description" content="Turn expert recordings and approved procedures into searchable, source-linked guidance at the point of work.">
-<link rel="canonical" href="https://www.allus.ai/solution.html">
+<link rel="canonical" href="https://allus-ai.github.io/allus-ai-website/solution.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Allus AI">
 <meta property="og:title" content="Operational Knowledge &amp; Guidance | Allus AI">
 <meta property="og:description" content="Turn expert recordings and approved procedures into searchable, source-linked guidance at the point of work.">
-<meta property="og:url" content="https://www.allus.ai/solution.html">
-<meta property="og:image" content="https://www.allus.ai/assets/media/allus-knowledge-guidance.webp">
+<meta property="og:url" content="https://allus-ai.github.io/allus-ai-website/solution.html">
+<meta property="og:image" content="https://allus-ai.github.io/allus-ai-website/assets/media/allus-knowledge-guidance.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Operational Knowledge &amp; Guidance | Allus AI">
 <meta name="twitter:description" content="Turn expert recordings and approved procedures into searchable, source-linked guidance at the point of work.">
-<meta name="twitter:image" content="https://www.allus.ai/assets/media/allus-knowledge-guidance.webp">
+<meta name="twitter:image" content="https://allus-ai.github.io/allus-ai-website/assets/media/allus-knowledge-guidance.webp">
 <meta name="theme-color" content="#111318">
 <link rel="icon" href="assets/allus-icon-navy.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Allus AI","url":"https://www.allus.ai","logo":"https://www.allus.ai/assets/allus-logo-navy.svg","sameAs":[],"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","email":"contact@allus.ai","contactType":"sales"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Allus AI","url":"https://allus-ai.github.io/allus-ai-website/","logo":"https://allus-ai.github.io/allus-ai-website/assets/allus-logo-navy.svg","sameAs":[],"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","email":"contact@allus.ai","contactType":"sales"}}</script>
 <script>(function(){var t={"operational-knowledge-guidance":"Operational Knowledge & Guidance","production-process-intelligence":"Production & Process Intelligence","equipment-asset-intelligence":"Equipment & Asset Intelligence","industrial-safety-site-intelligence":"Industrial Safety & Site Intelligence"};var v=new URLSearchParams(location.search).get('solution');if(v&&t[v]){document.title=t[v]+' | Allus AI';var og=document.querySelector('meta[property="og:title"]');if(og)og.content=document.title;var c=document.querySelector('link[rel=canonical]');if(c)c.href=c.href.split('?')[0]+'?solution='+v;}})();</script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://formspree.io https://api.hsforms.com https://hooks.zapier.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io mailto:;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="stylesheet" href="responsive.css">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -146,7 +149,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
           </div>
         </div>
         <figure style="position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 26px; background: #111318; animation: fade-up .9s cubic-bezier(.16,1,.3,1) .25s both;">
-          <img src="{{ s.image }}" alt="{{ s.title }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%;" loading="eager" fetchpriority="high" decoding="async">
+          <img data-dc-src="{{ s.image }}" alt="{{ s.title }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%;" loading="eager" fetchpriority="high" decoding="async">
           <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.05), rgba(13,20,36,.35) 100%);"></span>
           <figcaption style="position: absolute; left: 18px; bottom: 16px; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,.92); color: #101828; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase;">{{ s.visualEyebrow }}</figcaption>
         </figure>
@@ -272,7 +275,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
         <sc-if value="{{ isSteps }}" hint-placeholder-val="{{ true }}">
           <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
             <figure style="position: relative; margin: 0; min-height: 440px; overflow: hidden; border-radius: 24px; background: #111318;">
-              <img src="{{ s.image2 }}" alt="{{ s.title }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%;" loading="lazy" decoding="async">
+              <img data-dc-src="{{ s.image2 }}" alt="{{ s.title }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%;" loading="lazy" decoding="async">
               <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.05) 40%, rgba(13,20,36,.8) 100%);"></span>
               <figcaption style="position: absolute; right: 24px; bottom: 22px; left: 24px; color: #fff; font-family: 'Newsreader', Georgia, serif; font-size: 26px; font-weight: 400; letter-spacing: -.02em; line-height: 1.15;">{{ s.narrative.caption }}</figcaption>
             </figure>
@@ -336,7 +339,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
       </div>
       <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">
         <span>© 2026 Allus AI Inc. · Atlanta, Georgia</span>
-        <div style="display: flex; gap: 20px;"><a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a><a href="terms.html" style-hover="color: #fff;">Terms</a><a href="https://trust.allus.ai" style-hover="color: #fff;">Trust Center</a></div>
+        <div style="display: flex; gap: 20px;"><a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a><a href="https://trust.allus.ai" style-hover="color: #fff;">Trust Center</a></div>
       </div>
     </div>
   </footer>

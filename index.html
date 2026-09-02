@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Allus AI — Industrial Intelligence for Manufacturing</title>
 <meta name="description" content="Vision foundation models that see the work, understand it over time and run where the work happens. Built for real-world latency, reliability and compute constraints.">
-<link rel="canonical" href="https://www.allus.ai/">
+<link rel="canonical" href="https://allus-ai.github.io/allus-ai-website/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Allus AI">
 <meta property="og:title" content="Allus AI — Industrial Intelligence for Manufacturing">
 <meta property="og:description" content="Vision foundation models that see the work, understand it over time and run where the work happens. Built for real-world latency, reliability and compute constraints.">
-<meta property="og:url" content="https://www.allus.ai/">
-<meta property="og:image" content="https://www.allus.ai/assets/media/allus-hero-1.webp">
+<meta property="og:url" content="https://allus-ai.github.io/allus-ai-website/">
+<meta property="og:image" content="https://allus-ai.github.io/allus-ai-website/assets/media/allus-hero-1.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Allus AI — Industrial Intelligence for Manufacturing">
 <meta name="twitter:description" content="Vision foundation models that see the work, understand it over time and run where the work happens. Built for real-world latency, reliability and compute constraints.">
-<meta name="twitter:image" content="https://www.allus.ai/assets/media/allus-hero-1.webp">
+<meta name="twitter:image" content="https://allus-ai.github.io/allus-ai-website/assets/media/allus-hero-1.webp">
 <meta name="theme-color" content="#111318">
 <link rel="icon" href="assets/allus-icon-navy.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Allus AI","url":"https://www.allus.ai","logo":"https://www.allus.ai/assets/allus-logo-navy.svg","sameAs":[],"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","email":"contact@allus.ai","contactType":"sales"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Allus AI","url":"https://allus-ai.github.io/allus-ai-website/","logo":"https://allus-ai.github.io/allus-ai-website/assets/allus-logo-navy.svg","sameAs":[],"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","email":"contact@allus.ai","contactType":"sales"}}</script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://formspree.io https://api.hsforms.com https://hooks.zapier.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io mailto:;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="stylesheet" href="responsive.css">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -156,11 +159,11 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
 
       <!-- Reel -->
       <div style="position: relative; z-index: 1; margin: 12px 0 0;" onMouseEnter="{{ pauseReel }}" onMouseLeave="{{ resumeReel }}">
-        <figure style="position: relative; width: 100%; margin: 0; overflow: hidden; border-radius: 28px; background: #111318; isolation: isolate; box-shadow: 0 30px 80px rgba(16,24,40,.14); animation: fade-up .9s cubic-bezier(.16,1,.3,1) .35s both;">
+        <figure onClick="{{ armVideo }}" style="position: relative; width: 100%; margin: 0; overflow: hidden; border-radius: 28px; background: #111318; isolation: isolate; box-shadow: 0 30px 80px rgba(16,24,40,.14); animation: fade-up .9s cubic-bezier(.16,1,.3,1) .35s both;">
           <div style="position: relative; width: 100%; overflow: hidden; aspect-ratio: 16 / 9; background: #111318;">
             <sc-for list="{{ heroSlides }}" as="s" hint-placeholder-count="1">
               <div style="{{ s.style }}">
-                <video muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" preload="none" poster="{{ s.poster }}" src="{{ s.liveSrc }}" aria-label="{{ s.label }} manufacturing scene" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;"></video>
+                <video muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" preload="none" data-dc-poster="{{ s.poster }}" data-dc-src="{{ s.liveSrc }}" aria-label="{{ s.label }} manufacturing scene" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;"></video>
               </div>
             </sc-for>
             <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(13,20,36,.42), transparent 26%, transparent 70%, rgba(13,20,36,.55));"></div>
@@ -303,7 +306,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
           </div>
           <a href="{{ activeSolution.href }}" style="position: relative; display: block; min-height: 520px; overflow: hidden; border-radius: 26px; background: #111318; isolation: isolate;">
             <sc-for list="{{ solutions }}" as="s" hint-placeholder-count="1">
-              <img src="{{ s.image }}" alt="{{ s.alt }}" style="{{ s.imageStyle }}" loading="eager" fetchpriority="high" decoding="async">
+              <img data-dc-src="{{ s.image }}" alt="{{ s.alt }}" style="{{ s.imageStyle }}" loading="eager" fetchpriority="high" decoding="async">
             </sc-for>
             <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.05) 30%, rgba(13,20,36,.82) 100%);"></div>
             <div style="position: absolute; right: 28px; bottom: 26px; left: 28px; display: flex; justify-content: space-between; align-items: end; gap: 24px; color: #fff;">
@@ -332,7 +335,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
       <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
         <sc-for list="{{ industries }}" as="ind" hint-placeholder-count="5">
           <a href="{{ ind.href }}" style="position: relative; display: grid; align-content: end; min-height: 380px; padding: 20px; overflow: hidden; border-radius: 22px; background: #111318; color: #fff; isolation: isolate; transition: transform .45s cubic-bezier(.16,1,.3,1);" style-hover="transform: translateY(-6px);">
-            <img src="{{ ind.image }}" alt="{{ ind.title }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; opacity: .92; transition: transform 1s cubic-bezier(.16,1,.3,1);" loading="lazy" decoding="async">
+            <img data-dc-src="{{ ind.image }}" alt="{{ ind.title }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; opacity: .92; transition: transform 1s cubic-bezier(.16,1,.3,1);" loading="lazy" decoding="async">
             <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.1) 35%, rgba(13,20,36,.86) 100%);"></span>
             <span style="position: relative; margin-bottom: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; color: rgba(255,255,255,.7);">{{ ind.num }}</span>
             <strong style="position: relative; font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1;">{{ ind.title }}</strong>
@@ -422,7 +425,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
       <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px 30px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">
         <span>© 2026 Allus AI Inc. · Atlanta, Georgia</span>
         <div style="display: flex; gap: 8px 20px;">
-          <a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a><a href="terms.html" style-hover="color: #fff;">Terms</a>
+          <a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a>
           <a href="https://trust.allus.ai" target="_blank" rel="noreferrer" style-hover="color: #fff;">Trust Center</a>
           
         </div>
@@ -483,7 +486,7 @@ class Component extends DCLogic {
       const active = i === this.state.heroTab;
       return {
         ...s,
-        liveSrc: (i === this.state.heroTab || i === (this.state.heroTab + 1) % scenes.length) ? s.src : undefined,
+        liveSrc: (window.matchMedia && window.matchMedia('(max-width: 900px)').matches && !this.state.armed) ? undefined : ((i === this.state.heroTab || i === (this.state.heroTab + 1) % scenes.length) ? s.src : undefined),
         select: () => this.setState({ heroTab: i }),
         style: { position: 'absolute', inset: 0, opacity: active ? 1 : 0, transform: active ? 'scale(1)' : 'scale(1.03)', transition: 'opacity .7s cubic-bezier(.22,1,.36,1), transform 1.2s cubic-bezier(.22,1,.36,1)', pointerEvents: active ? 'auto' : 'none' },
         tabStyle: { position: 'relative', overflow: 'hidden', minHeight: 34, padding: '0 16px', border: 0, borderRadius: 999, background: active ? 'rgba(255,255,255,.14)' : 'transparent', color: '#fff', fontSize: 13, fontWeight: 500, letterSpacing: '.01em', cursor: 'pointer', transition: 'background .3s ease' },
@@ -531,6 +534,7 @@ class Component extends DCLogic {
       heroSlides,
       activeSceneKicker: scenes[this.state.heroTab].kicker,
       activeSceneTitle: scenes[this.state.heroTab].title,
+      armVideo: () => { if (!this.state.armed) this.setState({ armed: true }); },
       pauseReel: () => this.setState({ reelPaused: true }),
       toggleReel: () => { const held = !this.state.reelHeld; this.setState({ reelHeld: held }); document.querySelectorAll('video').forEach(v => held ? v.pause() : v.play().catch(() => {})); },
       reelHeld: this.state.reelHeld, reelBtnLabel: this.state.reelHeld ? 'Play scenes' : 'Pause scenes', reelBtnIcon: this.state.reelHeld ? '▶' : '❚❚',

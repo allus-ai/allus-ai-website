@@ -46,7 +46,7 @@
     // Fallback: open the visitor's mail client with the message pre-filled
     const body = Object.entries(data).map(([k, v]) => k + ': ' + v).join('\n');
     location.href = 'mailto:' + (cfg.formFallbackEmail || 'contact@allus.ai') + '?subject=' + encodeURIComponent('Website inquiry — ' + (data.intent || 'demo')) + '&body=' + encodeURIComponent(body);
-    return true;
+    return 'mailto'; // not a confirmed receipt — the page shows guidance, not a success state
   };
 
   // CTA click tracking + rel hardening for external links

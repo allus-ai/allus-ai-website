@@ -1,7 +1,7 @@
 // Launch configuration — edit these before deploying. Every page reads this file.
 window.ALLUS_CONFIG = {
   // Public site origin (used for canonical / Open Graph URLs)
-  siteUrl: 'https://www.allus.ai',
+  siteUrl: 'https://allus-ai.github.io/allus-ai-website', // switch to 'https://www.allus.ai' once the domain is bound and every URL returns 200 (also update sitemap.xml + canonical/og tags — see DEPLOY.md §3)
   // Contact form: POST endpoint (Formspree, HubSpot Forms API, Zapier, your own API).
   // Leave empty to fall back to a pre-filled mailto: link.
   formEndpoint: '',
@@ -15,6 +15,7 @@ window.ALLUS_CONFIG = {
   // and show qualitative statements instead.
   approvedMetrics: false,
   // Legal entity shown in the footer
+  debug: false, // true → runtime template warnings in console
   legalName: 'Allus AI Inc.',
   legalAddress: 'Atlanta, Georgia, USA'
 };
