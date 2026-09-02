@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Solutions — Allus AI (v2)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet">
+<style>
+html { background: #fff; }
+body { margin: 0; color: #101828; background: #fff; font-family: "Manrope", "Avenir Next", sans-serif; font-size: 16px; line-height: 1.55; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; }
+html { overflow-x: clip; }
+a { color: inherit; text-decoration: none; } a:hover { color: inherit; }
+h1, h2, h3, p { margin: 0; text-wrap: pretty; }
+button { font: inherit; }
+@keyframes fade-up { from { opacity: 0; transform: translate3d(0, 16px, 0); } to { opacity: 1; transform: none; } }
+@keyframes rise-in { from { opacity: 0; transform: translate3d(0, 28px, 0); } to { opacity: 1; transform: none; } }
+@keyframes orb-drift { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-46%) translateY(18px); } }
+@keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+a > span[aria-hidden="true"] { display: inline-block; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+a:hover > span[aria-hidden="true"] { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+@keyframes parallax-y { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
+@keyframes orb-a { from { transform: translate(0, 0) scale(1); } to { transform: translate(14vw, 12vh) scale(1.18); } }
+@keyframes orb-b { from { transform: translate(0, 0) scale(1.1); } to { transform: translate(-12vw, -14vh) scale(.92); } }
+@keyframes header-compact { to { height: 60px; background: rgba(252,251,248,.98); box-shadow: 0 10px 30px rgba(16,24,40,.08); } }
+[data-btn] { box-sizing: border-box; transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease, background .2s ease, border-color .2s ease, color .2s ease; }
+[data-btn]:hover { transform: translateY(-1px); }
+[data-btn]:active { transform: translateY(0) scale(.985); }
+[data-btn] > span[aria-hidden] { transition: transform .35s cubic-bezier(.16,1,.3,1), background .2s ease, color .2s ease; }
+[data-btn="primary"]:hover { box-shadow: 0 12px 26px rgba(36,89,211,.28); }
+[data-btn="primary"]:hover > span[aria-hidden] { background: #fff; color: #2459d3; transform: translateX(2px); }
+[data-btn="dark"]:hover { background: #2459d3 !important; }
+[data-btn="dark"]:hover > span[aria-hidden] { transform: translateX(2px); }
+[data-btn="light"]:hover { box-shadow: 0 12px 26px rgba(17,19,24,.16); }
+[data-btn="light"]:hover > span[aria-hidden] { background: #2459d3; color: #fff; transform: translateX(2px); }
+[data-btn="ghost"]:hover { border-color: #101828 !important; background: #fff !important; }
+[data-btn="ghost"]:hover > span[aria-hidden] { color: #101828; transform: translateX(4px); }
+[data-btn="ghost-dark"]:hover { border-color: #fff !important; background: rgba(255,255,255,.08) !important; }
+[data-btn="ghost-dark"]:hover > span[aria-hidden] { transform: translateX(4px); }
+
+/* ---- interaction polish ---- */
+:root { --ease-out: cubic-bezier(.16,1,.3,1); --ease-soft: cubic-bezier(.4,0,.2,1); }
+html { scroll-behavior: smooth; }
+::selection { background: rgba(63,122,254,.18); color: #101828; }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid #3f7afe; outline-offset: 3px; border-radius: 6px; }
+[data-btn]:focus-visible { outline-offset: 2px; }
+/* buttons: press ripple */
+[data-btn] { position: relative; overflow: hidden; isolation: isolate; -webkit-tap-highlight-color: transparent; }
+[data-btn]::before { content: ''; position: absolute; inset: 0; background: radial-gradient(120px circle at var(--px, 50%) var(--py, 50%), rgba(255,255,255,.35), transparent 60%); opacity: 0; transition: opacity .5s var(--ease-soft); pointer-events: none; }
+[data-btn]:active::before { opacity: 1; transition-duration: 0s; }
+[data-btn="ghost"]::before, [data-btn="ghost-dark"]::before { background: radial-gradient(120px circle at var(--px, 50%) var(--py, 50%), rgba(63,122,254,.16), transparent 60%); }
+/* cards & links: uniform hover motion */
+a[href], button { -webkit-tap-highlight-color: transparent; }
+a[href][style*="border-radius: 2"], a[href][style*="border-radius: 1"] { transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-soft), border-color .25s var(--ease-soft), background .25s var(--ease-soft); }
+a[href][style*="border-radius: 2"]:active, a[href][style*="border-radius: 1"]:active { transform: translateY(0) scale(.992) !important; transition-duration: .12s; }
+a[href] img[style*="object-fit: cover"] { transition: transform .9s var(--ease-out), opacity .4s var(--ease-soft); }
+a[href]:hover img[style*="object-fit: cover"] { transform: scale(1.04); }
+/* tabs / rows */
+button[role="tab"], [role="radiogroup"] > button, [role="radio"] { transition: background .3s var(--ease-soft), color .3s var(--ease-soft), border-color .3s var(--ease-soft), box-shadow .3s var(--ease-soft), transform .3s var(--ease-out); }
+button[role="tab"]:hover, [role="radio"]:hover { background: rgba(16,24,40,.035); }
+button[role="tab"]:active, [role="radio"]:active { transform: scale(.995); }
+button[role="tab"] > span:first-child { transition: color .3s var(--ease-soft), transform .3s var(--ease-out); }
+/* footer & text links */
+footer a[href] { position: relative; transition: color .25s var(--ease-soft); }
+footer nav a[href]::after { content: ''; position: absolute; left: 0; bottom: 2px; width: 100%; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .35s var(--ease-out); }
+footer nav a[href]:hover::after { transform: scaleX(1); transform-origin: left; }
+/* nav links (dc-import AllusNav) */
+nav[aria-label="Primary navigation"] a[href] { transition: background .25s var(--ease-soft), color .25s var(--ease-soft); }
+/* pill switchers */
+nav[aria-label] a[href][style*="border-radius: 999px"], nav[aria-label] button[style*="border-radius: 999px"] { transition: background .3s var(--ease-soft), color .3s var(--ease-soft), box-shadow .3s var(--ease-soft); }
+/* inputs */
+input, textarea, select { transition: border-color .25s var(--ease-soft), box-shadow .25s var(--ease-soft), background .25s var(--ease-soft); }
+input:hover, textarea:hover, select:hover { border-color: rgba(17,19,24,.32) !important; }
+/* accordion + icons */
+button[aria-expanded] { transition: color .25s var(--ease-soft); }
+button[aria-expanded]:hover { color: #2459d3; }
+button[aria-expanded]:hover > span[aria-hidden] { border-color: #2459d3 !important; background: #eef3ff; }
+/* stat numbers */
+strong[style*="font-size: 56px"], strong[style*="font-size: 52px"], strong[style*="font-size: 44px"] { font-variant-numeric: tabular-nums; }
+/* chips */
+li[style*="border-radius: 999px"], span[style*="border-radius: 999px"][style*="border: 1px solid"] { transition: border-color .25s var(--ease-soft), background .25s var(--ease-soft), transform .3s var(--ease-out); }
+li[style*="border-radius: 999px"]:hover { border-color: rgba(16,24,40,.32) !important; transform: translateY(-1px); }
+/* images fade in */
+img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
+</style>
+<script>document.addEventListener('pointerdown', e => { const b = e.target.closest && e.target.closest('[data-btn]'); if (!b) return; const r = b.getBoundingClientRect(); b.style.setProperty('--px', ((e.clientX - r.left) / r.width * 100) + '%'); b.style.setProperty('--py', ((e.clientY - r.top) / r.height * 100) + '%'); }, { passive: true });</script>
+<script>document.addEventListener('pointermove', e => { const r = document.documentElement.style; r.setProperty('--mx', e.clientX + 'px'); r.setProperty('--my', e.clientY + 'px'); }, { passive: true });</script>
+</helmet>
+<div data-screen-label="Solutions overview v2" style="min-width: 1244px; position: relative;">
+  <div aria-hidden="true" style="position: fixed; top: 0; left: 0; right: 0; z-index: 40; height: 2px; background: #3f7afe; transform-origin: left; animation: progress linear both; animation-timeline: scroll(root);"></div>
+  <div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 1400px; z-index: -1; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 100%); mask-image: linear-gradient(180deg, #000 60%, transparent 100%);">
+    <div style="position: absolute; top: -30%; left: -18%; width: 70vw; height: 70vw; border-radius: 50%; background: radial-gradient(circle, rgba(63,122,254,.14), transparent 70%); filter: blur(40px); animation: orb-a 26s ease-in-out infinite alternate;"></div>
+    <div style="position: absolute; right: -20%; top: 30%; width: 64vw; height: 64vw; border-radius: 50%; background: radial-gradient(circle, rgba(110,184,169,.12), transparent 70%); filter: blur(40px); animation: orb-b 32s ease-in-out infinite alternate;"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(560px circle at var(--mx, 50vw) var(--my, 30vh), rgba(63,122,254,.09), transparent 60%);"></div>
+  </div>
+  <dc-import name="AllusNav" active="solutions" hint-size="100%,72px" style="position: sticky; top: 0; z-index: 25;"></dc-import>
+
+  <main style="position: relative;">
+    <div aria-hidden="true" style="position: absolute; top: 0; left: 50%; z-index: 0; width: 100vw; height: 720px; transform: translateX(-50%); pointer-events: none; background-image: linear-gradient(rgba(37,78,214,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(37,78,214,.12) 1px, transparent 1px); background-size: 46px 46px; -webkit-mask-image: radial-gradient(64% 58% at 50% 22%, rgba(0,0,0,.8) 0%, rgba(0,0,0,.3) 50%, transparent 82%); mask-image: radial-gradient(64% 58% at 50% 22%, rgba(0,0,0,.8) 0%, rgba(0,0,0,.3) 50%, transparent 82%);"></div>
+    <!-- Hero -->
+    <section style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding: 96px 0 64px;">
+      <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr); gap: 56px; align-items: end;">
+        <div style="display: grid; gap: 20px; animation: fade-up .8s cubic-bezier(.16,1,.3,1) both;">
+          <nav aria-label="Breadcrumb" style="display: flex; gap: 8px; align-items: center; color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase;"><a href="index.html">Allus AI</a><span aria-hidden="true">/</span><span style="color: #101828;">Solutions</span></nav>
+          <h1 style="max-width: 15ch; font-family: 'Newsreader', Georgia, serif; font-size: 76px; font-weight: 400; letter-spacing: -.025em; line-height: 1.02;">Start with the problem.<br><em style="color: #3f7afe; font-style: italic; font-weight: 400;">Configure for the operation.</em></h1>
+        </div>
+        <div style="display: grid; gap: 20px; padding-bottom: 8px; animation: fade-up .8s cubic-bezier(.16,1,.3,1) .15s both;">
+          <p style="max-width: 40ch; color: #5f687a; font-size: 18px; line-height: 1.5;">Start from the problem. One model system.</p>
+          <div style="display: flex; gap: 12px;">
+            <a href="connect.html?intent=demo" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 8px 0 18px; color: #fcfbf8; border-radius: 12px; background: #2459d3; font-size: 13px; font-weight: 600;" style-hover="box-shadow: 0 12px 28px rgba(36,89,211,.22);" data-btn="primary">Request a Demo <span aria-hidden="true" style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,.16); color: #fff; font-size: 14px; line-height: 1;">→</span></a>
+            <a href="story.html?story=advanced-materials" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 18px; color: #101828; border: 1px solid rgba(17,19,24,.22); border-radius: 12px; background: transparent; font-size: 13px; font-weight: 600;" style-hover="background: #eeede8;" data-btn="ghost">Customer Stories <span aria-hidden="true" style="color: #5f687a; font-size: 15px;">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Four solutions -->
+    <section aria-label="Solution families" style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; animation: fade-up .9s cubic-bezier(.16,1,.3,1) .3s both;">
+      <sc-for list="{{ solutions }}" as="s" hint-placeholder-count="4">
+        <a href="{{ s.href }}" style="position: relative; display: grid; grid-template-rows: 300px auto; overflow: hidden; border: 1px solid rgba(16,24,40,.16); border-radius: 26px; background: #fff; transition: border-color .18s ease, box-shadow .45s ease, transform .45s cubic-bezier(.16,1,.3,1);" style-hover="border-color: rgba(16,24,40,.3); box-shadow: 0 24px 56px rgba(17,19,24,.09); transform: translateY(-4px);">
+          <div style="position: relative; overflow: hidden; background: #111318;">
+            <img src="{{ s.image }}" alt="{{ s.alt }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%;">
+            <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.1), rgba(13,20,36,.55) 100%);"></span>
+            <span style="position: absolute; top: 18px; left: 18px; display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; background: rgba(255,255,255,.92); color: #101828; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase;"><i aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: {{ s.color }};"></i>{{ s.domain }}</span>
+          </div>
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 40px; gap: 20px; align-items: start; padding: 24px 26px 26px;">
+            <span style="display: grid; gap: 10px;">
+              <h2 style="font-family: 'Manrope', sans-serif; font-size: 24px; font-weight: 600; letter-spacing: -.035em; line-height: 1.1;">{{ s.title }}</h2>
+              <p style="color: #5f687a; font-size: 15px; line-height: 1.45;">{{ s.outcome }}</p>
+            </span>
+            <span aria-hidden="true" style="display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #eef3ff; color: #2459d3; font-size: 16px;">→</span>
+          </div>
+        </a>
+      </sc-for>
+    </section>
+
+
+    <!-- Proof band -->
+    <section aria-label="Results" style="padding-block: 96px 112px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 40px; align-items: center; padding: 40px; border-radius: 28px; background: #ebf1fb; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+        <div style="display: grid; gap: 14px; align-content: start;"><span style="justify-self: start; padding: 6px 12px; border-radius: 999px; background: #fff; color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase;">Proven results</span><h2 style="font-family: 'Manrope', sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -.045em; line-height: 1.04;">Four problems. One set of numbers.</h2><p style="color: #5f687a; font-size: 15px; line-height: 1.5;">Every solution, measured in SQDC.</p><span style="color: #8a92a3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .06em;">Illustrative figures · replace with approved results</span></div>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-self: center;"><div style="display: grid; gap: 0; align-content: space-between; min-height: 176px; padding: 20px 22px; border-radius: 18px; background: #fff; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; animation: rise-in .8s cubic-bezier(.16,1,.3,1) 0ms both;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Safety</span><span style="display: grid; gap: 6px;"><span style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">78</strong><span style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.02em;">%</span></span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">Fewer safety incidents</span></span></div><div style="display: grid; gap: 0; align-content: space-between; min-height: 176px; padding: 20px 22px; border-radius: 18px; background: #fff; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; animation: rise-in .8s cubic-bezier(.16,1,.3,1) 90ms both;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Delivery</span><span style="display: grid; gap: 6px;"><span style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">77</strong><span style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.02em;">%</span></span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">Faster onboarding</span></span></div><div style="display: grid; gap: 0; align-content: space-between; min-height: 176px; padding: 20px 22px; border-radius: 18px; background: #fff; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; animation: rise-in .8s cubic-bezier(.16,1,.3,1) 180ms both;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Quality</span><span style="display: grid; gap: 6px;"><span style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">32</strong><span style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.02em;">%</span></span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">Fewer defects</span></span></div><div style="display: grid; gap: 0; align-content: space-between; min-height: 176px; padding: 20px 22px; border-radius: 18px; background: #fff; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; animation: rise-in .8s cubic-bezier(.16,1,.3,1) 270ms both;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Cost</span><span style="display: grid; gap: 6px;"><span style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">5</strong><span style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.02em;">%</span></span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">More productivity</span></span></div></div>
+      </div>
+    </section>
+
+    <!-- Shared foundation -->
+    <section aria-labelledby="foundation-title" style="padding-block: 104px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <header style="display: grid; gap: 14px; max-width: 760px; margin-bottom: 44px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;">
+          <p style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">Shared foundation</p>
+          <h2 id="foundation-title" style="font-family: 'Manrope', sans-serif; font-size: 48px; font-weight: 500; letter-spacing: -.045em; line-height: 1.04;">Built to operate<br><em style="color: #3f7afe; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400;">in industrial reality.</em></h2>
+          <p style="max-width: 50ch; color: #5f687a; font-size: 17px; line-height: 1.55;">Edge, on-premise, private cloud or hybrid — inside your system.</p>
+        </header>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+          <sc-for list="{{ foundation }}" as="f" hint-placeholder-count="2">
+            <div style="display: grid; gap: 18px; padding: 28px; border: 1px solid rgba(16,24,40,.16); border-radius: 24px; background: #fff;">
+              <div style="display: grid; gap: 6px;">
+                <span style="color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">{{ f.eyebrow }}</span>
+                <h3 style="font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 400; letter-spacing: -.025em; line-height: 1.05;">{{ f.title }}</h3>
+              </div>
+              <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; margin: 0; padding: 18px 0 0; border-top: 1px solid rgba(16,24,40,.12); list-style: none;">
+                <sc-for list="{{ f.items }}" as="it" hint-placeholder-count="4"><li style="display: grid; grid-template-columns: 28px 1fr; gap: 8px; align-items: start; font-size: 14px; line-height: 1.45;"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding-top: 4px;">{{ it.num }}</span><span><strong style="display: block; font-weight: 600; letter-spacing: -.01em;">{{ it.title }}</strong><span style="color: #5f687a; font-size: 13px;">{{ it.note }}</span></span></li></sc-for>
+              </ul>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- CTA -->
+    <section aria-labelledby="site-cta-title" style="padding-block: 96px 88px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <div style="position: relative; display: grid; gap: 16px; justify-items: center; padding: 72px 40px; overflow: hidden; border-radius: 28px; background: #111318; color: #fcfbf8; text-align: center; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+          <div aria-hidden="true" style="position: absolute; top: -50%; left: 50%; width: 640px; height: 640px; border-radius: 50%; background: radial-gradient(circle, rgba(63,122,254,.45), transparent 66%); transform: translateX(-50%); animation: orb-drift 8s ease-in-out infinite alternate; pointer-events: none;"></div>
+          <p style="position: relative; color: rgba(255,255,255,.6); font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;">Next step</p>
+          <h2 id="site-cta-title" style="position: relative; max-width: 20ch; font-family: 'Newsreader', Georgia, serif; font-size: 48px; font-weight: 400; letter-spacing: -.03em; line-height: 1.06;">Capture knowledge, verify standard work,<br><em style="color: #9db9ff; font-style: italic; font-weight: 400;">optimize the line.</em></h2>
+          <p style="position: relative; max-width: 44ch; color: rgba(255,255,255,.7); font-size: 17px; line-height: 1.55;">Bring a workload and a boundary.</p>
+          <div style="position: relative; display: flex; gap: 12px; margin-top: 12px;">
+            <a href="connect.html?intent=demo" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 8px 0 18px; color: #101828; border-radius: 12px; background: #fff; font-size: 14px; font-weight: 600;" data-btn="light">Request a Demo <span aria-hidden="true" style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #eef3ff; color: #2459d3; font-size: 14px; line-height: 1;">→</span></a>
+            <a href="connect.html?intent=pilot" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 18px; color: #fff; border: 1px solid rgba(255,255,255,.28); border-radius: 12px; font-size: 14px; font-weight: 600;" style-hover="background: rgba(255,255,255,.08);" data-btn="ghost-dark">Start a Pilot <span aria-hidden="true" style="color: rgba(255,255,255,.7); font-size: 15px;">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="color: #fcfbf8; background: #111318; border-top: 1px solid rgba(255,255,255,.08);">
+    <div style="display: grid; gap: 48px; width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding-block: 64px 32px;">
+      <div style="display: grid; grid-template-columns: minmax(200px, 1.1fr) repeat(4, minmax(0, 1fr)); gap: 40px 28px;">
+        <div style="display: grid; gap: 18px; align-content: start;">
+          <a href="index.html" style="display: block; width: max-content;"><img src="assets/allus-logo-white.svg" alt="" style="display: block; width: 132px; height: auto;"></a>
+          <p style="max-width: 26ch; color: rgba(255,255,255,.58); font-size: 15px; line-height: 1.45;">Industrial foundation models and model-powered solutions for the physical world.</p>
+          <p style="color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">Cupertino · Atlanta</p>
+        </div>
+        <sc-for list="{{ footerGroups }}" as="g" hint-placeholder-count="4">
+          <div style="display: grid; align-content: start; gap: 8px;">
+            <h3 style="margin: 0 0 6px; color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase;">{{ g.title }}</h3>
+            <sc-for list="{{ g.links }}" as="l" hint-placeholder-count="3"><a href="{{ l.href }}" style="display: block; min-height: 26px; color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.35;" style-hover="color: #fff;">{{ l.label }}</a></sc-for>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">
+        <span>© 2026 Allus AI</span>
+        <div style="display: flex; gap: 20px;"><a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a><a href="https://trust.allus.ai" style-hover="color: #fff;">Trust Center</a></div>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;autoCycle&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  renderVals() { const v = this.renderBase(); v.stepKeys = e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); this.setState(s => ({ step: Math.max(0, s.step + d) % 5, cycle: s.cycle + 1 })); }; return v; }
+  state = { step: 0, paused: false, cycle: 0 };
+  componentDidMount() { this.start(); }
+  componentWillUnmount() { clearInterval(this._t); }
+  componentDidUpdate(p) { if (p.autoCycle !== this.props.autoCycle) this.start(); }
+  start() { clearInterval(this._t); if (this.props.autoCycle ?? true) this._t = setInterval(() => { if (!this.state.paused) this.setState(s => ({ step: (s.step + 1) % 5, cycle: s.cycle + 1 })); }, 3800); }
+  renderBase() {
+    const h = React.createElement;
+    const auto = this.props.autoCycle ?? true;
+    const step = this.state.step;
+    const loopData = [
+      ['Capture', 'Video, narration, procedures and system context from the plant.'],
+      ['Understand', 'AllusONE and AllusFlow structure what happened, where and when.'],
+      ['Ground', 'Results are tied to approved terminology, procedures and evidence.'],
+      ['Deliver', 'Guidance, timelines and records reach the right role, line and task.'],
+      ['Review', 'Authorized people confirm, correct and decide before anything downstream.']
+    ];
+    return {
+      navItems: [['Model', 'model.html'], ['Solutions', 'solutions.html', true], ['Industries', 'solutions.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Company', 'company.html']].map(([label, href, active]) => ({ label, href, style: { display: 'flex', alignItems: 'center', height: 40, padding: '0 14px', borderRadius: 999, fontSize: 13, fontWeight: 500, color: active ? '#101828' : '#25324a', background: active ? '#eeede8' : 'transparent' } })),
+      solutions: [
+        ['People & knowledge', 'Operational Knowledge & Guidance', 'Expert know-how, delivered at the station.', 'operational-knowledge-guidance', 'assets/media/allus-guided-work-handoff.jpg', '#3f7afe', ['Capture expert video and approved procedures', 'Search the exact step or source moment', 'Guide work by role, product, line and task']],
+        ['Process & execution', 'Production & Process Intelligence', 'Every cycle, step and interruption — on a timeline.', 'production-process-intelligence', 'assets/media/allus-process-sequence-context.jpg', '#6eb8a9', ['Structure video into steps, cycles and events', 'Compare execution with standard work', 'Measure time, motion, variation and bottlenecks']],
+        ['Equipment & assets', 'Equipment & Asset Intelligence', 'Visible condition, tied to the maintenance record.', 'equipment-asset-intelligence', 'assets/media/allus-asset-service-continuity.jpg', '#df855d', ['Read indicators, gauges and visible condition', 'Ground service work in approved knowledge', 'Connect sensor, EAM and evidence into one record']],
+        ['Safety & sites', 'Industrial Safety & Site Intelligence', 'Site events, reviewed by people, within your rules.', 'industrial-safety-site-intelligence', 'assets/media/allus-governed-event-review.jpg', '#8c7ac9', ['Define access, zone and retention boundaries first', 'Surface configured events for human review', 'Suggest approved response, preserve the record']]
+      ].map(([domain, title, outcome, slug, image, color, points], i) => ({ domain, title, outcome, image, color, alt: title, num: '0' + (i + 1), href: 'solution.html?solution=' + slug, pain: ['Expert know-how leaves with the people who hold it.', 'Time studies and standard-work checks are slow, manual and periodic.', 'Visible equipment condition and the maintenance record live apart.', 'Site video is abundant; governed, reviewable context is not.'][i], points: points.map(text => ({ text })) })),
+      loop: loopData.map(([title, note], i) => {
+        const active = i === step, last = i === 4;
+        return {
+          title, note, num: '0' + (i + 1),
+          select: () => this.setState({ step: i, cycle: this.state.cycle + 1 }),
+          style: { position: 'relative', display: 'grid', alignContent: 'start', gap: 10, minHeight: 250, padding: '22px 22px 26px', border: 0, borderLeft: i ? '1px solid rgba(16,24,40,.12)' : 0, background: active ? '#fff' : 'transparent', color: 'inherit', textAlign: 'left', cursor: 'pointer', transition: 'background .35s ease', overflow: 'hidden' },
+          numStyle: { color: active ? (last ? '#3f7f72' : '#2459d3') : '#5f687a', fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, letterSpacing: '.08em' },
+          dotStyle: { display: 'block', width: 10, height: 10, borderRadius: '50%', background: active ? (last ? '#6eb8a9' : '#3f7afe') : 'transparent', border: '1px solid ' + (last ? '#6eb8a9' : '#3f7afe'), transition: 'background .3s ease' },
+          noteStyle: { color: '#5f687a', fontSize: 14, lineHeight: 1.5, opacity: active ? 1 : .55, transition: 'opacity .35s ease' },
+          progress: active && auto && !this.state.paused ? h('span', { key: 'p' + this.state.cycle, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: last ? '#6eb8a9' : '#3f7afe', transformOrigin: 'left', animation: 'progress 3.8s linear both' } }) : null
+        };
+      }),
+      pause: () => this.setState({ paused: true }),
+      resume: () => this.setState({ paused: false, cycle: this.state.cycle + 1 }),
+      foundation: [
+        { eyebrow: 'Prepare', title: 'Ground the models for the plant.', items: [['Industrial Data Engine', 'Connect, curate and govern image, video, document and event data.'], ['Model Adaptation', 'Adapt to your terminology, processes, products and sites.'], ['Evaluation & Reliability', 'Test behavior, uncertainty and failure modes on real workflows.'], ['Hardware Optimization', 'Meet latency, throughput, memory and power constraints.']] },
+        { eyebrow: 'Operate', title: 'Run, govern and connect the system.', items: [['Edge Runtime', 'Stream management, offline operation, recovery and observability.'], ['Deployment & Model Ops', 'Versions, staged rollout, rollback, drift and audit history.'], ['Security & Data Governance', 'Access, isolation, retention, privacy and evidence policies.'], ['Integrations', 'Cameras, industrial systems, enterprise identity, APIs and workflows.']] }
+      ].map(f => ({ ...f, items: f.items.map(([title, note], i) => ({ title, note, num: '0' + (i + 1) })) })),
+      industries: [
+        ['Electronics Assembly', 'electronics-assembly', 'High-mix assembly knowledge and station guidance.', 'assets/media/allus-electronics-assembly-workstation.jpg'],
+        ['FMCG', 'fmcg', 'Changeovers and high-speed line context.', 'assets/media/allus-fmcg-packaging-line.jpg'],
+        ['Food & Beverage', 'food-beverage', 'Sanitation to packaging, governed.', 'assets/media/allus-food-beverage-production.jpg'],
+        ['Advanced Materials', 'advanced-materials', 'Expert knowledge across long material cycles.', 'assets/media/allus-advanced-materials-facility-context.jpg'],
+        ['Automotive', 'automotive', 'Assembly, material flow and plant operations.', 'assets/media/allus-automotive-body-shop.jpg']
+      ].map(([title, slug, summary, image], i) => ({ title, summary, image, num: '0' + (i + 1), href: 'industry.html?industry=' + slug })),
+      footerGroups: [
+        { title: 'Models', links: [['AllusONE', 'model-detail.html?model=allusone'], ['AllusFlow', 'model-detail.html?model=allusflow'], ['AllusEdge', 'model-detail.html?model=allusedge']] },
+        { title: 'Solutions', links: [['Operational Knowledge & Guidance', 'solution.html?solution=operational-knowledge-guidance'], ['Production & Process Intelligence', 'solution.html?solution=production-process-intelligence'], ['Equipment & Asset Intelligence', 'solution.html?solution=equipment-asset-intelligence'], ['Industrial Safety & Site Intelligence', 'solution.html?solution=industrial-safety-site-intelligence']] },
+        { title: 'Industries', links: [['Electronics Assembly', 'industry.html?industry=electronics-assembly'], ['FMCG', 'industry.html?industry=fmcg'], ['Food & Beverage', 'industry.html?industry=food-beverage'], ['Advanced Materials', 'industry.html?industry=advanced-materials'], ['Automotive', 'industry.html?industry=automotive']] },
+        { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy and Security', 'privacy.html'], ['Contact Us', 'connect.html?intent=demo']] }
+      ].map(g => ({ title: g.title, links: g.links.map(([label, href]) => ({ label, href })) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

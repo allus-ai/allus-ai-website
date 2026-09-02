@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Solution detail — Allus AI (v2)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet">
+<style>
+html { background: #fff; }
+body { margin: 0; color: #101828; background: #fff; font-family: "Manrope", "Avenir Next", sans-serif; font-size: 16px; line-height: 1.55; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; }
+html { overflow-x: clip; }
+a { color: inherit; text-decoration: none; } a:hover { color: inherit; }
+h1, h2, h3, p { margin: 0; text-wrap: pretty; }
+button, input { font: inherit; }
+@keyframes fade-up { from { opacity: 0; transform: translate3d(0, 16px, 0); } to { opacity: 1; transform: none; } }
+@keyframes rise-in { from { opacity: 0; transform: translate3d(0, 28px, 0); } to { opacity: 1; transform: none; } }
+@keyframes orb-drift { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-46%) translateY(18px); } }
+@keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes wave { to { transform: translateX(-50%); } }
+@keyframes pulse-dot { 0% { r: 5; opacity: .35; } 100% { r: 12; opacity: 0; } }
+@keyframes bob { 0%, 100% { margin-top: 0; } 50% { margin-top: 4px; } }
+a > span[aria-hidden="true"] { display: inline-block; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+a:hover > span[aria-hidden="true"] { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+@keyframes parallax-y { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
+@keyframes orb-a { from { transform: translate(0, 0) scale(1); } to { transform: translate(14vw, 12vh) scale(1.18); } }
+@keyframes orb-b { from { transform: translate(0, 0) scale(1.1); } to { transform: translate(-12vw, -14vh) scale(.92); } }
+@keyframes header-compact { to { height: 60px; background: rgba(252,251,248,.98); box-shadow: 0 10px 30px rgba(16,24,40,.08); } }
+[data-btn] { box-sizing: border-box; transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease, background .2s ease, border-color .2s ease, color .2s ease; }
+[data-btn]:hover { transform: translateY(-1px); }
+[data-btn]:active { transform: translateY(0) scale(.985); }
+[data-btn] > span[aria-hidden] { transition: transform .35s cubic-bezier(.16,1,.3,1), background .2s ease, color .2s ease; }
+[data-btn="primary"]:hover { box-shadow: 0 12px 26px rgba(36,89,211,.28); }
+[data-btn="primary"]:hover > span[aria-hidden] { background: #fff; color: #2459d3; transform: translateX(2px); }
+[data-btn="dark"]:hover { background: #2459d3 !important; }
+[data-btn="dark"]:hover > span[aria-hidden] { transform: translateX(2px); }
+[data-btn="light"]:hover { box-shadow: 0 12px 26px rgba(17,19,24,.16); }
+[data-btn="light"]:hover > span[aria-hidden] { background: #2459d3; color: #fff; transform: translateX(2px); }
+[data-btn="ghost"]:hover { border-color: #101828 !important; background: #fff !important; }
+[data-btn="ghost"]:hover > span[aria-hidden] { color: #101828; transform: translateX(4px); }
+[data-btn="ghost-dark"]:hover { border-color: #fff !important; background: rgba(255,255,255,.08) !important; }
+[data-btn="ghost-dark"]:hover > span[aria-hidden] { transform: translateX(4px); }
+
+/* ---- interaction polish ---- */
+:root { --ease-out: cubic-bezier(.16,1,.3,1); --ease-soft: cubic-bezier(.4,0,.2,1); }
+html { scroll-behavior: smooth; }
+::selection { background: rgba(63,122,254,.18); color: #101828; }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid #3f7afe; outline-offset: 3px; border-radius: 6px; }
+[data-btn]:focus-visible { outline-offset: 2px; }
+/* buttons: press ripple */
+[data-btn] { position: relative; overflow: hidden; isolation: isolate; -webkit-tap-highlight-color: transparent; }
+[data-btn]::before { content: ''; position: absolute; inset: 0; background: radial-gradient(120px circle at var(--px, 50%) var(--py, 50%), rgba(255,255,255,.35), transparent 60%); opacity: 0; transition: opacity .5s var(--ease-soft); pointer-events: none; }
+[data-btn]:active::before { opacity: 1; transition-duration: 0s; }
+[data-btn="ghost"]::before, [data-btn="ghost-dark"]::before { background: radial-gradient(120px circle at var(--px, 50%) var(--py, 50%), rgba(63,122,254,.16), transparent 60%); }
+/* cards & links: uniform hover motion */
+a[href], button { -webkit-tap-highlight-color: transparent; }
+a[href][style*="border-radius: 2"], a[href][style*="border-radius: 1"] { transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-soft), border-color .25s var(--ease-soft), background .25s var(--ease-soft); }
+a[href][style*="border-radius: 2"]:active, a[href][style*="border-radius: 1"]:active { transform: translateY(0) scale(.992) !important; transition-duration: .12s; }
+a[href] img[style*="object-fit: cover"] { transition: transform .9s var(--ease-out), opacity .4s var(--ease-soft); }
+a[href]:hover img[style*="object-fit: cover"] { transform: scale(1.04); }
+/* tabs / rows */
+button[role="tab"], [role="radiogroup"] > button, [role="radio"] { transition: background .3s var(--ease-soft), color .3s var(--ease-soft), border-color .3s var(--ease-soft), box-shadow .3s var(--ease-soft), transform .3s var(--ease-out); }
+button[role="tab"]:hover, [role="radio"]:hover { background: rgba(16,24,40,.035); }
+button[role="tab"]:active, [role="radio"]:active { transform: scale(.995); }
+button[role="tab"] > span:first-child { transition: color .3s var(--ease-soft), transform .3s var(--ease-out); }
+/* footer & text links */
+footer a[href] { position: relative; transition: color .25s var(--ease-soft); }
+footer nav a[href]::after { content: ''; position: absolute; left: 0; bottom: 2px; width: 100%; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .35s var(--ease-out); }
+footer nav a[href]:hover::after { transform: scaleX(1); transform-origin: left; }
+/* nav links (dc-import AllusNav) */
+nav[aria-label="Primary navigation"] a[href] { transition: background .25s var(--ease-soft), color .25s var(--ease-soft); }
+/* pill switchers */
+nav[aria-label] a[href][style*="border-radius: 999px"], nav[aria-label] button[style*="border-radius: 999px"] { transition: background .3s var(--ease-soft), color .3s var(--ease-soft), box-shadow .3s var(--ease-soft); }
+/* inputs */
+input, textarea, select { transition: border-color .25s var(--ease-soft), box-shadow .25s var(--ease-soft), background .25s var(--ease-soft); }
+input:hover, textarea:hover, select:hover { border-color: rgba(17,19,24,.32) !important; }
+/* accordion + icons */
+button[aria-expanded] { transition: color .25s var(--ease-soft); }
+button[aria-expanded]:hover { color: #2459d3; }
+button[aria-expanded]:hover > span[aria-hidden] { border-color: #2459d3 !important; background: #eef3ff; }
+/* stat numbers */
+strong[style*="font-size: 56px"], strong[style*="font-size: 52px"], strong[style*="font-size: 44px"] { font-variant-numeric: tabular-nums; }
+/* chips */
+li[style*="border-radius: 999px"], span[style*="border-radius: 999px"][style*="border: 1px solid"] { transition: border-color .25s var(--ease-soft), background .25s var(--ease-soft), transform .3s var(--ease-out); }
+li[style*="border-radius: 999px"]:hover { border-color: rgba(16,24,40,.32) !important; transform: translateY(-1px); }
+/* images fade in */
+img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
+</style>
+<script>document.addEventListener('pointerdown', e => { const b = e.target.closest && e.target.closest('[data-btn]'); if (!b) return; const r = b.getBoundingClientRect(); b.style.setProperty('--px', ((e.clientX - r.left) / r.width * 100) + '%'); b.style.setProperty('--py', ((e.clientY - r.top) / r.height * 100) + '%'); }, { passive: true });</script>
+<script>document.addEventListener('pointermove', e => { const r = document.documentElement.style; r.setProperty('--mx', e.clientX + 'px'); r.setProperty('--my', e.clientY + 'px'); }, { passive: true });</script>
+</helmet>
+<div data-screen-label="Solution detail v2" style="min-width: 1244px; position: relative;">
+  <div aria-hidden="true" style="position: fixed; top: 0; left: 0; right: 0; z-index: 40; height: 2px; background: #3f7afe; transform-origin: left; animation: progress linear both; animation-timeline: scroll(root);"></div>
+  <div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 1400px; z-index: -1; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 100%); mask-image: linear-gradient(180deg, #000 60%, transparent 100%);">
+    <div style="position: absolute; top: -30%; left: -18%; width: 70vw; height: 70vw; border-radius: 50%; background: radial-gradient(circle, rgba(63,122,254,.14), transparent 70%); filter: blur(40px); animation: orb-a 26s ease-in-out infinite alternate;"></div>
+    <div style="position: absolute; right: -20%; top: 30%; width: 64vw; height: 64vw; border-radius: 50%; background: radial-gradient(circle, rgba(110,184,169,.12), transparent 70%); filter: blur(40px); animation: orb-b 32s ease-in-out infinite alternate;"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(560px circle at var(--mx, 50vw) var(--my, 30vh), rgba(63,122,254,.09), transparent 60%);"></div>
+  </div>
+  <dc-import name="AllusNav" active="solutions" hint-size="100%,72px" style="position: sticky; top: 0; z-index: 25;"></dc-import>
+
+  <main style="position: relative;">
+    <div aria-hidden="true" style="position: absolute; top: 0; left: 50%; z-index: 0; width: 100vw; height: 720px; transform: translateX(-50%); pointer-events: none; background-image: linear-gradient(rgba(37,78,214,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(37,78,214,.12) 1px, transparent 1px); background-size: 46px 46px; -webkit-mask-image: radial-gradient(64% 58% at 50% 22%, rgba(0,0,0,.8) 0%, rgba(0,0,0,.3) 50%, transparent 82%); mask-image: radial-gradient(64% 58% at 50% 22%, rgba(0,0,0,.8) 0%, rgba(0,0,0,.3) 50%, transparent 82%);"></div>
+    <!-- Switcher + hero -->
+    <section style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding: 40px 0 0;">
+      <nav aria-label="Solution families" style="display: flex; gap: 4px; width: max-content; margin-inline: auto; padding: 5px; border: 1px solid rgba(16,24,40,.14); border-radius: 999px; background: #fcfbf8; animation: fade-up .6s cubic-bezier(.16,1,.3,1) both;">
+        <sc-for list="{{ rail }}" as="r" hint-placeholder-count="4"><a href="{{ r.href }}" onClick="{{ r.select }}" style="{{ r.style }}"><i aria-hidden="true" style="{{ r.dot }}"></i>{{ r.short }}</a></sc-for>
+      </nav>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; align-items: center; padding: 80px 0 32px;">
+        <div style="display: grid; gap: 28px; animation: fade-up .8s cubic-bezier(.16,1,.3,1) .1s both;">
+          <p style="display: flex; align-items: center; gap: 12px; color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;"><span>{{ s.kicker }}</span><i aria-hidden="true" style="width: 4px; height: 4px; border-radius: 50%; background: #3f7afe;"></i><span style="color: #101828;">{{ s.title }}</span></p>
+          <h1 style="display: grid; gap: 10px;"><span style="font-family: 'Newsreader', Georgia, serif; font-size: 60px; font-weight: 400; letter-spacing: -.025em; line-height: 1.04; color: #101828;">{{ heroA }}<br><em style="color: #3f7afe; font-style: italic; font-weight: 400;">{{ heroB }}</em></span></h1>
+          <p style="max-width: 36ch; color: #5f687a; font-size: 17px; line-height: 1.55;">{{ heroSub }}</p>
+          <div style="display: flex; gap: 12px; margin-top: 4px;">
+            <a href="connect.html?intent=demo" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 8px 0 18px; color: #fcfbf8; border-radius: 12px; background: #2459d3; font-size: 13px; font-weight: 600;" style-hover="box-shadow: 0 12px 28px rgba(36,89,211,.22);" data-btn="primary">Request a Demo <span aria-hidden="true" style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,.16); color: #fff; font-size: 14px; line-height: 1;">→</span></a>
+            <a href="connect.html?intent=pilot" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 18px; color: #101828; border: 1px solid rgba(17,19,24,.22); border-radius: 12px; background: transparent; font-size: 13px; font-weight: 600;" style-hover="background: #eeede8;" data-btn="ghost">Start a Pilot <span aria-hidden="true" style="color: #5f687a; font-size: 15px;">→</span></a>
+          </div>
+        </div>
+        <figure style="position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 26px; background: #111318; animation: fade-up .9s cubic-bezier(.16,1,.3,1) .25s both;">
+          <img src="{{ s.image }}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%;">
+          <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.05), rgba(13,20,36,.35) 100%);"></span>
+          <figcaption style="position: absolute; left: 18px; bottom: 16px; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,.92); color: #101828; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase;">{{ s.visualEyebrow }}</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- The cost of today -->
+    <section aria-labelledby="cost-title" style="padding-block: 104px 0;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+        <div style="display: grid; gap: 20px; align-content: start; padding: 40px; border-radius: 24px; background: #111318; color: #fcfbf8;">
+          <span style="color: rgba(255,255,255,.6); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">The cost of today</span>
+          <h2 id="cost-title" style="font-family: 'Newsreader', Georgia, serif; font-size: 32px; font-weight: 400; letter-spacing: -.025em; line-height: 1.1;">{{ prob.pain }}</h2>
+          <ul style="display: grid; gap: 12px; margin: 4px 0 0; padding: 20px 0 0; border-top: 1px solid rgba(255,255,255,.16); list-style: none;"><sc-for list="{{ prob.cost }}" as="c" hint-placeholder-count="3"><li style="display: grid; grid-template-columns: 12px 1fr; gap: 10px; color: rgba(255,255,255,.78); font-size: 14px; line-height: 1.5;"><i aria-hidden="true" style="width: 6px; height: 6px; margin-top: 7px; border-radius: 50%; background: #df855d;"></i>{{ c.text }}</li></sc-for></ul>
+        </div>
+        <div style="display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 20px;">
+          <div style="display: grid; gap: 20px; align-content: center; padding: 40px; border: 1px solid rgba(16,24,40,.16); border-radius: 24px; background: #fcfbf8;">
+            <span style="color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">What changes</span>
+            <p style="font-family: 'Newsreader', Georgia, serif; font-size: 32px; font-weight: 400; letter-spacing: -.025em; line-height: 1.1;">{{ prob.shift }}</p>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"><sc-for list="{{ stats }}" as="st" hint-placeholder-count="2"><div style="display: grid; gap: 8px; align-content: end; min-height: 150px; padding: 24px; border: 1px solid rgba(16,24,40,.16); border-radius: 20px; background: #fff;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 44px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">{{ st.value }}</strong><span style="font-size: 13px; font-weight: 600; line-height: 1.35;">{{ st.label }}</span></div></sc-for></div>
+        </div>
+      </div>
+      <p style="width: min(1180px, calc(100% - 64px)); margin: 14px auto 0; color: #8a92a3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .06em;">Illustrative figures · replace with approved results</p>
+    </section>
+
+    <!-- How it works loop -->
+    <section aria-labelledby="loop-title" style="padding-block: 128px 120px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <header style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 48px; align-items: end; margin-bottom: 56px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;">
+          <div>
+            <p style="margin: 0 0 16px; color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">How it works</p>
+            <h2 id="loop-title" style="max-width: 18ch; font-family: 'Manrope', sans-serif; font-size: 48px; font-weight: 500; letter-spacing: -.045em; line-height: 1.04;">{{ s.stageCaption }}</h2>
+          </div>
+          <p style="max-width: 36ch; color: #5f687a; font-size: 16px; line-height: 1.55;">← → to step through.</p>
+        </header>
+        <div style="{{ stageGridStyle }}" onMouseEnter="{{ pause }}" onMouseLeave="{{ resume }}" onKeyDown="{{ stepKeys }}">
+          <sc-for list="{{ s.stages }}" as="st" hint-placeholder-count="4">
+            <button type="button" onClick="{{ st.select }}" onMouseEnter="{{ st.select }}" style="{{ st.style }}">
+              <span style="display: flex; justify-content: space-between; align-items: center;"><span style="{{ st.numStyle }}">{{ st.num }}</span><i aria-hidden="true" style="{{ st.dot }}"></i></span>
+              <strong style="margin-top: 36px; font-family: 'Newsreader', Georgia, serif; font-size: 28px; font-weight: 400; letter-spacing: -.025em; line-height: 1;">{{ st.title }}</strong>
+              <span style="{{ st.noteStyle }}">{{ st.note }}</span>
+              {{ st.progress }}
+            </button>
+          </sc-for>
+        </div>
+        <p style="margin-top: 14px; color: #8a92a3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .06em;">Illustrative sequence · {{ s.visualMeta }}</p>
+      </div>
+    </section>
+
+    <!-- What you get -->
+    <section aria-labelledby="caps-title" style="padding-block: 120px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <header style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 48px; align-items: end; margin-bottom: 56px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;">
+          <div>
+            <p style="margin: 0 0 16px; color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">What you get</p>
+            <h2 id="caps-title" style="max-width: 16ch; font-family: 'Manrope', sans-serif; font-size: 48px; font-weight: 500; letter-spacing: -.045em; line-height: 1.04;">Everything you need,<br><em style="color: #3f7afe; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400;">nothing you don't.</em></h2>
+          </div>
+          <p style="max-width: 40ch; color: #5f687a; font-size: 16px; line-height: 1.55;">Approved procedures stay the authority.</p>
+        </header>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+          <sc-for list="{{ s.sections }}" as="sec" hint-placeholder-count="5">
+            <article style="{{ sec.style }}">
+              <span style="color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em;">{{ sec.num }}</span>
+              <h3 style="margin-top: 14px; font-family: 'Newsreader', Georgia, serif; font-size: 28px; font-weight: 400; letter-spacing: -.025em; line-height: 1.1;">{{ sec.title }}</h3>
+              <p style="margin-top: 10px; color: #5f687a; font-size: 15px; line-height: 1.5;">{{ sec.note }}.</p>
+              <sc-if value="{{ sec.hasChildren }}" hint-placeholder-val="{{ false }}">
+                <ul style="display: grid; gap: 8px; margin: 18px 0 0; padding: 16px 0 0; border-top: 1px solid rgba(16,24,40,.12); list-style: none;">
+                  <sc-for list="{{ sec.children }}" as="ch" hint-placeholder-count="2"><li style="display: grid; grid-template-columns: 14px 1fr; gap: 10px; font-size: 14px; line-height: 1.45;"><i aria-hidden="true" style="width: 6px; height: 6px; margin-top: 7px; border-radius: 50%; background: #3f7afe;"></i><span><strong style="font-weight: 600;">{{ ch.title }}</strong> <span style="color: #5f687a;">— {{ ch.note }}</span></span></li></sc-for>
+                </ul>
+              </sc-if>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- Narrative -->
+    <section aria-labelledby="nar-title" style="padding-block: 120px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <header style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 48px; align-items: end; margin-bottom: 56px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;">
+          <div>
+            <p style="margin: 0 0 16px; color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">{{ s.narrative.eyebrow }}</p>
+            <h2 id="nar-title" style="max-width: 16ch; font-family: 'Manrope', sans-serif; font-size: 48px; font-weight: 500; letter-spacing: -.045em; line-height: 1.04;">{{ s.narrative.titleA }}<br><em style="color: #3f7afe; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400;">{{ s.narrative.titleB }}</em></h2>
+          </div>
+          <p style="max-width: 40ch; color: #5f687a; font-size: 16px; line-height: 1.55;">{{ s.narrative.intro }}</p>
+        </header>
+        <sc-if value="{{ isRoi }}" hint-placeholder-val="{{ false }}">
+          <div style="display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 14px; align-items: stretch; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+            <div style="display: grid; align-content: start; gap: 18px; padding: 26px 28px; border: 1px solid rgba(16,24,40,.16); border-radius: 22px; background: #fcfbf8;">
+              <div style="display: flex; justify-content: space-between; align-items: center;"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Your numbers</span><button type="button" onClick="{{ roi.reset }}" style="padding: 0; border: 0; background: transparent; color: #2459d3; font-size: 12px; font-weight: 600; cursor: pointer;">Reset</button></div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <sc-for list="{{ roi.inputs }}" as="inp" hint-placeholder-count="4">
+                  <label style="display: grid; gap: 8px; padding: 14px 16px; border: 1px solid rgba(16,24,40,.14); border-radius: 14px; background: #fff;"><span style="color: #5f687a; font-size: 13px;">{{ inp.label }}</span><span style="display: flex; align-items: baseline; gap: 6px;"><input type="number" min="0" value="{{ inp.value }}" onChange="{{ inp.onChange }}" onFocus="{{ inp.selectAll }}" style="width: 100%; min-width: 0; padding: 0; border: 0; background: transparent; font-family: 'Manrope', sans-serif; font-size: 30px; font-weight: 600; letter-spacing: -.03em; color: #101828; outline: none;"><span style="color: #8a92a3; font-size: 12px; white-space: nowrap;">{{ inp.unit }}</span></span></label>
+                </sc-for>
+              </div>
+              <div style="display: grid; gap: 0; padding-top: 6px; border-top: 1px solid rgba(16,24,40,.12);">
+                <sc-for list="{{ roi.metrics }}" as="mt" hint-placeholder-count="4"><div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(16,24,40,.08); font-size: 14px;"><span style="color: #5f687a;">{{ mt.label }}</span><span style="font-family: 'Manrope', sans-serif; font-weight: 600; letter-spacing: -.02em; white-space: nowrap;">{{ mt.value }} <span style="color: #8a92a3; font-weight: 400; font-size: 12px;">{{ mt.unit }}</span></span></div></sc-for>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-rows: auto 1fr; gap: 14px;">
+              <div style="display: grid; gap: 12px; align-content: end; padding: 30px 32px; border-radius: 22px; background: #111318; color: #fcfbf8;">
+                <span style="color: rgba(255,255,255,.6); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">{{ roi.hero.label }}</span>
+                <strong style="font-family: 'Manrope', sans-serif; font-size: 72px; font-weight: 600; letter-spacing: -.045em; line-height: 1; font-variant-numeric: tabular-nums;">{{ roi.hero.value }}</strong>
+                <span style="color: rgba(255,255,255,.7); font-size: 14px;">{{ roi.hero.note }}</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div style="position: relative; display: grid; gap: 8px; align-content: end; min-height: 200px; padding: 22px 24px; overflow: hidden; border: 1px solid rgba(16,24,40,.16); border-radius: 20px; background: linear-gradient(180deg, #fff, #f7f9ff); isolation: isolate;">
+                  <div aria-hidden="true" style="{{ roi.waveStyle }}">
+                    <svg viewBox="0 0 800 60" preserveAspectRatio="none" style="position: absolute; top: -34px; left: 0; width: 200%; height: 60px; opacity: .55; filter: blur(1px); animation: wave 11s linear infinite reverse, bob 5s ease-in-out infinite;"><path d="M0 30 C 66 18, 134 18, 200 30 S 334 42, 400 30 S 534 18, 600 30 S 734 42, 800 30 V60 H0 Z" fill="url(#roiGradBack)"></path></svg>
+                    <svg viewBox="0 0 800 60" preserveAspectRatio="none" style="position: absolute; top: -28px; left: 0; width: 200%; height: 60px; animation: wave 7s linear infinite, bob 4s ease-in-out infinite .6s;"><defs><linearGradient id="roiGradBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9db9ff"></stop><stop offset="1" stop-color="#dfe8ff"></stop></linearGradient><linearGradient id="roiGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f7afe" stop-opacity=".55"></stop><stop offset="1" stop-color="#3f7afe" stop-opacity=".18"></stop></linearGradient></defs><path d="M0 30 C 50 40, 150 40, 200 30 S 350 20, 400 30 S 550 40, 600 30 S 750 20, 800 30 V60 H0 Z" fill="url(#roiGrad)"></path><path d="M0 30 C 50 40, 150 40, 200 30 S 350 20, 400 30 S 550 40, 600 30 S 750 20, 800 30" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1.2"></path></svg>
+                    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(63,122,254,.22), rgba(63,122,254,.06) 60%, rgba(63,122,254,.1));"></div>
+                    <div style="position: absolute; left: 0; right: 0; top: 0; height: 60px; background: linear-gradient(180deg, rgba(255,255,255,.35), transparent);"></div>
+                  </div>
+                  <span style="position: relative; color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Year-one ROI</span>
+                  <strong style="position: relative; color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 44px; font-weight: 600; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums;">{{ roi.roiText }}</strong>
+                </div>
+                <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; align-items: center; min-height: 200px; padding: 22px 24px; border: 1px solid rgba(16,24,40,.16); border-radius: 20px; background: #fff;">
+                  <svg viewBox="0 0 104 104" style="display: block; width: 120px; height: 120px; overflow: visible;"><defs><linearGradient id="pbGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9db9ff"></stop><stop offset="1" stop-color="#2459d3"></stop></linearGradient></defs><sc-for list="{{ roi.ticks }}" as="t" hint-placeholder-count="12"><line x1="{{ t.x1 }}" y1="{{ t.y1 }}" x2="{{ t.x2 }}" y2="{{ t.y2 }}" stroke="{{ t.color }}" stroke-width="2" stroke-linecap="round" style="transition: stroke .5s ease;"></line></sc-for><circle cx="52" cy="52" r="38" fill="none" stroke="#eef3ff" stroke-width="6"></circle><circle cx="52" cy="52" r="38" fill="none" stroke="url(#pbGrad)" stroke-width="6" stroke-linecap="round" stroke-dasharray="238.8" stroke-dashoffset="{{ roi.ringOffset }}" transform="rotate(-90 52 52)" style="transition: stroke-dashoffset .9s cubic-bezier(.16,1,.3,1);"></circle><circle cx="{{ roi.dotX }}" cy="{{ roi.dotY }}" r="7" fill="#2459d3" opacity=".18" style="transition: cx .9s cubic-bezier(.16,1,.3,1), cy .9s cubic-bezier(.16,1,.3,1); animation: pulse-dot 2.4s ease-out infinite;"></circle><circle cx="{{ roi.dotX }}" cy="{{ roi.dotY }}" r="4" fill="#fff" stroke="#2459d3" stroke-width="2.5" style="transition: cx .9s cubic-bezier(.16,1,.3,1), cy .9s cubic-bezier(.16,1,.3,1);"></circle><text x="52" y="56" text-anchor="middle" style="font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; letter-spacing: .1em; fill: #8a92a3;">{{ roi.ringLabel }}</text></svg>
+                  <span style="display: grid; gap: 8px;"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Payback</span><strong style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap; color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 36px; font-weight: 600; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums;">{{ roi.paybackMonths }}<span style="font-size: 16px; letter-spacing: -.01em;">mo</span></strong><span style="color: #5f687a; font-size: 13px; line-height: 1.4;">to recover the first-year cost</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isSteps }}" hint-placeholder-val="{{ true }}">
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+            <figure style="position: relative; margin: 0; min-height: 440px; overflow: hidden; border-radius: 24px; background: #111318;">
+              <img src="{{ s.image2 }}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%;">
+              <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.05) 40%, rgba(13,20,36,.8) 100%);"></span>
+              <figcaption style="position: absolute; right: 24px; bottom: 22px; left: 24px; color: #fff; font-family: 'Newsreader', Georgia, serif; font-size: 26px; font-weight: 400; letter-spacing: -.02em; line-height: 1.15;">{{ s.narrative.caption }}</figcaption>
+            </figure>
+            <ol style="display: grid; gap: 10px; margin: 0; padding: 0; list-style: none;">
+              <sc-for list="{{ narrativeSteps }}" as="st" hint-placeholder-count="3">
+                <li style="display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; padding: 24px 26px; border: 1px solid rgba(16,24,40,.16); border-radius: 20px; background: #fff;"><span style="display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #dfe8ff; color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 11px;">{{ st.num }}</span><span style="display: grid; gap: 6px;"><strong style="font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1;">{{ st.title }}</strong><span style="color: #5f687a; font-size: 14px; line-height: 1.5;">{{ st.note }}</span></span></li>
+              </sc-for>
+            </ol>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+
+
+    <!-- FAQ -->
+    <section aria-labelledby="faq-title" style="padding-block: 0 112px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 48px; align-items: start; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+        <div style="display: grid; gap: 12px;"><p style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">Before you ask</p><h2 id="faq-title" style="font-family: 'Manrope', sans-serif; font-size: 36px; font-weight: 500; letter-spacing: -.045em; line-height: 1.06;">Common questions.</h2></div>
+        <div style="display: grid; border-top: 1px solid rgba(16,24,40,.16);">
+          <sc-for list="{{ faq }}" as="q" hint-placeholder-count="3">
+            <div style="border-bottom: 1px solid rgba(16,24,40,.16);">
+              <button type="button" onClick="{{ q.toggle }}" aria-expanded="{{ q.open }}" style="display: grid; grid-template-columns: 1fr 28px; gap: 16px; align-items: center; width: 100%; min-height: 60px; padding: 16px 4px; border: 0; background: transparent; color: inherit; font-size: 17px; font-weight: 600; letter-spacing: -.02em; text-align: left; cursor: pointer;">{{ q.q }}<span aria-hidden="true" style="{{ q.iconStyle }}">+</span></button>
+              <div style="{{ q.bodyStyle }}"><p style="min-height: 0; overflow: hidden; max-width: 62ch; padding: 0 4px; color: #25324a; font-size: 15px; line-height: 1.6;">{{ q.a }}</p></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section aria-labelledby="site-cta-title" style="padding-block: 0 96px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <div style="position: relative; display: grid; gap: 16px; justify-items: center; padding: 72px 40px; overflow: hidden; border-radius: 28px; background: #111318; color: #fcfbf8; text-align: center; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+          <div aria-hidden="true" style="position: absolute; top: -50%; left: 50%; width: 640px; height: 640px; border-radius: 50%; background: radial-gradient(circle, rgba(63,122,254,.45), transparent 66%); transform: translateX(-50%); animation: orb-drift 8s ease-in-out infinite alternate; pointer-events: none;"></div>
+          <p style="position: relative; color: rgba(255,255,255,.6); font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;">Next step</p>
+          <h2 id="site-cta-title" style="position: relative; max-width: 22ch; font-family: 'Newsreader', Georgia, serif; font-size: 48px; font-weight: 400; letter-spacing: -.03em; line-height: 1.06;">See it<br><em style="color: #9db9ff; font-style: italic; font-weight: 400;">on your own line.</em></h2>
+          <p style="position: relative; max-width: 44ch; color: rgba(255,255,255,.7); font-size: 17px; line-height: 1.55;">Bring a workload and a boundary.</p>
+          <div style="position: relative; display: flex; gap: 12px; margin-top: 12px;">
+            <a href="connect.html?intent=demo" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 8px 0 18px; color: #101828; border-radius: 12px; background: #fff; font-size: 14px; font-weight: 600;" data-btn="light">Request a Demo <span aria-hidden="true" style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #eef3ff; color: #2459d3; font-size: 14px; line-height: 1;">→</span></a>
+            <a href="connect.html?intent=pilot" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 18px; color: #fff; border: 1px solid rgba(255,255,255,.28); border-radius: 12px; font-size: 14px; font-weight: 600;" style-hover="background: rgba(255,255,255,.08);" data-btn="ghost-dark">Start a Pilot <span aria-hidden="true" style="color: rgba(255,255,255,.7); font-size: 15px;">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="color: #fcfbf8; background: #111318; border-top: 1px solid rgba(255,255,255,.08);">
+    <div style="display: grid; gap: 48px; width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding-block: 64px 32px;">
+      <div style="display: grid; grid-template-columns: minmax(200px, 1.1fr) repeat(4, minmax(0, 1fr)); gap: 40px 28px;">
+        <div style="display: grid; gap: 18px; align-content: start;">
+          <a href="index.html" style="display: block; width: max-content;"><img src="assets/allus-logo-white.svg" alt="" style="display: block; width: 132px; height: auto;"></a>
+          <p style="max-width: 26ch; color: rgba(255,255,255,.58); font-size: 15px; line-height: 1.45;">Industrial foundation models and model-powered solutions for the physical world.</p>
+          <p style="color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">Cupertino · Atlanta</p>
+        </div>
+        <sc-for list="{{ footerGroups }}" as="g" hint-placeholder-count="4">
+          <div style="display: grid; align-content: start; gap: 8px;">
+            <h3 style="margin: 0 0 6px; color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase;">{{ g.title }}</h3>
+            <sc-for list="{{ g.links }}" as="l" hint-placeholder-count="3"><a href="{{ l.href }}" style="display: block; min-height: 26px; color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.35;" style-hover="color: #fff;">{{ l.label }}</a></sc-for>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">
+        <span>© 2026 Allus AI</span>
+        <div style="display: flex; gap: 20px;"><a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a><a href="https://trust.allus.ai" style-hover="color: #fff;">Trust Center</a></div>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;solution&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;operational-knowledge-guidance&quot;,&quot;options&quot;:[&quot;operational-knowledge-guidance&quot;,&quot;production-process-intelligence&quot;,&quot;equipment-asset-intelligence&quot;,&quot;industrial-safety-site-intelligence&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page&quot;},&quot;autoCycle&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  renderVals() { const v = this.renderBase(); v.stepKeys = e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); this.setState(s => ({ step: Math.max(0, s.step + d) % 1000, cycle: s.cycle + 1 })); }; return v; }
+  state = { data: null, solution: null, step: 0, paused: false, cycle: 0, faqOpen: 0, roi: { operators: 40, rate: 30, starts: 6, days: 22 } };
+  componentDidMount() { import('./allus-content.js').then(data => this.setState({ data })); this.start(); }
+  componentWillUnmount() { clearInterval(this._t); cancelAnimationFrame(this._raf); }
+  tween(t) { const key = JSON.stringify(t); if (this._tKey === key) return; this._tKey = key; const from = this.state.tw || Object.fromEntries(Object.keys(t).map(k => [k, 0])); const t0 = performance.now(); cancelAnimationFrame(this._raf); const step = now => { const p = Math.min(1, (now - t0) / 900), e = 1 - Math.pow(1 - p, 3); const cur = {}; for (const k in t) cur[k] = from[k] + (t[k] - from[k]) * e; this.setState({ tw: cur }); if (p < 1) this._raf = requestAnimationFrame(step); }; this._raf = requestAnimationFrame(step); }
+  componentDidUpdate(p) { if (p.autoCycle !== this.props.autoCycle) this.start(); }
+  start() { clearInterval(this._t); if (this.props.autoCycle ?? true) this._t = setInterval(() => { if (!this.state.paused) this.setState(s => ({ step: s.step + 1, cycle: s.cycle + 1 })); }, 4200); }
+  renderBase() {
+    const d = this.state.data;
+    const h = React.createElement;
+    const auto = this.props.autoCycle ?? true;
+    const navItems = [['Model', 'model.html'], ['Solutions', 'solutions.html', true], ['Industries', 'solutions.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Company', 'company.html']].map(([label, href, active]) => ({ label, href, style: { display: 'flex', alignItems: 'center', height: 40, padding: '0 14px', borderRadius: 999, fontSize: 13, fontWeight: 500, color: active ? '#101828' : '#25324a', background: active ? '#eeede8' : 'transparent' } }));
+    if (!d) return { navItems, rail: [], footerGroups: [], s: { sections: [], stages: [], narrative: {} }, refs: [], prob: { cost: [] }, faq: [], stats: [], relatedIndustries: [], isRoi: false, isSteps: false, roi: { inputs: [], metrics: [], hero: {}, waveStyle: {}, roiText: '', paybackText: '', ringOffset: 238.8, dotX: 52, dotY: 14, paybackMonths: '', ringLabel: '', ticks: [] }, narrativeSteps: [], stageGridStyle: {}, capsCount: '' };
+    const id = this.state.solution || new URLSearchParams(location.search).get('solution') || this.props.solution || 'operational-knowledge-guidance';
+    const src = d.solutions[id];
+    const num = i => '0' + (i + 1);
+    const n = src.stages.length;
+    const step = this.state.step % n;
+    const shorts = { 'operational-knowledge-guidance': 'Knowledge & Guidance', 'production-process-intelligence': 'Production & Process', 'equipment-asset-intelligence': 'Equipment & Assets', 'industrial-safety-site-intelligence': 'Safety & Sites' };
+    const hero = { 'operational-knowledge-guidance': ['Expert know-how,', 'delivered at the station.', 'Turn expert demonstrations and approved procedures into guidance people can search and follow.'], 'production-process-intelligence': ['Every cycle, step and interruption', 'on a timeline.', 'Turn work video into reviewable steps, timing and evidence across stations, lines and sites.'], 'equipment-asset-intelligence': ['Visible condition,', 'tied to the maintenance record.', 'Connect what equipment looks like with approved knowledge and system context.'], 'industrial-safety-site-intelligence': ['Site events reviewed by people,', 'within your rules.', 'Governed video and approved response knowledge for human-reviewed site events.'] };
+    const s = {
+      ...src,
+      stages: src.stages.map(([title, note], i) => {
+        const active = i === step;
+        return { title, note, num: num(i),
+          select: () => this.setState({ step: i, cycle: this.state.cycle + 1 }),
+          style: { position: 'relative', display: 'grid', alignContent: 'start', gap: 10, minHeight: 230, padding: '22px 22px 26px', border: 0, borderLeft: i ? '1px solid rgba(16,24,40,.12)' : 0, background: active ? '#fff' : 'transparent', color: 'inherit', textAlign: 'left', cursor: 'pointer', transition: 'background .35s ease', overflow: 'hidden' },
+          numStyle: { color: active ? '#2459d3' : '#5f687a', fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, letterSpacing: '.08em' },
+          dot: { display: 'block', width: 10, height: 10, borderRadius: '50%', background: active ? src.color : 'transparent', border: '1px solid ' + src.color, transition: 'background .3s ease' },
+          noteStyle: { color: '#5f687a', fontSize: 14, lineHeight: 1.5, opacity: active ? 1 : .55, transition: 'opacity .35s ease' },
+          progress: active && auto && !this.state.paused ? h('span', { key: 'p' + this.state.cycle, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: src.color, transformOrigin: 'left', animation: 'progress 4.2s linear both' } }) : null };
+      }),
+      sections: src.sections.map(([title, note, children], i, arr) => ({ title, note, num: num(i), hasChildren: !!children, children: (children || []).map(([t, nn]) => ({ title: t, note: nn })), style: { display: 'grid', alignContent: 'start', padding: '28px 30px 32px', border: '1px solid rgba(16,24,40,.16)', borderRadius: 22, background: '#fff', gridColumn: (i === arr.length - 1 && arr.length % 2 === 1) ? '1 / -1' : 'auto' } }))
+    };
+    const r = this.state.roi;
+    const num2 = k => Number(r[k]) || 0;
+    const onboarding = num2('starts') * 12 * 8, search = Math.round(num2('operators') * 10 * num2('days') * 12 / 60), total = onboarding + search, value = total * num2('rate'), cost = 24000, net = value - cost;
+    const targets = { onboarding, search, total, value, net, roiPct: cost ? net / cost * 100 : 0, payback: value ? cost / value * 12 : 0 };
+    this.tween(targets);
+    const tw = this.state.tw || Object.fromEntries(Object.keys(targets).map(k => [k, 0]));
+    const R = k => Math.round(tw[k]);
+    const fmt = x => x.toLocaleString('en-US');
+    const set = k => e => this.setState({ roi: { ...this.state.roi, [k]: e.target.value } });
+    return {
+      navItems, s,
+      capsCount: ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven'][src.sections.length - 1],
+      stageGridStyle: { display: 'grid', gridTemplateColumns: 'repeat(' + n + ', minmax(0,1fr))', border: '1px solid rgba(16,24,40,.16)', borderRadius: 24, background: '#fcfbf8', overflow: 'hidden' },
+      pause: () => this.setState({ paused: true }),
+      resume: () => this.setState({ paused: false, cycle: this.state.cycle + 1 }),
+      rail: d.solutionOrder.map(key => { const cur = key === id, c = d.solutions[key].color; return { short: shorts[key], href: 'solution.html?solution=' + key, select: e => { e.preventDefault(); this.setState({ solution: key, step: 0, cycle: this.state.cycle + 1 }); }, style: { display: 'inline-flex', alignItems: 'center', gap: 10, minHeight: 44, padding: '0 20px', borderRadius: 999, background: cur ? '#111318' : 'transparent', color: cur ? '#fff' : '#25324a', fontSize: 15, fontWeight: 600, transition: 'background .25s ease, color .25s ease' }, dot: { width: 8, height: 8, borderRadius: '50%', background: c } }; }),
+      isRoi: src.narrative.kind === 'roi', isSteps: src.narrative.kind === 'steps',
+      narrativeSteps: (src.narrative.steps || []).map(([title, note], i) => ({ title, note, num: num(i) })),
+      roi: {
+        inputs: [['Operators', 'operators', 'people'], ['Loaded labor', 'rate', '$/hour'], ['New starts', 'starts', '/month'], ['Workdays', 'days', '/month']].map(([label, key, unit]) => ({ label, unit, value: r[key], onChange: set(key), selectAll: e => e.target.select() })),
+        metrics: [['Onboarding hours returned', fmt(R('onboarding')), 'h / yr'], ['Search hours returned', fmt(R('search')), 'h / yr'], ['Total hours returned', fmt(R('total')), 'h / yr'], ['Labor capacity value', '$' + fmt(R('value')), '/ yr']].map(([label, value, unit]) => ({ label, value, unit })),
+        hero: { label: 'Year-one net value', value: (R('net') < 0 ? '−$' : '$') + fmt(Math.abs(R('net'))), note: 'Labor capacity value minus a $' + fmt(cost) + ' illustrative first-year cost' },
+        roiText: R('roiPct') + '%',
+        waveStyle: { position: 'absolute', left: 0, right: 0, bottom: 0, height: Math.max(0, Math.min(92, tw.roiPct * .92)) + '%', transition: 'height .9s cubic-bezier(.16,1,.3,1)' },
+        paybackText: value ? tw.payback.toFixed(1) + ' mo' : '—',
+        ringOffset: 238.8 * (1 - Math.max(0, Math.min(1, tw.payback / 12))),
+        dotX: 52 + 38 * Math.cos((Math.max(0, Math.min(1, tw.payback / 12)) * 360 - 90) * Math.PI / 180),
+        dotY: 52 + 38 * Math.sin((Math.max(0, Math.min(1, tw.payback / 12)) * 360 - 90) * Math.PI / 180),
+        paybackMonths: value ? tw.payback.toFixed(1) : '—',
+        ringLabel: Math.round(Math.max(0, Math.min(12, tw.payback))) + ' / 12 MO',
+        ticks: Array.from({ length: 12 }, (_, i) => { const a = (i * 30 - 90) * Math.PI / 180; return { x1: 52 + 47 * Math.cos(a), y1: 52 + 47 * Math.sin(a), x2: 52 + 51 * Math.cos(a), y2: 52 + 51 * Math.sin(a), color: i < Math.round(Math.max(0, Math.min(12, tw.payback))) ? '#2459d3' : 'rgba(16,24,40,.14)' }; }),
+        reset: () => this.setState({ roi: { operators: 40, rate: 30, starts: 6, days: 22 } })
+      },
+      refs: src.refs.map(label => ({ label })),
+      heroA: hero[id][0], heroB: hero[id][1], heroSub: hero[id][2],
+      stats: d.solutionStats[id].map(([value, label, note]) => ({ value, label, note })),
+      prob: { ...d.solutionProblems[id], cost: d.solutionProblems[id].cost.map(text => ({ text })) },
+      faq: d.solutionFaq[id].map(([q, a], i) => { const open = this.state.faqOpen === i; return { q, a, open, toggle: () => this.setState({ faqOpen: open ? -1 : i }), iconStyle: { display: 'grid', placeItems: 'center', width: 28, height: 28, borderRadius: '50%', border: '1px solid rgba(16,24,40,.2)', color: '#2459d3', fontSize: 18, lineHeight: 1, transform: open ? 'rotate(45deg)' : 'none', transition: 'transform .35s cubic-bezier(.16,1,.3,1)' }, bodyStyle: { display: 'grid', gridTemplateRows: open ? '1fr' : '0fr', paddingBottom: open ? 22 : 0, transition: 'grid-template-rows .4s cubic-bezier(.16,1,.3,1), padding-bottom .4s cubic-bezier(.16,1,.3,1)', overflow: 'hidden' } }; }),
+      relatedIndustries: d.industryOrder.filter(k => d.industries[k].mix.includes(id)).map(k => ({ title: d.industries[k].title, href: 'industry.html?industry=' + k })),
+      footerGroups: d.footerGroups4
+    };
+  }
+}
+</script>
+</body>
+</html>

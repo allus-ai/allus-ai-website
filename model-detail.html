@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Model detail — Allus AI (v2)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet">
+<style>
+html { background: #fff; }
+body { margin: 0; color: #101828; background: #fff; font-family: "Manrope", "Avenir Next", sans-serif; font-size: 16px; line-height: 1.55; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; }
+html { overflow-x: clip; }
+a { color: inherit; text-decoration: none; } a:hover { color: inherit; }
+h1, h2, h3, p { margin: 0; text-wrap: pretty; }
+button { font: inherit; }
+@keyframes fade-up { from { opacity: 0; transform: translate3d(0, 16px, 0); } to { opacity: 1; transform: none; } }
+@keyframes rise-in { from { opacity: 0; transform: translate3d(0, 28px, 0); } to { opacity: 1; transform: none; } }
+@keyframes orb-drift { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-46%) translateY(18px); } }
+@keyframes dash { to { stroke-dashoffset: -40; } }
+@keyframes core-pulse { 0%, 100% { box-shadow: 0 0 0 10px rgba(223,232,255,.7), 0 16px 32px rgba(17,19,24,.05); } 50% { box-shadow: 0 0 0 18px rgba(223,232,255,.35), 0 18px 36px rgba(17,19,24,.07); } }
+@keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+a > span[aria-hidden="true"] { display: inline-block; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+a:hover > span[aria-hidden="true"] { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+@keyframes parallax-y { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
+@keyframes orb-a { from { transform: translate(0, 0) scale(1); } to { transform: translate(14vw, 12vh) scale(1.18); } }
+@keyframes orb-b { from { transform: translate(0, 0) scale(1.1); } to { transform: translate(-12vw, -14vh) scale(.92); } }
+@keyframes header-compact { to { height: 60px; background: rgba(252,251,248,.98); box-shadow: 0 10px 30px rgba(16,24,40,.08); } }
+[data-btn] { box-sizing: border-box; transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease, background .2s ease, border-color .2s ease, color .2s ease; }
+[data-btn]:hover { transform: translateY(-1px); }
+[data-btn]:active { transform: translateY(0) scale(.985); }
+[data-btn] > span[aria-hidden] { transition: transform .35s cubic-bezier(.16,1,.3,1), background .2s ease, color .2s ease; }
+[data-btn="primary"]:hover { box-shadow: 0 12px 26px rgba(36,89,211,.28); }
+[data-btn="primary"]:hover > span[aria-hidden] { background: #fff; color: #2459d3; transform: translateX(2px); }
+[data-btn="dark"]:hover { background: #2459d3 !important; }
+[data-btn="dark"]:hover > span[aria-hidden] { transform: translateX(2px); }
+[data-btn="light"]:hover { box-shadow: 0 12px 26px rgba(17,19,24,.16); }
+[data-btn="light"]:hover > span[aria-hidden] { background: #2459d3; color: #fff; transform: translateX(2px); }
+[data-btn="ghost"]:hover { border-color: #101828 !important; background: #fff !important; }
+[data-btn="ghost"]:hover > span[aria-hidden] { color: #101828; transform: translateX(4px); }
+[data-btn="ghost-dark"]:hover { border-color: #fff !important; background: rgba(255,255,255,.08) !important; }
+[data-btn="ghost-dark"]:hover > span[aria-hidden] { transform: translateX(4px); }
+
+/* ---- interaction polish ---- */
+:root { --ease-out: cubic-bezier(.16,1,.3,1); --ease-soft: cubic-bezier(.4,0,.2,1); }
+html { scroll-behavior: smooth; }
+::selection { background: rgba(63,122,254,.18); color: #101828; }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid #3f7afe; outline-offset: 3px; border-radius: 6px; }
+[data-btn]:focus-visible { outline-offset: 2px; }
+/* buttons: press ripple */
+[data-btn] { position: relative; overflow: hidden; isolation: isolate; -webkit-tap-highlight-color: transparent; }
+[data-btn]::before { content: ''; position: absolute; inset: 0; background: radial-gradient(120px circle at var(--px, 50%) var(--py, 50%), rgba(255,255,255,.35), transparent 60%); opacity: 0; transition: opacity .5s var(--ease-soft); pointer-events: none; }
+[data-btn]:active::before { opacity: 1; transition-duration: 0s; }
+[data-btn="ghost"]::before, [data-btn="ghost-dark"]::before { background: radial-gradient(120px circle at var(--px, 50%) var(--py, 50%), rgba(63,122,254,.16), transparent 60%); }
+/* cards & links: uniform hover motion */
+a[href], button { -webkit-tap-highlight-color: transparent; }
+a[href][style*="border-radius: 2"], a[href][style*="border-radius: 1"] { transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-soft), border-color .25s var(--ease-soft), background .25s var(--ease-soft); }
+a[href][style*="border-radius: 2"]:active, a[href][style*="border-radius: 1"]:active { transform: translateY(0) scale(.992) !important; transition-duration: .12s; }
+a[href] img[style*="object-fit: cover"] { transition: transform .9s var(--ease-out), opacity .4s var(--ease-soft); }
+a[href]:hover img[style*="object-fit: cover"] { transform: scale(1.04); }
+/* tabs / rows */
+button[role="tab"], [role="radiogroup"] > button, [role="radio"] { transition: background .3s var(--ease-soft), color .3s var(--ease-soft), border-color .3s var(--ease-soft), box-shadow .3s var(--ease-soft), transform .3s var(--ease-out); }
+button[role="tab"]:hover, [role="radio"]:hover { background: rgba(16,24,40,.035); }
+button[role="tab"]:active, [role="radio"]:active { transform: scale(.995); }
+button[role="tab"] > span:first-child { transition: color .3s var(--ease-soft), transform .3s var(--ease-out); }
+/* footer & text links */
+footer a[href] { position: relative; transition: color .25s var(--ease-soft); }
+footer nav a[href]::after { content: ''; position: absolute; left: 0; bottom: 2px; width: 100%; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .35s var(--ease-out); }
+footer nav a[href]:hover::after { transform: scaleX(1); transform-origin: left; }
+/* nav links (dc-import AllusNav) */
+nav[aria-label="Primary navigation"] a[href] { transition: background .25s var(--ease-soft), color .25s var(--ease-soft); }
+/* pill switchers */
+nav[aria-label] a[href][style*="border-radius: 999px"], nav[aria-label] button[style*="border-radius: 999px"] { transition: background .3s var(--ease-soft), color .3s var(--ease-soft), box-shadow .3s var(--ease-soft); }
+/* inputs */
+input, textarea, select { transition: border-color .25s var(--ease-soft), box-shadow .25s var(--ease-soft), background .25s var(--ease-soft); }
+input:hover, textarea:hover, select:hover { border-color: rgba(17,19,24,.32) !important; }
+/* accordion + icons */
+button[aria-expanded] { transition: color .25s var(--ease-soft); }
+button[aria-expanded]:hover { color: #2459d3; }
+button[aria-expanded]:hover > span[aria-hidden] { border-color: #2459d3 !important; background: #eef3ff; }
+/* stat numbers */
+strong[style*="font-size: 56px"], strong[style*="font-size: 52px"], strong[style*="font-size: 44px"] { font-variant-numeric: tabular-nums; }
+/* chips */
+li[style*="border-radius: 999px"], span[style*="border-radius: 999px"][style*="border: 1px solid"] { transition: border-color .25s var(--ease-soft), background .25s var(--ease-soft), transform .3s var(--ease-out); }
+li[style*="border-radius: 999px"]:hover { border-color: rgba(16,24,40,.32) !important; transform: translateY(-1px); }
+/* images fade in */
+img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
+</style>
+<script>document.addEventListener('pointerdown', e => { const b = e.target.closest && e.target.closest('[data-btn]'); if (!b) return; const r = b.getBoundingClientRect(); b.style.setProperty('--px', ((e.clientX - r.left) / r.width * 100) + '%'); b.style.setProperty('--py', ((e.clientY - r.top) / r.height * 100) + '%'); }, { passive: true });</script>
+<script>document.addEventListener('pointermove', e => { const r = document.documentElement.style; r.setProperty('--mx', e.clientX + 'px'); r.setProperty('--my', e.clientY + 'px'); }, { passive: true });</script>
+</helmet>
+<div data-screen-label="Model detail v2" style="min-width: 1244px; position: relative;">
+  <div aria-hidden="true" style="position: fixed; top: 0; left: 0; right: 0; z-index: 40; height: 2px; background: #3f7afe; transform-origin: left; animation: progress linear both; animation-timeline: scroll(root);"></div>
+  <div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 1400px; z-index: -1; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 100%); mask-image: linear-gradient(180deg, #000 60%, transparent 100%);">
+    <div style="position: absolute; top: -30%; left: -18%; width: 70vw; height: 70vw; border-radius: 50%; background: radial-gradient(circle, rgba(63,122,254,.14), transparent 70%); filter: blur(40px); animation: orb-a 26s ease-in-out infinite alternate;"></div>
+    <div style="position: absolute; right: -20%; top: 30%; width: 64vw; height: 64vw; border-radius: 50%; background: radial-gradient(circle, rgba(110,184,169,.12), transparent 70%); filter: blur(40px); animation: orb-b 32s ease-in-out infinite alternate;"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(560px circle at var(--mx, 50vw) var(--my, 30vh), rgba(63,122,254,.09), transparent 60%);"></div>
+  </div>
+  <dc-import name="AllusNav" active="model" hint-size="100%,72px" style="position: sticky; top: 0; z-index: 25;"></dc-import>
+
+  <main style="position: relative;">
+    <div aria-hidden="true" style="position: absolute; top: 0; left: 50%; z-index: 0; width: 100vw; height: 720px; transform: translateX(-50%); pointer-events: none; background-image: linear-gradient(rgba(37,78,214,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(37,78,214,.12) 1px, transparent 1px); background-size: 46px 46px; -webkit-mask-image: radial-gradient(64% 58% at 50% 22%, rgba(0,0,0,.8) 0%, rgba(0,0,0,.3) 50%, transparent 82%); mask-image: radial-gradient(64% 58% at 50% 22%, rgba(0,0,0,.8) 0%, rgba(0,0,0,.3) 50%, transparent 82%);"></div>
+    <!-- Model switcher + hero -->
+    <section style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding: 40px 0 0;">
+      <nav aria-label="Allus model system" style="display: flex; gap: 4px; width: max-content; margin-inline: auto; padding: 5px; border: 1px solid rgba(16,24,40,.14); border-radius: 999px; background: #fcfbf8; animation: fade-up .6s cubic-bezier(.16,1,.3,1) both;">
+        <sc-for list="{{ rail }}" as="r" hint-placeholder-count="3">
+          <a href="{{ r.href }}" onClick="{{ r.select }}" style="{{ r.style }}"><small style="{{ r.kindStyle }}">{{ r.kind }}</small>{{ r.title }}</a>
+        </sc-for>
+      </nav>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; padding: 56px 0 40px;">
+        <div style="display: grid; gap: 22px; animation: fade-up .8s cubic-bezier(.16,1,.3,1) .1s both;">
+          <p style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;">{{ m.kicker }}</p>
+          <h1 style="font-family: 'Newsreader', Georgia, serif; font-size: 72px; font-weight: 400; letter-spacing: -.025em; line-height: 1.02;">{{ m.title }}.<br><em style="color: #3f7afe; font-style: italic; font-weight: 400;">{{ m.tagline }}</em></h1>
+          <p style="max-width: 44ch; color: #5f687a; font-size: 18px; line-height: 1.5;">{{ m.summary }}</p>
+          <div style="display: flex; gap: 12px; margin-top: 4px;">
+            <a href="connect.html?intent=model-access" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 8px 0 18px; color: #fcfbf8; border-radius: 12px; background: #2459d3; font-size: 13px; font-weight: 600;" style-hover="box-shadow: 0 12px 28px rgba(36,89,211,.22);" data-btn="primary">Request Model Access <span aria-hidden="true" style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,.16); color: #fff; font-size: 14px; line-height: 1;">→</span></a>
+            <a href="{{ m.nextHref }}" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 18px; color: #101828; border: 1px solid rgba(17,19,24,.22); border-radius: 12px; background: transparent; font-size: 13px; font-weight: 600;" style-hover="background: #eeede8;" data-btn="ghost">{{ m.nextLabel }} <span aria-hidden="true" style="color: #5f687a; font-size: 15px;">→</span></a>
+          </div>
+        </div>
+        <!-- Animated I/O visual -->
+        <div style="position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr); gap: 16px; align-items: center; padding: 28px 24px; border: 1px solid rgba(16,24,40,.16); border-radius: 26px; background: radial-gradient(70% 90% at 50% 50%, rgba(223,232,255,.6), #fcfbf8 70%); animation: fade-up .9s cubic-bezier(.16,1,.3,1) .25s both;">
+          <svg aria-hidden="true" viewBox="0 0 560 300" preserveAspectRatio="none" style="position: absolute; inset: 28px 24px; width: calc(100% - 48px); height: calc(100% - 56px); pointer-events: none;">
+            <sc-for list="{{ m.paths }}" as="p" hint-placeholder-count="8"><path d="{{ p.d }}" fill="none" stroke="{{ p.stroke }}" stroke-width="{{ p.width }}" stroke-dasharray="3 7" opacity="{{ p.opacity }}" style="animation: dash 1.4s linear infinite; transition: opacity .3s ease, stroke-width .3s ease;"></path></sc-for>
+          </svg>
+          <ul style="position: relative; display: grid; gap: 8px; margin: 0; padding: 0; list-style: none;">
+            <sc-for list="{{ m.inputs }}" as="x" hint-placeholder-count="4">
+              <li onMouseEnter="{{ x.hover }}" onMouseLeave="{{ clearHover }}" style="{{ x.style }}"><b style="color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 500;">{{ x.num }}</b><span style="font-size: 13px; font-weight: 500; letter-spacing: -.02em; line-height: 1.3;">{{ x.label }}</span></li>
+            </sc-for>
+          </ul>
+          <div style="position: relative; display: grid; justify-items: center; gap: 10px; text-align: center;">
+            <div style="display: grid; place-items: center; width: 84px; height: 84px; border: 1px solid rgba(63,122,254,.3); border-radius: 50%; background: #fff; animation: core-pulse 3.2s cubic-bezier(.22,1,.36,1) infinite;"><img src="assets/allus-icon-navy.svg" alt="" style="display: block; width: 38px; height: auto;"></div>
+            <strong style="font-size: 15px; font-weight: 600; letter-spacing: -.02em;">{{ m.title }}</strong>
+          </div>
+          <ul style="position: relative; display: grid; gap: 8px; margin: 0; padding: 0; list-style: none;">
+            <sc-for list="{{ m.outputs }}" as="x" hint-placeholder-count="4">
+              <li onMouseEnter="{{ x.hover }}" onMouseLeave="{{ clearHover }}" style="{{ x.style }}"><b style="color: #3f7f72; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 500;">{{ x.num }}</b><span style="font-size: 13px; font-weight: 500; letter-spacing: -.02em; line-height: 1.3;">{{ x.label }}</span></li>
+            </sc-for>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo + how it works stepper -->
+    <section aria-labelledby="how-title" style="padding-block: 96px 112px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <header style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 48px; align-items: end; margin-bottom: 44px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;">
+          <div>
+            <p style="margin: 0 0 16px; color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">How it works</p>
+            <h2 id="how-title" style="max-width: 16ch; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 500; letter-spacing: -.045em; line-height: 1.04;">{{ m.howA }}<br><em style="color: #3f7afe; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400;">{{ m.howB }}</em></h2>
+          </div>
+          <p style="max-width: 40ch; color: #5f687a; font-size: 17px; line-height: 1.55;">{{ m.howCaption }}</p>
+        </header>
+        <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 20px; align-items: stretch; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;" onMouseEnter="{{ pause }}" onMouseLeave="{{ resume }}" onKeyDown="{{ stepKeys }}">
+          <figure style="position: relative; margin: 0; min-height: 460px; overflow: hidden; border-radius: 26px; background: #111318;">
+            <img src="{{ m.image }}" alt="{{ m.alt }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%;">
+            <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.05) 40%, rgba(13,20,36,.8) 100%);"></span>
+            <figcaption style="position: absolute; right: 26px; bottom: 24px; left: 26px; display: grid; gap: 8px; color: #fff;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7);">Step {{ activeStep.num }} of 04</span>
+              <strong style="font-family: 'Newsreader', Georgia, serif; font-size: 34px; font-weight: 400; letter-spacing: -.025em; line-height: 1.06;">{{ activeStep.title }}</strong>
+              <span style="max-width: 46ch; color: rgba(255,255,255,.78); font-size: 15px; line-height: 1.5;">{{ activeStep.note }}</span>
+            </figcaption>
+          </figure>
+          <ol role="tablist" style="display: grid; margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(16,24,40,.16);">
+            <sc-for list="{{ m.stages }}" as="st" hint-placeholder-count="4">
+              <li style="display: contents;">
+                <button type="button" role="tab" onClick="{{ st.select }}" style="{{ st.style }}">
+                  <span style="{{ st.numStyle }}">{{ st.num }}</span>
+                  <span style="display: grid; gap: 6px; text-align: left;">
+                    <strong style="font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1;">{{ st.title }}</strong>
+                    <span style="{{ st.noteStyle }}">{{ st.note }}</span>
+                  </span>
+                  {{ st.progress }}
+                </button>
+              </li>
+            </sc-for>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spec -->
+    <section aria-labelledby="spec-title" style="padding-block: 96px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <header style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 48px; align-items: end; margin-bottom: 40px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;">
+          <div>
+            <p style="margin: 0 0 16px; color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">Model spec</p>
+            <h2 id="spec-title" style="font-family: 'Manrope', sans-serif; font-size: 44px; font-weight: 500; letter-spacing: -.045em; line-height: 1.04;">{{ m.title }} in<br><em style="color: #3f7afe; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400;">evaluation terms.</em></h2>
+          </div>
+          <p style="max-width: 40ch; color: #5f687a; font-size: 16px; line-height: 1.55;">Written for workload evaluation, not as a catalog sheet.</p>
+        </header>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid rgba(16,24,40,.16); border-radius: 24px; background: #fff; overflow: hidden; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+          <sc-for list="{{ m.specs }}" as="sp" hint-placeholder-count="3">
+            <div style="{{ sp.style }}">
+              <span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">{{ sp.num }} · {{ sp.title }}</span>
+              <ul style="display: grid; gap: 0; margin: 14px 0 0; padding: 0; list-style: none;">
+                <sc-for list="{{ sp.points }}" as="pt" hint-placeholder-count="3"><li style="display: flex; gap: 12px; align-items: start; padding: 11px 0; border-top: 1px solid rgba(16,24,40,.1); font-size: 15px; line-height: 1.45; color: #25324a;"><i aria-hidden="true" style="flex: none; width: 6px; height: 6px; margin-top: 8px; border-radius: 50%; background: #3f7afe;"></i>{{ pt.text }}</li></sc-for>
+              </ul>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next in the system -->
+    <section aria-labelledby="next-title" style="padding-block: 96px 80px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <header style="display: grid; gap: 12px; margin-bottom: 32px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;">
+          <p style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">In the system</p>
+          <h2 id="next-title" style="font-family: 'Manrope', sans-serif; font-size: 40px; font-weight: 500; letter-spacing: -.045em; line-height: 1.06;">{{ m.nextTitle }}</h2>
+        </header>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+          <sc-for list="{{ m.related }}" as="r" hint-placeholder-count="2">
+            <a href="{{ r.href }}" style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; align-items: center; padding: 26px 28px; border: 1px solid rgba(16,24,40,.16); border-radius: 20px; background: #fff; transition: border-color .18s ease, transform .4s cubic-bezier(.16,1,.3,1);" style-hover="border-color: rgba(16,24,40,.3); transform: translateY(-3px);">
+              <span style="display: grid; gap: 6px;">
+                <span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">{{ r.kind }}</span>
+                <strong style="font-family: 'Newsreader', Georgia, serif; font-size: 26px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1;">{{ r.title }}</strong>
+                <span style="color: #5f687a; font-size: 14px; line-height: 1.5;">{{ r.note }}</span>
+              </span>
+              <span aria-hidden="true" style="display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid rgba(16,24,40,.16); border-radius: 50%; color: #2459d3;">→</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section aria-labelledby="site-cta-title" style="padding-block: 16px 88px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <div style="position: relative; display: grid; gap: 16px; justify-items: center; padding: 72px 40px; overflow: hidden; border-radius: 28px; background: #111318; color: #fcfbf8; text-align: center; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+          <div aria-hidden="true" style="position: absolute; top: -50%; left: 50%; width: 640px; height: 640px; border-radius: 50%; background: radial-gradient(circle, rgba(63,122,254,.45), transparent 66%); transform: translateX(-50%); animation: orb-drift 8s ease-in-out infinite alternate; pointer-events: none;"></div>
+          <p style="position: relative; color: rgba(255,255,255,.6); font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;">Next step</p>
+          <h2 id="site-cta-title" style="position: relative; max-width: 20ch; font-family: 'Newsreader', Georgia, serif; font-size: 48px; font-weight: 400; letter-spacing: -.03em; line-height: 1.06;">Evaluate {{ m.title }}<br><em style="color: #9db9ff; font-style: italic; font-weight: 400;">on your own workload.</em></h2>
+          <p style="position: relative; max-width: 44ch; color: rgba(255,255,255,.7); font-size: 17px; line-height: 1.55;">Bring a task and a boundary.</p>
+          <div style="position: relative; display: flex; gap: 12px; margin-top: 12px;">
+            <a href="connect.html?intent=model-access" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 8px 0 18px; color: #101828; border-radius: 12px; background: #fff; font-size: 14px; font-weight: 600;" data-btn="light">Request Model Access <span aria-hidden="true" style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #eef3ff; color: #2459d3; font-size: 14px; line-height: 1;">→</span></a>
+            <a href="connect.html?intent=demo" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 18px; color: #fff; border: 1px solid rgba(255,255,255,.28); border-radius: 12px; font-size: 14px; font-weight: 600;" style-hover="background: rgba(255,255,255,.08);" data-btn="ghost-dark">Request a Demo <span aria-hidden="true" style="color: rgba(255,255,255,.7); font-size: 15px;">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="color: #fcfbf8; background: #111318; border-top: 1px solid rgba(255,255,255,.08);">
+    <div style="display: grid; gap: 48px; width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding-block: 64px 32px;">
+      <div style="display: grid; grid-template-columns: minmax(200px, 1.1fr) repeat(4, minmax(0, 1fr)); gap: 40px 28px;">
+        <div style="display: grid; gap: 18px; align-content: start;">
+          <a href="index.html" style="display: block; width: max-content;"><img src="assets/allus-logo-white.svg" alt="" style="display: block; width: 132px; height: auto;"></a>
+          <p style="max-width: 26ch; color: rgba(255,255,255,.58); font-size: 15px; line-height: 1.45;">Industrial foundation models and model-powered solutions for the physical world.</p>
+          <p style="color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">Cupertino · Atlanta</p>
+        </div>
+        <sc-for list="{{ footerGroups }}" as="g" hint-placeholder-count="4">
+          <div style="display: grid; align-content: start; gap: 8px;">
+            <h3 style="margin: 0 0 6px; color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase;">{{ g.title }}</h3>
+            <sc-for list="{{ g.links }}" as="l" hint-placeholder-count="3"><a href="{{ l.href }}" style="display: block; min-height: 26px; color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.35;" style-hover="color: #fff;">{{ l.label }}</a></sc-for>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">
+        <span>© 2026 Allus AI</span>
+        <div style="display: flex; gap: 20px;"><a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a><a href="https://trust.allus.ai" style-hover="color: #fff;">Trust Center</a></div>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;model&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;allusone&quot;,&quot;options&quot;:[&quot;allusone&quot;,&quot;allusflow&quot;,&quot;allusedge&quot;],&quot;tsType&quot;:&quot;'allusone' | 'allusflow' | 'allusedge'&quot;,&quot;section&quot;:&quot;Page&quot;},&quot;autoCycle&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  renderVals() { const v = this.renderBase(); v.stepKeys = e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); this.setState(s => ({ step: Math.max(0, s.step + d) % 4, cycle: s.cycle + 1 })); }; return v; }
+  state = { model: null, step: 0, hover: null, paused: false, cycle: 0 };
+  componentDidMount() { this.start(); }
+  componentWillUnmount() { clearInterval(this._t); }
+  componentDidUpdate(p) { if (p.autoCycle !== this.props.autoCycle) this.start(); }
+  start() { clearInterval(this._t); if (this.props.autoCycle ?? true) this._t = setInterval(() => { if (!this.state.paused) this.setState(s => ({ step: (s.step + 1) % 4, cycle: s.cycle + 1 })); }, 5000); }
+
+  renderBase() {
+    const id = this.state.model || new URLSearchParams(location.search).get('model') || this.props.model || 'allusone';
+    const auto = this.props.autoCycle ?? true;
+    const h = React.createElement;
+    const data = {
+      allusone: {
+        kicker: 'Core model', title: 'AllusONE', tagline: 'sees the factory and reasons about it.',
+        summary: 'The core model for multimodal industrial perception and structured reasoning across image, video and the plant\'s own operating context.',
+        inputs: ['Any product line', 'New SKU — zero-shot', 'Live camera & video', 'Objects, actions & timing'],
+        outputs: ['Defect detection', 'Assembly verification', 'SOP compliance', 'Cycle-time & takt'],
+        howA: 'One multimodal context.', howB: 'Reviewable structure.',
+        howCaption: 'People, equipment, material and time are read together, then returned as structured understanding for review.',
+        image: 'assets/media/allusone-industrial-reasoning.jpg', alt: 'Industrial workcell where operator, machine state, material and procedure are connected as one context.',
+        stages: [['Perceive the scene', 'Locate supported people, parts, tools, equipment and regions in image or video.'], ['Relate the context', 'Connect visible entities, spatial relationships and configured task context.'], ['Ground the reasoning', 'Reference approved terminology, instructions and industrial knowledge.'], ['Structure the output', 'Return supported regions, answers or structured records for review.']],
+        specs: [['Inputs', 'Supported image and video formats · approved text instructions · configured terminology and system context'], ['Capabilities', 'Configured recognition and segmentation · evidence-linked visual questions · structured outputs · supported workflow calls'], ['Deployment', 'Edge server · on-premise · private cloud · hybrid, selected through workload and environment evaluation']],
+        nextLabel: 'See AllusFlow', nextHref: 'model-detail.html?model=allusflow', nextTitle: 'Two products carry AllusONE across time and onto the edge.',
+        related: [['Product · Time', 'AllusFlow', 'Turns long recordings into steps, cycle times and interruptions, each linked to its source moment.', 'model-detail.html?model=allusflow'], ['Product · Edge', 'AllusEdge', 'Compresses and validates the models for the cameras, servers and power limits already on site.', 'model-detail.html?model=allusedge']]
+      },
+      allusflow: {
+        kicker: 'Product · Time', title: 'AllusFlow', tagline: 'turns video into steps, timing and evidence.',
+        summary: 'Recorded work, its narration and its instructions become a reviewable timeline of steps, cycle times, interruptions and source moments.',
+        inputs: ['Recorded work video', 'Narrated audio', 'Operating documents', 'Instructions & manuals'],
+        outputs: ['Steps, phases & cycles', 'Cycle time & variation', 'Interruptions & resume', 'Searchable source moments'],
+        howA: 'From a long recording.', howB: 'To a process timeline.',
+        howCaption: 'AllusFlow connects recorded work with its narration and instructions, so teams can inspect the relevant step, duration, interruption or source moment.',
+        image: 'assets/media/allusflow-temporal-model.jpg', alt: 'Workcell with temporal echoes linking action, transition, interruption and resumed activity.',
+        stages: [['Collect source materials', 'Bring together recorded work video, explanatory audio, operating documents and usage instructions.'], ['Divide work into steps', 'Mark when configured steps, phases and states begin, change, pause and end.'], ['Measure time & sequence', 'Calculate durations and preserve the order of work, waiting, interruptions and resumptions.'], ['Return reviewable evidence', 'Create a timestamped timeline with direct links back to the relevant source video.']],
+        specs: [['Inputs', 'Recorded work video · explanatory or narrated audio · operating documents · usage instructions and manuals'], ['Process understanding', 'Step and phase boundaries · action and state changes · cycle timing · waiting, interruption and resume linking'], ['Reviewable outputs', 'Timestamped process timeline · step and cycle durations · flagged sequence differences · direct links to source video moments']],
+        nextLabel: 'See it in a solution', nextHref: 'solution.html?solution=production-process-intelligence', nextTitle: 'Where the timeline goes next.',
+        related: [['Solution', 'Production & Process Intelligence', 'Compare the timeline with approved work, or combine it with production context across stations, lines and sites.', 'solution.html?solution=production-process-intelligence'], ['Product · Edge', 'AllusEdge', 'Run AllusFlow close to the cameras when connectivity or data boundaries require it.', 'model-detail.html?model=allusedge']]
+      },
+      allusedge: {
+        kicker: 'Product · Edge', title: 'AllusEdge', tagline: 'puts the model on the hardware you already own.',
+        summary: 'Distill, quantize, compile and validate selected Allus models for target edge hardware, then package them for controlled local deployment.',
+        inputs: ['Pre-trained Allus model', 'Task data & calibration', 'Target edge hardware', 'Latency, memory & power limits'],
+        outputs: ['Distilled edge model', 'Hardware-optimized runtime', 'Validated performance profile', 'Deployable edge package'],
+        howA: 'From a foundation model.', howB: 'To a validated edge package.',
+        howCaption: 'AllusEdge reduces the model footprint, adapts it to target hardware and verifies accuracy and performance before deployment.',
+        image: 'assets/media/allusedge-local-intelligence.jpg', alt: 'Rugged edge computer connected to industrial cameras and a technician-controlled interface.',
+        stages: [['Define the target', 'Select the model, task, calibration samples, hardware and accuracy, latency, memory and power limits.'], ['Distill & compress', 'Apply distillation, quantization and other validated compression methods for the selected workload.'], ['Compile & validate', 'Build the hardware-optimized runtime and measure accuracy and performance on the target device.'], ['Package & deploy', 'Produce a controlled edge package with versioning, updates, rollback and runtime monitoring.']],
+        specs: [['Inputs', 'Pre-trained Allus model · task data and calibration samples · target edge hardware · latency, memory and power limits'], ['Edge optimization', 'Distillation · quantization · validated pruning · target-specific compilation and runtime adaptation'], ['Deployment outputs', 'Distilled and compressed edge model · hardware-optimized runtime · validated performance profile · deployable package with updates and rollback']],
+        nextLabel: 'Discuss deployment', nextHref: 'connect.html?intent=sales', nextTitle: 'What AllusEdge carries onto the device.',
+        related: [['Core model', 'AllusONE', 'The perception and reasoning model AllusEdge compresses for local execution.', 'model-detail.html?model=allusone'], ['Product · Time', 'AllusFlow', 'Run step and timing analysis on site, with source moments kept inside your boundary.', 'model-detail.html?model=allusflow']]
+      }
+    };
+    const src = data[id];
+    const num = i => '0' + (i + 1);
+    const hov = this.state.hover;
+    const nodeStyle = (side, i) => {
+      const active = hov === side + i, dim = hov && !active;
+      return { display: 'grid', gridTemplateColumns: '20px 1fr', gap: 8, alignItems: 'center', minHeight: 46, padding: '10px 12px', border: '1px solid ' + (active ? (side === 'in' ? 'rgba(63,122,254,.6)' : 'rgba(110,184,169,.7)') : 'rgba(16,24,40,.16)'), borderRadius: 14, background: active ? (side === 'in' ? '#eef3ff' : '#eaf6f2') : '#fff', opacity: dim ? .55 : 1, transform: active ? (side === 'in' ? 'translateX(4px)' : 'translateX(-4px)') : 'none', transition: 'all .3s cubic-bezier(.16,1,.3,1)', cursor: 'default' };
+    };
+    // SVG geometry: viewBox 560x300; inputs column x 0-190, outputs 370-560, core center 280,150. Row centers at 27,81,135,189 → offset for 4 items ≈ 46px pitch + 8 gap
+    const rowY = i => 27 + i * 54 + 0;
+    const paths = [];
+    for (let i = 0; i < 4; i++) {
+      const y = rowY(i) + 42;
+      const a = hov === 'in' + i, dim = hov && !a;
+      paths.push({ d: 'M 190 ' + y + ' C 235 ' + y + ', 240 150, 280 150', stroke: '#3f7afe', width: a ? 2 : 1.2, opacity: dim ? .12 : (a ? .95 : .4) });
+      const b = hov === 'out' + i, dimb = hov && !b;
+      paths.push({ d: 'M 370 ' + y + ' C 325 ' + y + ', 320 150, 280 150', stroke: '#6eb8a9', width: b ? 2 : 1.2, opacity: dimb ? .12 : (b ? .95 : .4) });
+    }
+    const step = this.state.step;
+    const m = {
+      ...src,
+      paths,
+      inputs: src.inputs.map((label, i) => ({ label, num: num(i), style: nodeStyle('in', i), hover: () => this.setState({ hover: 'in' + i }) })),
+      outputs: src.outputs.map((label, i) => ({ label, num: num(i), style: nodeStyle('out', i), hover: () => this.setState({ hover: 'out' + i }) })),
+      stages: src.stages.map(([title, note], i) => {
+        const active = i === step;
+        return {
+          title, note, num: num(i),
+          select: () => this.setState({ step: i, cycle: this.state.cycle + 1 }),
+          style: { position: 'relative', display: 'grid', gridTemplateColumns: '44px 1fr', gap: 14, alignItems: 'start', width: '100%', padding: '22px 18px', border: 0, borderBottom: '1px solid rgba(16,24,40,.16)', background: active ? 'rgba(255,255,255,.72)' : 'transparent', color: 'inherit', textAlign: 'left', cursor: 'pointer', transition: 'background .3s ease', overflow: 'hidden' },
+          numStyle: { color: active ? '#2459d3' : '#5f687a', fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, letterSpacing: '.08em', paddingTop: 6 },
+          noteStyle: { color: '#5f687a', fontSize: 14, lineHeight: 1.5, maxHeight: active ? 80 : 0, opacity: active ? 1 : 0, overflow: 'hidden', transition: 'max-height .5s cubic-bezier(.16,1,.3,1), opacity .35s ease' },
+          progress: active && auto && !this.state.paused ? h('span', { key: 'p' + this.state.cycle, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: -1, height: 2, background: '#3f7afe', transformOrigin: 'left', animation: 'progress 5s linear both' } }) : null
+        };
+      }),
+      specs: src.specs.map(([title, note], i) => ({ title, num: num(i), points: note.split(' · ').map(text => ({ text })), style: { padding: '26px 28px 30px', borderLeft: i ? '1px solid rgba(16,24,40,.12)' : 0 } })),
+      related: src.related.map(([kind, title, note, href]) => ({ kind, title, note, href }))
+    };
+    return {
+      m,
+      activeStep: m.stages[step],
+      clearHover: () => this.setState({ hover: null }),
+      pause: () => this.setState({ paused: true }),
+      resume: () => this.setState({ paused: false, cycle: this.state.cycle + 1 }),
+      navItems: [['Model', 'model.html', true], ['Solutions', 'solutions.html'], ['Industries', 'solutions.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Company', 'company.html']].map(([label, href, active]) => ({ label, href, style: { display: 'flex', alignItems: 'center', height: 40, padding: '0 14px', borderRadius: 999, fontSize: 13, fontWeight: 500, color: active ? '#101828' : '#25324a', background: active ? '#eeede8' : 'transparent' } })),
+      rail: [['allusone', 'Core', 'AllusONE'], ['allusflow', 'Time', 'AllusFlow'], ['allusedge', 'Edge', 'AllusEdge']].map(([key, kind, title]) => {
+        const cur = key === id;
+        return { kind, title, href: 'model-detail.html?model=' + key,
+          select: e => { e.preventDefault(); this.setState({ model: key, step: 0, hover: null, cycle: this.state.cycle + 1 }); },
+          style: { display: 'inline-flex', alignItems: 'center', gap: 10, minHeight: 44, padding: '0 20px', borderRadius: 999, background: cur ? '#111318' : 'transparent', color: cur ? '#fff' : '#25324a', fontSize: 15, fontWeight: 600, transition: 'background .25s ease, color .25s ease' },
+          kindStyle: { fontFamily: "'IBM Plex Mono', monospace", fontSize: 9, letterSpacing: '.1em', textTransform: 'uppercase', color: cur ? 'rgba(255,255,255,.6)' : '#5f687a' } };
+      }),
+      footerGroups: [
+        { title: 'Models', links: [['AllusONE', 'model-detail.html?model=allusone'], ['AllusFlow', 'model-detail.html?model=allusflow'], ['AllusEdge', 'model-detail.html?model=allusedge']] },
+        { title: 'Solutions', links: [['Operational Knowledge & Guidance', 'solution.html?solution=operational-knowledge-guidance'], ['Production & Process Intelligence', 'solution.html?solution=production-process-intelligence'], ['Equipment & Asset Intelligence', 'solution.html?solution=equipment-asset-intelligence'], ['Industrial Safety & Site Intelligence', 'solution.html?solution=industrial-safety-site-intelligence']] },
+        { title: 'Industries', links: [['Electronics Assembly', 'industry.html?industry=electronics-assembly'], ['FMCG', 'industry.html?industry=fmcg'], ['Food & Beverage', 'industry.html?industry=food-beverage'], ['Advanced Materials', 'industry.html?industry=advanced-materials'], ['Automotive', 'industry.html?industry=automotive']] },
+        { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy and Security', 'privacy.html'], ['Contact Us', 'connect.html?intent=demo']] }
+      ].map(g => ({ title: g.title, links: g.links.map(([label, href]) => ({ label, href })) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

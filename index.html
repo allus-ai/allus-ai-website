@@ -1,177 +1,530 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Allus AI industrial foundation models and model-powered solutions prototype.">
-  <meta name="theme-color" content="#f3f2ee">
-  <title>Allus AI — Industrial Intelligence</title>
-  <link rel="icon" href="./assets/allus-icon-navy.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=39.6">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
-  <!--
-    PROTOTYPE ASSUMPTIONS
-    - The information architecture and supplied copy are preserved.
-    - Only the supplied Allus AI logo files are used from the logo package.
-    - Typography, scale, layout, and the Morandi palette are independent prototype decisions.
-    - Original simulated industrial visuals illustrate the product concept; verified customer footage and metrics remain pending.
-    - Simulated scenes are clearly labeled and are not evidence of shipping functionality or measured outcomes.
-    - Hash routing keeps the prototype deployable as static files.
-  -->
-  <a class="skip-link" id="skipLink" href="#main">Skip to content</a>
+<x-dc>
+<helmet>
+<title>Allus AI — Industrial Intelligence (v2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet">
+<style>
+html { background: #fff; }
+body { margin: 0; color: #101828; background: #fff; font-family: "Manrope", "Avenir Next", sans-serif; font-size: 16px; line-height: 1.55; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; }
+html { overflow-x: clip; }
+a { color: inherit; text-decoration: none; }
+a:hover { color: inherit; }
+h1, h2, h3, p { margin: 0; text-wrap: pretty; }
+button { font: inherit; }
+@keyframes fade-up { from { opacity: 0; transform: translate3d(0, 16px, 0); } to { opacity: 1; transform: none; } }
+@keyframes rise-in { from { opacity: 0; transform: translate3d(0, 28px, 0); } to { opacity: 1; transform: none; } }
+@keyframes flow-x { from { left: -14%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } to { left: 100%; opacity: 0; } }
+@keyframes flow-y { from { top: -20%; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { top: 100%; opacity: 0; } }
+@keyframes orb-drift { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-46%) translateY(18px); } }
+@keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes pulse-ring { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.9); opacity: 0; } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+a > span[aria-hidden="true"] { display: inline-block; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+a:hover > span[aria-hidden="true"] { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+@keyframes parallax-y { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
+@keyframes orb-a { from { transform: translate(0, 0) scale(1); } to { transform: translate(14vw, 12vh) scale(1.18); } }
+@keyframes orb-b { from { transform: translate(0, 0) scale(1.1); } to { transform: translate(-12vw, -14vh) scale(.92); } }
+@keyframes header-compact { to { height: 60px; background: rgba(252,251,248,.98); box-shadow: 0 10px 30px rgba(16,24,40,.08); } }
+[data-btn] { box-sizing: border-box; transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease, background .2s ease, border-color .2s ease, color .2s ease; }
+[data-btn]:hover { transform: translateY(-1px); }
+[data-btn]:active { transform: translateY(0) scale(.985); }
+[data-btn] > span[aria-hidden] { transition: transform .35s cubic-bezier(.16,1,.3,1), background .2s ease, color .2s ease; }
+[data-btn="primary"]:hover { box-shadow: 0 12px 26px rgba(36,89,211,.28); }
+[data-btn="primary"]:hover > span[aria-hidden] { background: #fff; color: #2459d3; transform: translateX(2px); }
+[data-btn="dark"]:hover { background: #2459d3 !important; }
+[data-btn="dark"]:hover > span[aria-hidden] { transform: translateX(2px); }
+[data-btn="light"]:hover { box-shadow: 0 12px 26px rgba(17,19,24,.16); }
+[data-btn="light"]:hover > span[aria-hidden] { background: #2459d3; color: #fff; transform: translateX(2px); }
+[data-btn="ghost"]:hover { border-color: #101828 !important; background: #fff !important; }
+[data-btn="ghost"]:hover > span[aria-hidden] { color: #101828; transform: translateX(4px); }
+[data-btn="ghost-dark"]:hover { border-color: #fff !important; background: rgba(255,255,255,.08) !important; }
+[data-btn="ghost-dark"]:hover > span[aria-hidden] { transform: translateX(4px); }
 
-  <header class="site-header" id="siteHeader">
-    <a class="brand" href="#/" aria-label="Allus AI home">
-      <img class="brand-logo" src="./assets/allus-logo-navy.svg" width="2000" height="431" alt="Allus AI">
-    </a>
+/* ---- interaction polish ---- */
+:root { --ease-out: cubic-bezier(.16,1,.3,1); --ease-soft: cubic-bezier(.4,0,.2,1); }
+html { scroll-behavior: smooth; }
+::selection { background: rgba(63,122,254,.18); color: #101828; }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid #3f7afe; outline-offset: 3px; border-radius: 6px; }
+[data-btn]:focus-visible { outline-offset: 2px; }
+/* buttons: press ripple */
+[data-btn] { position: relative; overflow: hidden; isolation: isolate; -webkit-tap-highlight-color: transparent; }
+[data-btn]::before { content: ''; position: absolute; inset: 0; background: radial-gradient(120px circle at var(--px, 50%) var(--py, 50%), rgba(255,255,255,.35), transparent 60%); opacity: 0; transition: opacity .5s var(--ease-soft); pointer-events: none; }
+[data-btn]:active::before { opacity: 1; transition-duration: 0s; }
+[data-btn="ghost"]::before, [data-btn="ghost-dark"]::before { background: radial-gradient(120px circle at var(--px, 50%) var(--py, 50%), rgba(63,122,254,.16), transparent 60%); }
+/* cards & links: uniform hover motion */
+a[href], button { -webkit-tap-highlight-color: transparent; }
+a[href][style*="border-radius: 2"], a[href][style*="border-radius: 1"] { transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-soft), border-color .25s var(--ease-soft), background .25s var(--ease-soft); }
+a[href][style*="border-radius: 2"]:active, a[href][style*="border-radius: 1"]:active { transform: translateY(0) scale(.992) !important; transition-duration: .12s; }
+a[href] img[style*="object-fit: cover"] { transition: transform .9s var(--ease-out), opacity .4s var(--ease-soft); }
+a[href]:hover img[style*="object-fit: cover"] { transform: scale(1.04); }
+/* tabs / rows */
+button[role="tab"], [role="radiogroup"] > button, [role="radio"] { transition: background .3s var(--ease-soft), color .3s var(--ease-soft), border-color .3s var(--ease-soft), box-shadow .3s var(--ease-soft), transform .3s var(--ease-out); }
+button[role="tab"]:hover, [role="radio"]:hover { background: rgba(16,24,40,.035); }
+button[role="tab"]:active, [role="radio"]:active { transform: scale(.995); }
+button[role="tab"] > span:first-child { transition: color .3s var(--ease-soft), transform .3s var(--ease-out); }
+/* footer & text links */
+footer a[href] { position: relative; transition: color .25s var(--ease-soft); }
+footer nav a[href]::after { content: ''; position: absolute; left: 0; bottom: 2px; width: 100%; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .35s var(--ease-out); }
+footer nav a[href]:hover::after { transform: scaleX(1); transform-origin: left; }
+/* nav links (dc-import AllusNav) */
+nav[aria-label="Primary navigation"] a[href] { transition: background .25s var(--ease-soft), color .25s var(--ease-soft); }
+/* pill switchers */
+nav[aria-label] a[href][style*="border-radius: 999px"], nav[aria-label] button[style*="border-radius: 999px"] { transition: background .3s var(--ease-soft), color .3s var(--ease-soft), box-shadow .3s var(--ease-soft); }
+/* inputs */
+input, textarea, select { transition: border-color .25s var(--ease-soft), box-shadow .25s var(--ease-soft), background .25s var(--ease-soft); }
+input:hover, textarea:hover, select:hover { border-color: rgba(17,19,24,.32) !important; }
+/* accordion + icons */
+button[aria-expanded] { transition: color .25s var(--ease-soft); }
+button[aria-expanded]:hover { color: #2459d3; }
+button[aria-expanded]:hover > span[aria-hidden] { border-color: #2459d3 !important; background: #eef3ff; }
+/* stat numbers */
+strong[style*="font-size: 56px"], strong[style*="font-size: 52px"], strong[style*="font-size: 44px"] { font-variant-numeric: tabular-nums; }
+/* chips */
+li[style*="border-radius: 999px"], span[style*="border-radius: 999px"][style*="border: 1px solid"] { transition: border-color .25s var(--ease-soft), background .25s var(--ease-soft), transform .3s var(--ease-out); }
+li[style*="border-radius: 999px"]:hover { border-color: rgba(16,24,40,.32) !important; transform: translateY(-1px); }
+/* images fade in */
+img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
+</style>
+<script>document.addEventListener('pointermove', e => { const r = document.documentElement.style; r.setProperty('--mx', e.clientX + 'px'); r.setProperty('--my', e.clientY + 'px'); }, { passive: true });document.addEventListener('pointerdown', e => { const b = e.target.closest && e.target.closest('[data-btn]'); if (!b) return; const r = b.getBoundingClientRect(); b.style.setProperty('--px', ((e.clientX - r.left) / r.width * 100) + '%'); b.style.setProperty('--py', ((e.clientY - r.top) / r.height * 100) + '%'); }, { passive: true });</script>
+</helmet>
 
-    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation">
-      <span id="menuLabel">Menu</span><span class="menu-lines" aria-hidden="true"></span>
-    </button>
+<div data-screen-label="Home v2" style="min-width: 1244px; position: relative;">
+  <div aria-hidden="true" style="position: fixed; top: 0; left: 0; right: 0; z-index: 40; height: 2px; background: #3f7afe; transform-origin: left; animation: progress linear both; animation-timeline: scroll(root);"></div>
+  <div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 1400px; z-index: -1; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 100%); mask-image: linear-gradient(180deg, #000 60%, transparent 100%);">
+    <div style="position: absolute; top: -30%; left: -18%; width: 70vw; height: 70vw; border-radius: 50%; background: radial-gradient(circle, rgba(63,122,254,.14), transparent 70%); filter: blur(40px); animation: orb-a 26s ease-in-out infinite alternate;"></div>
+    <div style="position: absolute; right: -20%; top: 30%; width: 64vw; height: 64vw; border-radius: 50%; background: radial-gradient(circle, rgba(110,184,169,.12), transparent 70%); filter: blur(40px); animation: orb-b 32s ease-in-out infinite alternate;"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(560px circle at var(--mx, 50vw) var(--my, 30vh), rgba(63,122,254,.09), transparent 60%);"></div>
+  </div>
 
-    <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
-      <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
+  <!-- Header -->
+  <dc-import name="AllusNav" active="" hint-size="100%,72px" style="position: sticky; top: 0; z-index: 25;"></dc-import>
 
-      <div class="nav-item nav-item--submenu" data-nav-item="model">
-        <div class="nav-primary">
-          <a class="nav-primary-link" href="#/model" data-nav="model" data-index="01" aria-label="Model"><span class="nav-label" data-label="Model">Model</span></a>
-          <button class="nav-disclosure" type="button" aria-expanded="false" aria-controls="submenu-model" aria-label="Show Model pages"><span aria-hidden="true"></span></button>
-        </div>
-        <div class="nav-submenu nav-submenu--model" id="submenu-model" role="group" aria-label="Model pages" aria-hidden="true" inert>
-          <div class="nav-submenu-panel">
-            <div class="nav-submenu-intro">
-              <p class="eyebrow">MODEL FAMILY</p>
-              <h2>AllusONE.<br><em>Time and Edge Products.</em></h2>
-              <a class="nav-submenu-overview" href="#/model" data-route="/model">Model Overview <span aria-hidden="true">→</span></a>
-            </div>
-            <div class="nav-submenu-columns nav-submenu-columns--model">
-              <div class="nav-submenu-group nav-submenu-group--core">
-                <h3>Core</h3>
-                <a class="nav-submenu-link nav-submenu-link--core" href="#/model/allusone" data-route="/model/allusone"><span>01</span><strong>AllusONE</strong><i aria-hidden="true">→</i></a>
-                <p class="nav-submenu-note">Industrial perception and reasoning.</p>
-              </div>
-              <div class="nav-submenu-group">
-                <h3>Products</h3>
-                <a class="nav-submenu-link" href="#/model/allusflow" data-route="/model/allusflow"><span>02</span><strong>AllusFlow</strong><i aria-hidden="true">→</i></a>
-                <a class="nav-submenu-link" href="#/model/allusedge" data-route="/model/allusedge"><span>03</span><strong>AllusEdge</strong><i aria-hidden="true">→</i></a>
-                <p class="nav-submenu-note">Temporal understanding and local edge execution.</p>
-              </div>
-            </div>
+  <main>
+    <!-- 01 Hero -->
+    <section aria-labelledby="home-title" style="position: relative; width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+      <div aria-hidden="true" style="position: absolute; top: 0; bottom: 0; left: 50%; z-index: 0; width: 100vw; overflow: hidden; transform: translateX(-50%); pointer-events: none; -webkit-mask-image: radial-gradient(72% 62% at 50% 32%, rgba(0,0,0,.95) 0%, rgba(0,0,0,.45) 52%, transparent 84%); mask-image: radial-gradient(72% 62% at 50% 32%, rgba(0,0,0,.95) 0%, rgba(0,0,0,.45) 52%, transparent 84%);">
+        <canvas ref="{{ gridRef }}" style="display: block; width: 100%; height: 100%;"></canvas>
+      </div>
+      <div style="position: relative; z-index: 1; display: grid; justify-items: center; gap: 22px; padding: 96px 0 40px; text-align: center;">
+        <sc-if value="{{ showBacked }}" hint-placeholder-val="{{ true }}">
+          <div aria-label="Backed by" style="display: inline-flex; align-items: center; gap: 14px; min-height: 44px; padding: 6px 18px 6px 20px; border-radius: 999px; border: 1px solid rgba(36,89,211,.14); background: rgba(255,255,255,.7); animation: fade-up .7s cubic-bezier(.16,1,.3,1) both;">
+            <span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Backed by</span>
+            <img src="assets/partners/yc-combinator.webp" alt="Y Combinator" style="display: block; height: 18px; width: auto;">
+            <img src="assets/partners/nvidia-inception.png" alt="NVIDIA Inception Program" style="display: block; height: 24px; width: auto; padding-left: 12px; border-left: 1px solid rgba(16,24,40,.1);">
           </div>
+        </sc-if>
+        <h1 id="home-title" style="max-width: 16ch; color: #101828; font-family: 'Newsreader', Georgia, serif; font-size: 80px; font-weight: 400; letter-spacing: -.025em; line-height: 1.02; text-wrap: balance; animation: fade-up .8s cubic-bezier(.16,1,.3,1) .1s both;"><em style="color: #3f7afe; font-style: italic; font-weight: 400;">Industrial Intelligence</em><br><span style="display: inline-block; margin-top: .03em; font-size: .78em; letter-spacing: -.02em;">{{ heroSubline }}</span></h1>
+        <p aria-live="polite" style="display: grid; grid-template-columns: auto 5.4em; gap: 8px; align-items: baseline; color: #5f687a; font-size: 19px; line-height: 1.5; animation: fade-up .75s cubic-bezier(.16,1,.3,1) .2s both;"><span style="white-space: nowrap;">See, understand and act on</span><span style="{{ rotWordStyle }}"><strong style="color: #101828; font-weight: 600;">{{ rotWord }}</strong></span></p>
+        <p style="max-width: 50ch; margin-top: -8px; color: #5f687a; font-size: 16px; line-height: 1.5; animation: fade-up .75s cubic-bezier(.16,1,.3,1) .25s both;">Capture. Verify. Optimize.</p>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 6px; animation: fade-up .75s cubic-bezier(.16,1,.3,1) .3s both;">
+          <a href="connect.html?intent=demo" style="display: inline-flex; align-items: center; justify-content: center; gap: 12px; height: 46px; padding: 0 8px 0 18px; color: #fcfbf8;  border-radius: 12px; background: #2459d3; font-size: 14px; font-weight: 600; letter-spacing: -.01em; transition: box-shadow .3s ease, transform .3s cubic-bezier(.16,1,.3,1);" style-hover="box-shadow: 0 12px 28px rgba(36,89,211,.22); transform: translateY(-1px);" data-btn="primary">Request a Demo <span aria-hidden="true" style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,.16); color: #fff; font-size: 14px; line-height: 1;">→</span></a>
+          <a href="model.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 12px; height: 46px; padding: 0 18px; color: #101828; border: 1px solid rgba(17,19,24,.22); border-radius: 12px; background: transparent; font-size: 14px; font-weight: 600; letter-spacing: -.01em; transition: background .18s ease, border-color .18s ease;" style-hover="background: #eeede8; border-color: rgba(17,19,24,.25);" data-btn="ghost">Explore the Models <span aria-hidden="true" style="color: #5f687a; font-size: 15px;">→</span></a>
         </div>
       </div>
 
-      <div class="nav-item nav-item--submenu" data-nav-item="solutions">
-        <div class="nav-primary">
-          <a class="nav-primary-link" href="#/solutions" data-nav="solutions" data-index="02" aria-label="Solutions"><span class="nav-label" data-label="Solutions">Solutions</span></a>
-          <button class="nav-disclosure" type="button" aria-expanded="false" aria-controls="submenu-solutions" aria-label="Show Solutions pages"><span aria-hidden="true"></span></button>
-        </div>
-        <div class="nav-submenu nav-submenu--wide" id="submenu-solutions" role="group" aria-label="Solutions and industries" aria-hidden="true" inert>
-          <div class="nav-submenu-panel">
-            <div class="nav-submenu-intro">
-              <p class="eyebrow">SOLUTIONS &amp; INDUSTRIES</p>
-              <h2>Start with the Problem.<br><em>Configure for the Operation.</em></h2>
-              <a class="nav-submenu-overview" href="#/solutions" data-route="/solutions">Solutions Overview <span aria-hidden="true">→</span></a>
-            </div>
-            <div class="nav-submenu-columns nav-submenu-columns--two">
-              <div class="nav-submenu-group nav-submenu-group--stacked">
-                <div class="nav-submenu-cluster">
-                  <h3>Work &amp; Process</h3>
-                  <a class="nav-submenu-link" href="#/solutions/operational-knowledge-guidance" data-route="/solutions/operational-knowledge-guidance"><span>01</span><strong>Operational Knowledge &amp; Guidance</strong><i aria-hidden="true">→</i></a>
-                  <a class="nav-submenu-link" href="#/solutions/production-process-intelligence" data-route="/solutions/production-process-intelligence"><span>02</span><strong>Production &amp; Process Intelligence</strong><i aria-hidden="true">→</i></a>
-                </div>
-                <div class="nav-submenu-cluster">
-                  <h3>Assets &amp; Sites</h3>
-                  <a class="nav-submenu-link" href="#/solutions/equipment-asset-intelligence" data-route="/solutions/equipment-asset-intelligence"><span>03</span><strong>Equipment &amp; Asset Intelligence</strong><i aria-hidden="true">→</i></a>
-                  <a class="nav-submenu-link" href="#/solutions/industrial-safety-site-intelligence" data-route="/solutions/industrial-safety-site-intelligence"><span>04</span><strong>Industrial Safety &amp; Site Intelligence</strong><i aria-hidden="true">→</i></a>
-                </div>
+      <!-- Reel -->
+      <div style="position: relative; z-index: 1; margin: 12px 0 0;" onMouseEnter="{{ pauseReel }}" onMouseLeave="{{ resumeReel }}">
+        <figure style="position: relative; width: 100%; margin: 0; overflow: hidden; border-radius: 28px; background: #111318; isolation: isolate; box-shadow: 0 30px 80px rgba(16,24,40,.14); animation: fade-up .9s cubic-bezier(.16,1,.3,1) .35s both;">
+          <div style="position: relative; width: 100%; overflow: hidden; aspect-ratio: 16 / 9; background: #111318;">
+            <sc-for list="{{ heroSlides }}" as="s" hint-placeholder-count="1">
+              <div style="{{ s.style }}">
+                <video muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" preload="metadata" poster="{{ s.poster }}" src="{{ s.src }}" aria-label="{{ s.label }} manufacturing scene" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;"></video>
               </div>
-              <div class="nav-submenu-group">
-                <h3>Industries</h3>
-                <a class="nav-submenu-link" href="#/industries/electronics-assembly" data-route="/industries/electronics-assembly"><span>01</span><strong>Electronics Assembly</strong><i aria-hidden="true">→</i></a>
-                <a class="nav-submenu-link" href="#/industries/fmcg" data-route="/industries/fmcg"><span>02</span><strong>FMCG</strong><i aria-hidden="true">→</i></a>
-                <a class="nav-submenu-link" href="#/industries/food-beverage" data-route="/industries/food-beverage"><span>03</span><strong>Food &amp; Beverage</strong><i aria-hidden="true">→</i></a>
-                <a class="nav-submenu-link" href="#/industries/advanced-materials" data-route="/industries/advanced-materials"><span>04</span><strong>Advanced Materials</strong><i aria-hidden="true">→</i></a>
-                <a class="nav-submenu-link" href="#/industries/automotive" data-route="/industries/automotive"><span>05</span><strong>Automotive</strong><i aria-hidden="true">→</i></a>
-              </div>
+            </sc-for>
+            <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(13,20,36,.42), transparent 26%, transparent 70%, rgba(13,20,36,.55));"></div>
+          </div>
+          <div role="tablist" aria-label="Industry scenes" onKeyDown="{{ reelKeys }}" style="position: absolute; top: 20px; left: 50%; z-index: 3; display: flex; gap: 8px; padding: 6px; border-radius: 999px; background: rgba(10,14,22,.38); backdrop-filter: blur(10px); transform: translateX(-50%);">
+            <sc-for list="{{ heroSlides }}" as="s" hint-placeholder-count="4">
+              <button type="button" role="tab" onClick="{{ s.select }}" style="{{ s.tabStyle }}"><span style="position: relative; z-index: 1;">{{ s.label }}</span>{{ s.progress }}</button>
+            </sc-for>
+          </div>
+          <figcaption style="position: absolute; right: 24px; bottom: 22px; left: 24px; z-index: 3; display: flex; justify-content: space-between; align-items: end; gap: 20px; color: #fff;">
+            <div style="display: grid; gap: 6px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7);">{{ activeSceneKicker }}</span>
+              <strong style="font-family: 'Newsreader', Georgia, serif; font-size: 26px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1;">{{ activeSceneTitle }}</strong>
             </div>
+            <div style="display: flex; gap: 8px;">
+              <span style="padding: 7px 12px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; background: rgba(17,19,24,.42); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; backdrop-filter: blur(8px);">Person</span>
+              <span style="padding: 7px 12px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; background: rgba(17,19,24,.42); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; backdrop-filter: blur(8px);">Equipment</span>
+              <span style="padding: 7px 12px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; background: rgba(17,19,24,.42); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; backdrop-filter: blur(8px);">Material</span>
+              <span style="padding: 7px 12px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; background: rgba(17,19,24,.42); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; backdrop-filter: blur(8px);">Time</span>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- Runs-on strip -->
+      <div style="position: relative; z-index: 1; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 28px; margin: 28px 0 0; padding: 0 8px;">
+        <span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap;">Runs on</span>
+        <ul style="display: flex; gap: 10px; margin: 0; padding: 0; list-style: none;">
+          <sc-for list="{{ runsOn }}" as="r" hint-placeholder-count="4">
+            <li style="display: inline-flex; align-items: center; gap: 10px; min-height: 36px; padding: 0 14px; border: 1px solid rgba(16,24,40,.14); border-radius: 999px; background: #fff; font-size: 13px; font-weight: 600; letter-spacing: -.01em;"><i aria-hidden="true" style="display: block; width: 6px; height: 6px; border-radius: 50%; background: #3f7afe;"></i>{{ r.label }}<span style="color: #5f687a; font-weight: 400;">{{ r.note }}</span></li>
+          </sc-for>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 02 How it works -->
+    <section aria-labelledby="how-title" style="position: relative; padding-block: 136px 120px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <header style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 48px; align-items: end; margin-bottom: 64px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;">
+          <div>
+            <p style="margin: 0 0 16px; color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">How it works</p>
+            <h2 id="how-title" style="max-width: 16ch; color: #101828; font-family: 'Manrope', sans-serif; font-size: 54px; font-weight: 500; letter-spacing: -.045em; line-height: 1.04;">From tribal knowledge into<br><em style="color: #3f7afe; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400;">verified, optimized execution.</em></h2>
+          </div>
+          <p style="max-width: 40ch; color: #5f687a; font-size: 17px; line-height: 1.55;">One model. Two products. Time and edge.</p>
+        </header>
+
+        <!-- Pipeline -->
+        <div style="display: grid; grid-template-columns: 200px 56px minmax(0, 1fr) 56px 220px; align-items: stretch; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+          <!-- Inputs -->
+          <div style="display: grid; align-content: center; gap: 12px; padding: 28px 24px; border: 1px dashed rgba(16,24,40,.28); border-radius: 22px; background: #fcfbf8;">
+            <span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Inputs</span>
+            <strong style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3;">What the plant already has</strong>
+            <ul style="display: grid; gap: 8px; margin: 6px 0 0; padding: 0; list-style: none; color: #25324a; font-size: 14px;">
+              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #5f687a;"></i>Cameras &amp; video</li>
+              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #5f687a;"></i>Procedures &amp; manuals</li>
+              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #5f687a;"></i>Machine &amp; MES context</li>
+            </ul>
+          </div>
+          <!-- connector -->
+          <div aria-hidden="true" style="position: relative; align-self: center; height: 1px; background: rgba(16,24,40,.22);">{{ pulseIn }}</div>
+
+          <!-- Model system -->
+          <div style="position: relative; display: grid; grid-template-rows: auto auto; gap: 14px;">
+            <a href="model-detail.html?model=allusone" style="position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 24px; padding: 30px 32px; border: 1px solid rgba(16,24,40,.16); border-radius: 24px; background: radial-gradient(circle at 100% 0%, rgba(223,232,255,.7), transparent 46%), #fff; overflow: hidden; transition: border-color .18s ease, box-shadow .4s ease;" style-hover="border-color: rgba(16,24,40,.3); box-shadow: 0 18px 44px rgba(17,19,24,.08);">
+              <div style="display: grid; gap: 10px; align-content: center;">
+                <span style="display: inline-flex; align-items: center; gap: 8px; color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;"><i aria-hidden="true" style="position: relative; display: block; width: 8px; height: 8px; border-radius: 50%; background: #2459d3;">{{ ringA }}</i>01 · Core model</span>
+                <h3 style="color: #101828; font-family: 'Newsreader', Georgia, serif; font-size: 44px; font-weight: 400; letter-spacing: -.035em; line-height: 1;">AllusONE</h3>
+                <p style="max-width: 34ch; color: #5f687a; font-size: 15px; line-height: 1.5;">Sees people, parts, tools, equipment and state in image and video — then reasons over them with the plant's own terminology.</p>
+              </div>
+              <ul style="display: grid; align-content: center; gap: 0; margin: 0; padding: 0; border-left: 1px solid rgba(16,24,40,.16); list-style: none;">
+                <li style="display: grid; grid-template-columns: 28px 1fr; align-items: center; min-height: 44px; padding-left: 18px; border-bottom: 1px solid rgba(16,24,40,.12); font-size: 14px; font-weight: 500;"><span style="color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px;">a</span>Perceive the scene</li>
+                <li style="display: grid; grid-template-columns: 28px 1fr; align-items: center; min-height: 44px; padding-left: 18px; border-bottom: 1px solid rgba(16,24,40,.12); font-size: 14px; font-weight: 500;"><span style="color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px;">b</span>Relate the context</li>
+                <li style="display: grid; grid-template-columns: 28px 1fr; align-items: center; min-height: 44px; padding-left: 18px; font-size: 14px; font-weight: 500;"><span style="color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px;">c</span>Return structured output</li>
+              </ul>
+            </a>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+              <a href="model-detail.html?model=allusflow" style="position: relative; display: grid; gap: 8px; align-content: start; padding: 24px 26px; border: 1px solid rgba(16,24,40,.16); border-radius: 22px; background: #fff; transition: border-color .18s ease, box-shadow .4s ease, transform .4s cubic-bezier(.16,1,.3,1);" style-hover="border-color: rgba(16,24,40,.3); box-shadow: 0 18px 44px rgba(17,19,24,.08); transform: translateY(-3px);">
+                <span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">02 · Time</span>
+                <h3 style="color: #101828; font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 400; letter-spacing: -.03em; line-height: 1;">AllusFlow</h3>
+                <p style="color: #5f687a; font-size: 14px; line-height: 1.5;">Turns long recordings into steps, cycle times and interruptions — each linked back to its source moment.</p>
+              </a>
+              <a href="model-detail.html?model=allusedge" style="position: relative; display: grid; gap: 8px; align-content: start; padding: 24px 26px; border: 1px solid rgba(16,24,40,.16); border-radius: 22px; background: #fff; transition: border-color .18s ease, box-shadow .4s ease, transform .4s cubic-bezier(.16,1,.3,1);" style-hover="border-color: rgba(16,24,40,.3); box-shadow: 0 18px 44px rgba(17,19,24,.08); transform: translateY(-3px);">
+                <span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">03 · Edge</span>
+                <h3 style="color: #101828; font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 400; letter-spacing: -.03em; line-height: 1;">AllusEdge</h3>
+                <p style="color: #5f687a; font-size: 14px; line-height: 1.5;">Compresses and validates the models for the cameras, servers and power limits already on site.</p>
+              </a>
+            </div>
+          </div>
+
+          <div aria-hidden="true" style="position: relative; align-self: center; height: 1px; background: rgba(16,24,40,.22);">{{ pulseOut }}</div>
+
+          <!-- Outputs -->
+          <div style="display: grid; align-content: center; gap: 12px; padding: 28px 24px; border: 1px solid rgba(16,24,40,.16); border-radius: 22px; background: #111318; color: #fcfbf8;">
+            <span style="color: rgba(255,255,255,.6); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Outputs</span>
+            <strong style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3;">Reviewable, structured, source-linked</strong>
+            <ul style="display: grid; gap: 8px; margin: 6px 0 0; padding: 0; list-style: none; color: rgba(255,255,255,.78); font-size: 14px;">
+              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #3f7afe;"></i>Step-by-step guidance</li>
+              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #6eb8a9;"></i>Process timelines</li>
+              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #df855d;"></i>Asset condition records</li>
+              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #8c7ac9;"></i>Governed site event review</li>
+            </ul>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="nav-item nav-item--submenu" data-nav-item="resource">
-        <div class="nav-primary">
-          <a class="nav-primary-link" href="#/resource" data-nav="resource" data-index="03" aria-label="Use Cases"><span class="nav-label" data-label="Use Cases">Use Cases</span></a>
-          <button class="nav-disclosure" type="button" aria-expanded="false" aria-controls="submenu-resource" aria-label="Show Use Cases pages"><span aria-hidden="true"></span></button>
-        </div>
-        <div class="nav-submenu" id="submenu-resource" role="group" aria-label="Use Cases pages" aria-hidden="true" inert>
-          <div class="nav-submenu-panel">
-            <div class="nav-submenu-intro">
-              <p class="eyebrow">USE CASES</p>
-              <h2>Customer Stories from<br><em>Industrial Operations.</em></h2>
-              <a class="nav-submenu-overview" href="#/resource/use-cases" data-route="/resource/use-cases">All Customer Stories <span aria-hidden="true">→</span></a>
-            </div>
-            <div class="nav-submenu-columns nav-submenu-columns--one">
-              <div class="nav-submenu-group">
-                <h3>Customer Stories</h3>
-                <a class="nav-submenu-link" href="#/resource/use-cases" data-route="/resource/use-cases"><span>01</span><strong>All Customer Stories</strong><i aria-hidden="true">→</i></a>
-                <div class="nav-tertiary-list" aria-label="Customer case studies">
-                  <a href="#/resource/use-cases/advanced-materials" data-route="/resource/use-cases/advanced-materials"><span>01.1</span><strong>Advanced Materials</strong><i aria-hidden="true">→</i></a>
-                  <a href="#/resource/use-cases/electronics-assembly" data-route="/resource/use-cases/electronics-assembly"><span>01.2</span><strong>Electronics Assembly</strong><i aria-hidden="true">→</i></a>
-                  <a href="#/resource/use-cases/biscuit-production" data-route="/resource/use-cases/biscuit-production"><span>01.3</span><strong>Biscuit Production</strong><i aria-hidden="true">→</i></a>
-                </div>
+
+    <!-- Proof band -->
+    <section aria-label="Results" style="padding-block: 96px 0;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 40px; align-items: center; padding: 40px; border-radius: 28px; background: #ebf1fb; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+        <div style="display: grid; gap: 14px; align-content: start;"><span style="justify-self: start; padding: 6px 12px; border-radius: 999px; background: #fff; color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase;">Proven results</span><h2 style="font-family: 'Manrope', sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -.045em; line-height: 1.04;">Safety. Quality. Delivery. Cost.</h2><p style="color: #5f687a; font-size: 15px; line-height: 1.5;">The numbers plants track every shift.</p><span style="color: #8a92a3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .06em;">Illustrative figures · replace with approved results</span></div>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-self: center;"><div style="display: grid; gap: 0; align-content: space-between; min-height: 176px; padding: 20px 22px; border-radius: 18px; background: #fff; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; animation: rise-in .8s cubic-bezier(.16,1,.3,1) 0ms both;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Safety</span><span style="display: grid; gap: 6px;"><span style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">78</strong><span style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.02em;">%</span></span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">Fewer safety incidents</span></span></div><div style="display: grid; gap: 0; align-content: space-between; min-height: 176px; padding: 20px 22px; border-radius: 18px; background: #fff; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; animation: rise-in .8s cubic-bezier(.16,1,.3,1) 90ms both;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Delivery</span><span style="display: grid; gap: 6px;"><span style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">77</strong><span style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.02em;">%</span></span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">Faster onboarding</span></span></div><div style="display: grid; gap: 0; align-content: space-between; min-height: 176px; padding: 20px 22px; border-radius: 18px; background: #fff; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; animation: rise-in .8s cubic-bezier(.16,1,.3,1) 180ms both;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Quality</span><span style="display: grid; gap: 6px;"><span style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">32</strong><span style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.02em;">%</span></span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">Fewer defects</span></span></div><div style="display: grid; gap: 0; align-content: space-between; min-height: 176px; padding: 20px 22px; border-radius: 18px; background: #fff; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; animation: rise-in .8s cubic-bezier(.16,1,.3,1) 270ms both;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 40px rgba(36,89,211,.14);"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Cost</span><span style="display: grid; gap: 6px;"><span style="display: flex; align-items: baseline; gap: 4px; white-space: nowrap;"><strong style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 52px; font-weight: 600; letter-spacing: -.04em; line-height: 1;">5</strong><span style="color: #2459d3; font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.02em;">%</span></span><span style="color: #101828; font-size: 14px; font-weight: 600; line-height: 1.3;">More productivity</span></span></div></div>
+      </div>
+    </section>
+    <!-- 03 Solutions showcase -->
+    <section aria-labelledby="solutions-title" style="position: relative; padding-block: 112px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <header style="display: grid; gap: 14px; max-width: 720px; margin-bottom: 56px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;">
+          <p style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">Solutions</p>
+          <h2 id="solutions-title" style="color: #101828; font-family: 'Manrope', sans-serif; font-size: 54px; font-weight: 500; letter-spacing: -.045em; line-height: 1.04;">Built for how operators<br><em style="color: #3f7afe; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400;">actually work.</em></h2>
+          <p style="max-width: 48ch; color: #5f687a; font-size: 17px; line-height: 1.55;">Four floor problems. One model system.</p>
+        </header>
+        <div style="display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 32px; align-items: stretch; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;" onMouseEnter="{{ pauseSolutions }}" onMouseLeave="{{ resumeSolutions }}" onKeyDown="{{ solKeys }}">
+          <div role="tablist" aria-label="Solution families" style="display: grid; align-content: stretch; border-top: 1px solid rgba(16,24,40,.16);">
+            <sc-for list="{{ solutions }}" as="s" hint-placeholder-count="4">
+              <button type="button" role="tab" onClick="{{ s.select }}" onMouseEnter="{{ s.select }}" style="{{ s.rowStyle }}">
+                <span style="{{ s.numStyle }}">{{ s.num }}</span>
+                <span style="display: grid; gap: 6px; min-width: 0; text-align: left;">
+                  <span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase;">{{ s.domain }}</span>
+                  <strong style="{{ s.titleStyle }}">{{ s.title }}</strong>
+                  <span style="{{ s.noteStyle }}">{{ s.note }}</span>
+                </span>
+                <span aria-hidden="true" style="{{ s.arrowStyle }}">→</span>
+                {{ s.progress }}
+              </button>
+            </sc-for>
+          </div>
+          <a href="{{ activeSolution.href }}" style="position: relative; display: block; min-height: 520px; overflow: hidden; border-radius: 26px; background: #111318; isolation: isolate;">
+            <sc-for list="{{ solutions }}" as="s" hint-placeholder-count="1">
+              <img src="{{ s.image }}" alt="{{ s.alt }}" style="{{ s.imageStyle }}">
+            </sc-for>
+            <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.05) 30%, rgba(13,20,36,.82) 100%);"></div>
+            <div style="position: absolute; right: 28px; bottom: 26px; left: 28px; display: flex; justify-content: space-between; align-items: end; gap: 24px; color: #fff;">
+              <div style="display: grid; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7);">{{ activeSolution.domain }}</span>
+                <strong style="font-family: 'Newsreader', Georgia, serif; font-size: 32px; font-weight: 400; letter-spacing: -.025em; line-height: 1.08; max-width: 18ch;">{{ activeSolution.outcome }}</strong>
               </div>
+              <span style="display: inline-flex; align-items: center; gap: 12px; flex: none; min-height: 42px; padding: 0 18px; border-radius: 999px; background: #fff; color: #101828; font-size: 13px; font-weight: 600;">Explore <span aria-hidden="true">→</span></span>
             </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Industries -->
+    <section aria-labelledby="industries-title" style="position: relative; padding-block: 120px 96px; overflow: hidden;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <header style="display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 40px; margin-bottom: 44px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;">
+          <div style="display: grid; gap: 14px;">
+            <p style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">Industries</p>
+            <h2 id="industries-title" style="max-width: 18ch; color: #101828; font-family: 'Manrope', sans-serif; font-size: 48px; font-weight: 500; letter-spacing: -.045em; line-height: 1.06;">Same capabilities.<br><em style="color: #3f7afe; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400;">Your industry's language.</em></h2>
+          </div>
+          <a href="story.html?story=advanced-materials" style="position: relative; display: inline-flex; align-items: center; gap: 12px; min-height: 44px; padding-bottom: 6px; font-size: 13px; font-weight: 600; border-bottom: 1px solid #101828;">Read the customer stories <span aria-hidden="true">→</span></a>
+        </header>
+      </div>
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+        <sc-for list="{{ industries }}" as="ind" hint-placeholder-count="5">
+          <a href="{{ ind.href }}" style="position: relative; display: grid; align-content: end; min-height: 380px; padding: 20px; overflow: hidden; border-radius: 22px; background: #111318; color: #fff; isolation: isolate; transition: transform .45s cubic-bezier(.16,1,.3,1);" style-hover="transform: translateY(-6px);">
+            <img src="{{ ind.image }}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; opacity: .92; transition: transform 1s cubic-bezier(.16,1,.3,1);">
+            <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.1) 35%, rgba(13,20,36,.86) 100%);"></span>
+            <span style="position: relative; margin-bottom: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; color: rgba(255,255,255,.7);">{{ ind.num }}</span>
+            <strong style="position: relative; font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1;">{{ ind.title }}</strong>
+            <span style="position: relative; margin-top: 8px; color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.45;">{{ ind.summary }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- 04b Why Allus -->
+    <section aria-labelledby="why-title" style="padding-block: 0 96px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 48px; align-items: start; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+        <div style="display: grid; gap: 12px;"><p style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">Why Allus</p><h2 id="why-title" style="font-family: 'Manrope', sans-serif; font-size: 40px; font-weight: 500; letter-spacing: -.045em; line-height: 1.06;">What sets it apart.</h2></div>
+        <ol style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none;">
+          <sc-for list="{{ why }}" as="w" hint-placeholder-count="4"><li style="display: grid; gap: 8px; padding: 22px 24px; border: 1px solid rgba(16,24,40,.16); border-radius: 18px; background: #fff;"><span style="color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 11px;">{{ w.num }}</span><strong style="font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1;">{{ w.title }}</strong><span style="color: #5f687a; font-size: 14px; line-height: 1.5;">{{ w.note }}</span></li></sc-for>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 05 Trust strip -->
+    <section aria-label="Trust and compliance" style="width: min(1180px, calc(100% - 64px)); margin: 0 auto; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 40%;">
+      <div style="display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 32px; padding: 22px 28px; border: 1px solid rgba(16,24,40,.12); border-radius: 20px; background: rgba(255,255,255,.72); backdrop-filter: blur(8px);">
+        <div style="display: grid; gap: 4px;">
+          <span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Compliance</span>
+          <strong style="font-size: 17px; font-weight: 600; letter-spacing: -.02em;">Security and reliability are core.</strong>
+        </div>
+        <ul style="display: flex; align-items: center; justify-content: center; gap: 36px; margin: 0; padding: 0; list-style: none;">
+          <li style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; letter-spacing: -.01em;"><img src="assets/aicpa-soc-badge.png" alt="AICPA SOC" style="display: block; width: 40px; height: 40px; object-fit: contain;">SOC 2 Type II</li>
+          <li style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; letter-spacing: -.01em;"><img src="assets/a3-member-seal.png" alt="A3 member" style="display: block; width: 40px; height: 40px; object-fit: contain;">A3 Member</li>
+          <li style="display: flex; align-items: center; gap: 10px; color: #25324a; font-size: 14px;"><i aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: #2a9d6a;"></i>Encrypted end to end</li>
+          <li style="display: flex; align-items: center; gap: 10px; color: #25324a; font-size: 14px;"><i aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: #2a9d6a;"></i>Your data never trains shared models</li>
+        </ul>
+        <a href="https://trust.allus.ai" target="_blank" rel="noreferrer" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 8px 0 18px; border: 1px solid rgba(17,19,24,.15); border-radius: 12px; background: rgba(255,255,255,.9); font-size: 13px; font-weight: 600;" style-hover="background: #eeede8;" data-btn="light">Trust Center <span aria-hidden="true" style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #eef3ff; color: #2459d3; font-size: 14px; line-height: 1;">↗</span></a>
+      </div>
+    </section>
+
+    <!-- 05b FAQ -->
+    <section aria-labelledby="faq-title" style="padding-block: 96px 0;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 48px; align-items: start; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+        <div style="display: grid; gap: 12px;"><p style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">Before you ask</p><h2 id="faq-title" style="font-family: 'Manrope', sans-serif; font-size: 40px; font-weight: 500; letter-spacing: -.045em; line-height: 1.06;">Hardware, data, decisions.</h2></div>
+        <div style="display: grid; border-top: 1px solid rgba(16,24,40,.16);">
+          <sc-for list="{{ faq }}" as="q" hint-placeholder-count="5">
+            <div style="border-bottom: 1px solid rgba(16,24,40,.16);">
+              <button type="button" onClick="{{ q.toggle }}" aria-expanded="{{ q.open }}" style="display: grid; grid-template-columns: 1fr 28px; gap: 16px; align-items: center; width: 100%; min-height: 64px; padding: 18px 4px; border: 0; background: transparent; color: inherit; font-size: 18px; font-weight: 600; letter-spacing: -.02em; text-align: left; cursor: pointer;">{{ q.q }}<span aria-hidden="true" style="{{ q.iconStyle }}">+</span></button>
+              <div style="{{ q.bodyStyle }}"><p style="min-height: 0; overflow: hidden; max-width: 62ch; padding: 0 4px; color: #25324a; font-size: 15px; line-height: 1.6;">{{ q.a }}</p></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 CTA -->
+    <section aria-labelledby="site-cta-title" style="position: relative; padding-block: 96px 88px;">
+      <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
+        <div style="position: relative; display: grid; gap: 16px; justify-items: center; padding: 76px 40px; overflow: hidden; border-radius: 28px; background: #111318; color: #fcfbf8; text-align: center; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+          <div aria-hidden="true" style="position: absolute; top: -50%; left: 50%; width: 640px; height: 640px; border-radius: 50%; background: radial-gradient(circle, rgba(63,122,254,.45), transparent 66%); transform: translateX(-50%); animation: orb-drift 8s ease-in-out infinite alternate; pointer-events: none;"></div>
+          <p style="position: relative; color: rgba(255,255,255,.6); font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;">Next step</p>
+          <h2 id="site-cta-title" style="position: relative; max-width: 20ch; font-family: 'Newsreader', Georgia, serif; font-size: 52px; font-weight: 400; letter-spacing: -.03em; line-height: 1.06;">Start reducing deviations<br><em style="color: #9db9ff; font-style: italic; font-weight: 400;">and improving performance.</em></h2>
+          <p style="position: relative; max-width: 44ch; color: rgba(255,255,255,.7); font-size: 17px; line-height: 1.55;">Bring a workload and a boundary.</p>
+          <div style="position: relative; display: flex; gap: 12px; margin-top: 12px;">
+            <a href="connect.html?intent=demo" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 8px 0 18px; color: #101828; border-radius: 12px; background: #fff; font-size: 14px; font-weight: 600; letter-spacing: -.01em; transition: transform .3s cubic-bezier(.16,1,.3,1);" style-hover="transform: translateY(-1px);" data-btn="light">Request a Demo <span aria-hidden="true" style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #eef3ff; color: #2459d3; font-size: 14px; line-height: 1;">→</span></a>
+            <a href="connect.html?intent=pilot" style="display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 18px; color: #fff; border: 1px solid rgba(255,255,255,.28); border-radius: 12px; font-size: 14px; font-weight: 600; letter-spacing: -.01em; transition: background .2s ease;" style-hover="background: rgba(255,255,255,.08);" data-btn="ghost-dark">Start a Pilot <span aria-hidden="true" style="color: rgba(255,255,255,.7); font-size: 15px;">→</span></a>
           </div>
         </div>
       </div>
-
-      <div class="nav-item nav-item--submenu" data-nav-item="company">
-        <div class="nav-primary">
-          <a class="nav-primary-link" href="#/company" data-nav="company" data-index="04" aria-label="Company"><span class="nav-label" data-label="Company">Company</span></a>
-          <button class="nav-disclosure" type="button" aria-expanded="false" aria-controls="submenu-company" aria-label="Show Company pages"><span aria-hidden="true"></span></button>
-        </div>
-        <div class="nav-submenu" id="submenu-company" role="group" aria-label="Company pages" aria-hidden="true" inert>
-          <div class="nav-submenu-panel">
-            <div class="nav-submenu-intro">
-              <p class="eyebrow">COMPANY</p>
-              <h2>Who We Are,<br><em>How We Operate.</em></h2>
-              <a class="nav-submenu-overview" href="#/company" data-route="/company">Company Overview <span aria-hidden="true">→</span></a>
-            </div>
-            <div class="nav-submenu-columns nav-submenu-columns--one">
-              <div class="nav-submenu-group">
-                <h3>Company</h3>
-                <a class="nav-submenu-link" href="#/company" data-route="/company"><span>01</span><strong>About Us</strong><i aria-hidden="true">→</i></a>
-                <a class="nav-submenu-link" href="https://trust.allus.ai" target="_blank" rel="noreferrer"><span>02</span><strong>Trust Center</strong><i aria-hidden="true">↗</i></a>
-                <a class="nav-submenu-link" href="#/company/privacy-security" data-route="/company/privacy-security"><span>03</span><strong>Privacy and Security</strong><i aria-hidden="true">→</i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="mobile-nav-cta" href="#/connect?intent=demo" data-nav="connect" data-index="05" aria-label="Connect"><span class="nav-label" data-label="Connect">Connect</span><span aria-hidden="true">→</span></a>
-    </nav>
-
-    <a class="header-cta" href="#/connect?intent=demo" data-nav="connect">Connect <span aria-hidden="true">→</span></a>
-  </header>
-  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
-  <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
-
-  <main id="main" tabindex="-1">
-    <noscript>
-      <section class="script-fallback" aria-labelledby="script-fallback-title">
-        <h1 id="script-fallback-title">JavaScript Is Required to View This Site.</h1>
-        <p>Enable JavaScript and reload the page to explore Allus AI models, solutions, resources and contact options.</p>
-      </section>
-    </noscript>
+    </section>
   </main>
 
-  <footer class="site-footer" id="siteFooter"></footer>
+  <!-- Footer -->
+  <footer style="color: #fcfbf8; background: #111318; border-top: 1px solid rgba(255,255,255,.08);">
+    <div style="display: grid; gap: 48px; width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding-block: 64px 32px;">
+      <div style="display: grid; grid-template-columns: minmax(200px, 1.1fr) repeat(4, minmax(0, 1fr)); gap: 40px 28px;">
+        <div style="display: grid; gap: 18px; align-content: start;">
+          <a href="index.html" aria-label="Allus AI home" style="display: block; width: max-content;"><img src="assets/allus-logo-white.svg" alt="" style="display: block; width: 132px; height: auto;"></a>
+          <p style="max-width: 26ch; color: rgba(255,255,255,.58); font-size: 15px; letter-spacing: -.01em; line-height: 1.45;">Industrial foundation models and model-powered solutions for the physical world.</p>
+          <p style="color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">Cupertino · Atlanta</p>
+        </div>
+        <sc-for list="{{ footerGroups }}" as="g" hint-placeholder-count="4">
+          <div style="display: grid; align-content: start; gap: 8px; min-width: 0;">
+            <h3 style="margin: 0 0 6px; color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase;">{{ g.title }}</h3>
+            <sc-for list="{{ g.links }}" as="l" hint-placeholder-count="3">
+              <a href="{{ l.href }}" style="display: block; min-height: 26px; color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.35;" style-hover="color: #fff;">{{ l.label }}</a>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px 30px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">
+        <span>© 2026 Allus AI</span>
+        <div style="display: flex; gap: 8px 20px;">
+          <a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a>
+          <a href="https://trust.allus.ai" target="_blank" rel="noreferrer" style-hover="color: #fff;">Trust Center</a>
+          
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;autoCycle&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;heroHeadline&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;manufacturing&quot;,&quot;options&quot;:[&quot;manufacturing&quot;,&quot;physical-world&quot;],&quot;tsType&quot;:&quot;'manufacturing' | 'physical-world'&quot;,&quot;section&quot;:&quot;Copy&quot;},&quot;showBackedBy&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
+class Component extends DCLogic {
+  renderVals() { const v = this.renderBase(); const k = (key, n) => e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); this.setState(s => ({ [key]: (s[key] + d + n) % n, cycle: s.cycle + 1 })); }; v.solKeys = k('sol', 4); v.reelKeys = k('heroTab', 4); return v; }
+  state = { heroTab: 0, reelPaused: false, sol: 0, solPaused: false, cycle: 0, word: 0, wordIn: true, faqOpen: 0 };
+  gridRef = React.createRef();
 
-  <script src="./app.js?v=36.9"></script>
+  componentDidMount() {
+    this.startTimers();
+    const canvas = this.gridRef.current;
+    const ctx = canvas && canvas.getContext('2d');
+    if (!ctx) return;
+    const wrap = canvas.parentElement;
+    const SPACING = 46, SAMPLE = 26;
+    let width = 0, height = 0, cx = 0, cy = 0;
+    const displace = (x, y) => { const dx = x - cx, dy = y - cy; const s = 0.26 * Math.exp(-(dx * dx + dy * dy) / (2 * 440 * 440)); return [x + dx * s, y + dy * s]; };
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height); ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(37, 78, 214, 0.2)';
+      for (let x = cx % SPACING; x <= width; x += SPACING) { ctx.beginPath(); for (let y = 0; y <= height + SAMPLE; y += SAMPLE) { const [px, py] = displace(x, y); y === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py); } ctx.stroke(); }
+      for (let y = cy % SPACING; y <= height; y += SPACING) { ctx.beginPath(); for (let x = 0; x <= width + SAMPLE; x += SAMPLE) { const [px, py] = displace(x, y); x === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py); } ctx.stroke(); }
+    };
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      width = wrap.clientWidth; height = wrap.clientHeight;
+      canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); cx = width / 2; cy = height * 0.3; draw();
+    };
+    this._ro = new ResizeObserver(resize); this._ro.observe(wrap); resize();
+  }
+  componentWillUnmount() { this._ro && this._ro.disconnect(); clearInterval(this._t1); clearInterval(this._t2); clearInterval(this._t3); }
+
+  startTimers() {
+    clearInterval(this._t1); clearInterval(this._t2);
+    if (!(this.props.autoCycle ?? true)) return;
+    this._t1 = setInterval(() => { if (!this.state.reelPaused) this.setState(s => ({ heroTab: (s.heroTab + 1) % 4 })); }, 7000);
+    this._t2 = setInterval(() => { if (!this.state.solPaused) this.setState(s => ({ sol: (s.sol + 1) % 4, cycle: s.cycle + 1 })); }, 5200);
+    this._t3 = setInterval(() => { this.setState({ wordIn: false }); setTimeout(() => this.setState(s => ({ word: (s.word + 1) % 4, wordIn: true })), 320); }, 2600);
+  }
+  componentDidUpdate(prev) { if (prev.autoCycle !== this.props.autoCycle) this.startTimers(); }
+
+  renderBase() {
+    const auto = this.props.autoCycle ?? true;
+    const h = React.createElement;
+    const scenes = [
+      { label: 'Robotics', kicker: 'Robotics · Assembly cell', title: 'Robot, fixture and part state read in one pass.', src: 'assets/media/allus-hero-1.mp4', poster: 'assets/media/allus-hero-1.jpg' },
+      { label: 'Beverages', kicker: 'Beverages · Filling line', title: 'Fill, cap and label steps become timed events.', src: 'assets/media/allus-hero-2.mp4', poster: 'assets/media/allus-hero-2.jpg' },
+      { label: 'Utilities', kicker: 'Utilities · Gauge wall', title: 'Gauges and indicators read as reviewable readings.', src: 'assets/media/allus-hero-3.mp4', poster: 'assets/media/allus-hero-3.jpg' },
+      { label: 'Food', kicker: 'Food · Production line', title: 'Sanitation and changeover steps linked to procedure.', src: 'assets/media/allus-hero-4.mp4', poster: 'assets/media/allus-hero-4.jpg' }
+    ];
+    const heroSlides = scenes.map((s, i) => {
+      const active = i === this.state.heroTab;
+      return {
+        ...s,
+        select: () => this.setState({ heroTab: i }),
+        style: { position: 'absolute', inset: 0, opacity: active ? 1 : 0, transform: active ? 'scale(1)' : 'scale(1.03)', transition: 'opacity .7s cubic-bezier(.22,1,.36,1), transform 1.2s cubic-bezier(.22,1,.36,1)', pointerEvents: active ? 'auto' : 'none' },
+        tabStyle: { position: 'relative', overflow: 'hidden', minHeight: 34, padding: '0 16px', border: 0, borderRadius: 999, background: active ? 'rgba(255,255,255,.14)' : 'transparent', color: '#fff', fontSize: 13, fontWeight: 500, letterSpacing: '.01em', cursor: 'pointer', transition: 'background .3s ease' },
+        progress: active && auto && !this.state.reelPaused ? h('span', { key: 'p' + i + '-' + this.state.heroTab, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: '#fff', transformOrigin: 'left', animation: 'progress 7s linear both' } }) : null
+      };
+    });
+    const solutionData = [
+      ['PEOPLE & KNOWLEDGE', 'Operational Knowledge & Guidance', 'Turn expert work into searchable, step-linked guidance.', 'Expert know-how, delivered at the station.', 'operational-knowledge-guidance', 'assets/media/allus-guided-work-handoff.jpg', 'Two technicians at a fixture beside a guidance display'],
+      ['PROCESS & EXECUTION', 'Production & Process Intelligence', 'Structure work video into reviewable process evidence.', 'Every cycle, step and interruption — on a timeline.', 'production-process-intelligence', 'assets/media/allus-process-sequence-context.jpg', 'Industrial work sequence with source-linked moments'],
+      ['EQUIPMENT & ASSETS', 'Equipment & Asset Intelligence', 'Connect what equipment looks like with what to do next.', 'Visible condition, tied to the maintenance record.', 'equipment-asset-intelligence', 'assets/media/allus-asset-service-continuity.jpg', 'Technician consulting a terminal beside an industrial pump'],
+      ['SAFETY & SITES', 'Industrial Safety & Site Intelligence', 'Governed, human-reviewed context for configured site events.', 'Site events, reviewed by people, within your rules.', 'industrial-safety-site-intelligence', 'assets/media/allus-governed-event-review.jpg', 'Operations coordinator reviewing a site event']
+    ];
+    const solutions = solutionData.map(([domain, title, note, outcome, slug, image, alt], i) => {
+      const active = i === this.state.sol;
+      return {
+        domain, title, note, outcome, image, alt, num: '0' + (i + 1), href: 'solution.html?solution=' + slug,
+        select: () => this.setState({ sol: i, cycle: this.state.cycle + 1 }),
+        rowStyle: { position: 'relative', display: 'grid', gridTemplateColumns: '48px minmax(0,1fr) 28px', gap: 16, alignItems: 'center', width: '100%', padding: '26px 16px', border: 0, borderBottom: '1px solid rgba(16,24,40,.16)', background: active ? 'rgba(255,255,255,.72)' : 'transparent', color: 'inherit', cursor: 'pointer', textAlign: 'left', transition: 'background .3s ease', overflow: 'hidden', backdropFilter: active ? 'blur(6px)' : 'none' },
+        numStyle: { color: active ? '#2459d3' : '#5f687a', fontFamily: "'IBM Plex Mono', monospace", fontSize: 12, letterSpacing: '.08em', alignSelf: 'start', paddingTop: 4 },
+        titleStyle: { color: '#101828', fontFamily: "'Newsreader', Georgia, serif", fontSize: 26, fontWeight: 400, letterSpacing: '-.025em', lineHeight: 1.12 },
+        noteStyle: { color: '#5f687a', fontSize: 14, lineHeight: 1.5, maxHeight: active ? 60 : 0, opacity: active ? 1 : 0, overflow: 'hidden', transition: 'max-height .5s cubic-bezier(.16,1,.3,1), opacity .4s ease' },
+        arrowStyle: { justifySelf: 'end', color: active ? '#2459d3' : '#5f687a', transform: active ? 'translateX(0)' : 'translateX(-6px)', opacity: active ? 1 : .4, transition: 'transform .4s cubic-bezier(.16,1,.3,1), opacity .3s ease' },
+        imageStyle: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: active ? 1 : 0, transform: active ? 'scale(1)' : 'scale(1.04)', transition: 'opacity .7s ease, transform 1.4s cubic-bezier(.16,1,.3,1)' },
+        progress: active && auto && !this.state.solPaused ? h('span', { key: 'sp' + this.state.cycle, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: -1, height: 2, background: '#3f7afe', transformOrigin: 'left', animation: 'progress 5.2s linear both' } }) : null
+      };
+    });
+    const industries = [
+      ['Electronics Assembly', 'electronics-assembly', 'High-mix assembly knowledge and station guidance.', 'assets/media/allus-electronics-assembly-workstation.jpg'],
+      ['FMCG', 'fmcg', 'Changeovers and high-speed line context.', 'assets/media/allus-fmcg-packaging-line.jpg'],
+      ['Food & Beverage', 'food-beverage', 'Sanitation to packaging, governed.', 'assets/media/allus-food-beverage-production.jpg'],
+      ['Advanced Materials', 'advanced-materials', 'Expert knowledge across long material cycles.', 'assets/media/allus-advanced-materials-facility-context.jpg'],
+      ['Automotive', 'automotive', 'Assembly, material flow and plant operations.', 'assets/media/allus-automotive-body-shop.jpg']
+    ];
+    const pulse = (kf, color) => h('span', { 'aria-hidden': true, style: { position: 'absolute', top: -3, width: 7, height: 7, borderRadius: '50%', background: color, boxShadow: '0 0 0 3px rgba(63,122,254,.18)', animation: kf + ' 2.6s cubic-bezier(.4,0,.6,1) infinite' } });
+    return {
+      heroSubline: (this.props.heroHeadline ?? 'manufacturing') === 'physical-world' ? 'for the physical world.' : 'for Manufacturing.',
+      showBacked: this.props.showBackedBy ?? true,
+      rotWord: ['the work.', 'the line.', 'the asset.', 'the site.'][this.state.word],
+      rotWordStyle: { display: 'block', width: '5.4em', textAlign: 'left', whiteSpace: 'nowrap', opacity: this.state.wordIn ? 1 : 0, transform: this.state.wordIn ? 'translateY(0)' : 'translateY(10px)', transition: 'opacity .32s ease, transform .32s cubic-bezier(.16,1,.3,1)' },
+      why: [['One foundation model, not point solutions', 'AllusONE powers every solution; configure it, don\'t rebuild it.'], ['Runs inside your boundary', 'Edge, on-premise, private cloud or hybrid — your data never trains shared models.'], ['People stay in the decision', 'Every output is reviewable, source-linked evidence, not an automatic action.'], ['Configured in weeks', 'Scope, evidence, configure, review — the same path on every engagement.']].map(([title, note], i) => ({ title, note, num: '0' + (i + 1) })),
+      faq: [['What is AllusONE?', 'A vision foundation model for industrial scenes: it sees people, parts, tools and equipment in image and video, and reasons over them with your plant\'s terminology.'], ['Do we need new hardware?', 'Usually not. Allus works from recorded video and existing cameras; AllusEdge packages the models for the servers and power limits already on site.'], ['Where does our data go?', 'It stays inside your boundary — edge, on-premise, private cloud or hybrid. Customer data is never used to train shared models.'], ['Does Allus make decisions on the floor?', 'No. Allus returns structured, source-linked evidence for authorized people to review. Approved procedures and certified systems remain the authority.'], ['How long does a first deployment take?', 'A scoped evaluation typically runs in weeks: define the boundary, build a reviewed evidence set, configure, review.']].map(([q, a], i) => { const open = this.state.faqOpen === i; return { q, a, open, toggle: () => this.setState({ faqOpen: open ? -1 : i }), iconStyle: { display: 'grid', placeItems: 'center', width: 28, height: 28, borderRadius: '50%', border: '1px solid rgba(16,24,40,.2)', color: '#2459d3', fontSize: 18, lineHeight: 1, transform: open ? 'rotate(45deg)' : 'none', transition: 'transform .35s cubic-bezier(.16,1,.3,1)' }, bodyStyle: { display: 'grid', gridTemplateRows: open ? '1fr' : '0fr', paddingBottom: open ? 22 : 0, transition: 'grid-template-rows .4s cubic-bezier(.16,1,.3,1), padding-bottom .4s cubic-bezier(.16,1,.3,1)', overflow: 'hidden' } }; }),
+      gridRef: this.gridRef,
+      navItems: [['Model', 'model.html'], ['Solutions', 'solutions.html'], ['Industries', 'solutions.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Company', 'company.html']].map(([label, href]) => ({ label, href })),
+      heroSlides,
+      activeSceneKicker: scenes[this.state.heroTab].kicker,
+      activeSceneTitle: scenes[this.state.heroTab].title,
+      pauseReel: () => this.setState({ reelPaused: true }),
+      resumeReel: () => this.setState({ reelPaused: false }),
+      runsOn: [['Edge', 'next to cameras and machines'], ['On-Premise', 'inside your facility'], ['Private Cloud', 'in your own tenant'], ['Hybrid', 'local execution, central control']].map(([label, note]) => ({ label, note })),
+      pulseIn: pulse('flow-x', '#2459d3'),
+      pulseOut: pulse('flow-x', '#6eb8a9'),
+      ringA: h('span', { 'aria-hidden': true, style: { position: 'absolute', inset: -3, borderRadius: '50%', border: '1px solid #2459d3', animation: 'pulse-ring 2s ease-out infinite' } }),
+      solutions,
+      activeSolution: solutions[this.state.sol],
+      pauseSolutions: () => this.setState({ solPaused: true }),
+      resumeSolutions: () => this.setState({ solPaused: false, cycle: this.state.cycle + 1 }),
+      industries: industries.map(([title, slug, summary, image], i) => ({ title, summary, image, num: '0' + (i + 1), href: 'industry.html?industry=' + slug })),
+      footerGroups: [
+        { title: 'Models', links: [['AllusONE', 'model-detail.html?model=allusone'], ['AllusFlow', 'model-detail.html?model=allusflow'], ['AllusEdge', 'model-detail.html?model=allusedge']] },
+        { title: 'Solutions', links: solutionData.map(s => [s[1], 'solution.html?solution=' + s[4]]) },
+        { title: 'Industries', links: industries.map(([t, s]) => [t, 'industry.html?industry=' + s]) },
+        { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy and Security', 'privacy.html'], ['Contact Us', 'connect.html?intent=demo']] }
+      ].map(g => ({ title: g.title, links: g.links.map(([label, href]) => ({ label, href })) }))
+    };
+  }
+}
+</script>
 </body>
 </html>
