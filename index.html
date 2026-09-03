@@ -24,7 +24,9 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Allus AI","url":"https://allus-ai.github.io/allus-ai-website/","logo":"https://allus-ai.github.io/allus-ai-website/assets/allus-logo-navy.svg","sameAs":[],"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","email":"contact@allus.ai","contactType":"sales"}}</script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://formspree.io https://api.hsforms.com https://hooks.zapier.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io mailto:;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="stylesheet" href="responsive.css">
+<link rel="stylesheet" href="responsive.css?v=mtlssvou">
+<link rel="stylesheet" href="mobile.css?v=mtlssvou">
+<script src="mobile.js?v=mtlssvou" defer></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -52,7 +54,6 @@ button { font: inherit; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 a > span[aria-hidden="true"] { display: inline-block; transition: transform .4s cubic-bezier(.16,1,.3,1); }
 a:hover > span[aria-hidden="true"] { transform: translateX(4px); }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 @keyframes parallax-y { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
 @keyframes orb-a { from { transform: translate(0, 0) scale(1); } to { transform: translate(14vw, 12vh) scale(1.18); } }
 @keyframes orb-b { from { transform: translate(0, 0) scale(1.1); } to { transform: translate(-12vw, -14vh) scale(.92); } }
@@ -158,17 +159,16 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
       </div>
 
       <!-- Reel -->
-      <div style="position: relative; z-index: 1; margin: 12px 0 0;" onMouseEnter="{{ pauseReel }}" onMouseLeave="{{ resumeReel }}">
-        <figure onClick="{{ armVideo }}" style="position: relative; width: 100%; margin: 0; overflow: hidden; border-radius: 28px; background: #111318; isolation: isolate; box-shadow: 0 30px 80px rgba(16,24,40,.14); animation: fade-up .9s cubic-bezier(.16,1,.3,1) .35s both;">
+      <div style="position: relative; z-index: 1; margin: 12px 0 0;">
+        <figure style="position: relative; width: 100%; margin: 0; overflow: hidden; border-radius: 28px; background: #111318; isolation: isolate; box-shadow: 0 30px 80px rgba(16,24,40,.14); animation: fade-up .9s cubic-bezier(.16,1,.3,1) .35s both;">
           <div style="position: relative; width: 100%; overflow: hidden; aspect-ratio: 16 / 9; background: #111318;">
             <sc-for list="{{ heroSlides }}" as="s" hint-placeholder-count="1">
               <div style="{{ s.style }}">
-                <video muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" preload="none" data-dc-poster="{{ s.poster }}" data-dc-src="{{ s.liveSrc }}" aria-label="{{ s.label }} manufacturing scene" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;"></video>
+                <video muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" autoPlay="{{ true }}" preload="auto" data-dc-poster="{{ s.poster }}" data-dc-src="{{ s.liveSrc }}" aria-label="{{ s.label }} manufacturing scene" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;"></video>
               </div>
             </sc-for>
             <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(13,20,36,.42), transparent 26%, transparent 70%, rgba(13,20,36,.55));"></div>
           </div>
-          <button type="button" onClick="{{ toggleReel }}" aria-pressed="{{ reelHeld }}" aria-label="{{ reelBtnLabel }}" style="position: absolute; top: 20px; right: 20px; z-index: 3; display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.25); border-radius: 12px; background: rgba(10,14,22,.38); color: #fff; font-size: 13px; cursor: pointer; backdrop-filter: blur(10px);">{{ reelBtnIcon }}</button>
           <div role="tablist" aria-label="Industry scenes" onKeyDown="{{ reelKeys }}" style="position: absolute; top: 20px; left: 50%; z-index: 3; display: flex; gap: 8px; padding: 6px; border-radius: 999px; background: rgba(10,14,22,.38); backdrop-filter: blur(10px); transform: translateX(-50%);">
             <sc-for list="{{ heroSlides }}" as="s" hint-placeholder-count="4">
               <button type="button" role="tab" onClick="{{ s.select }}" style="{{ s.tabStyle }}"><span style="position: relative; z-index: 1;">{{ s.label }}</span>{{ s.progress }}</button>
@@ -289,7 +289,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
           <h2 id="solutions-title" style="color: #101828; font-family: 'Manrope', sans-serif; font-size: 54px; font-weight: 500; letter-spacing: -.045em; line-height: 1.04;">Built for how operators<br><em style="color: #3f7afe; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400;">actually work.</em></h2>
           <p style="max-width: 48ch; color: #5f687a; font-size: 17px; line-height: 1.55;">Four floor problems. One model system.</p>
         </header>
-        <div style="display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 32px; align-items: stretch; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;" onMouseEnter="{{ pauseSolutions }}" onMouseLeave="{{ resumeSolutions }}" onKeyDown="{{ solKeys }}">
+        <div style="display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 32px; align-items: stretch; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;" onKeyDown="{{ solKeys }}">
           <div role="tablist" aria-label="Solution families" style="display: grid; align-content: stretch; border-top: 1px solid rgba(16,24,40,.16);">
             <sc-for list="{{ solutions }}" as="s" hint-placeholder-count="4">
               <button type="button" role="tab" onClick="{{ s.select }}" onMouseEnter="{{ s.select }}" style="{{ s.rowStyle }}">
@@ -425,7 +425,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
       <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px 30px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">
         <span>© 2026 Allus AI Inc. · Atlanta, Georgia</span>
         <div style="display: flex; gap: 8px 20px;">
-          <a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a>
+          <a href="privacy.html" style-hover="color: #fff;">Privacy</a><a href="terms.html" style-hover="color: #fff;">Terms</a>
           <a href="https://trust.allus.ai" target="_blank" rel="noreferrer" style-hover="color: #fff;">Trust Center</a>
           
         </div>
@@ -437,7 +437,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
 <script type="text/x-dc" data-dc-script data-props="{&quot;autoCycle&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;heroHeadline&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;manufacturing&quot;,&quot;options&quot;:[&quot;manufacturing&quot;,&quot;physical-world&quot;],&quot;tsType&quot;:&quot;'manufacturing' | 'physical-world'&quot;,&quot;section&quot;:&quot;Copy&quot;},&quot;showBackedBy&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
 class Component extends DCLogic {
   renderVals() { const v = this.renderBase(); const k = (key, n) => e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); this.setState(s => ({ [key]: (s[key] + d + n) % n, cycle: s.cycle + 1 })); }; v.solKeys = k('sol', 4); v.reelKeys = k('heroTab', 4); return v; }
-  state = { heroTab: 0, reelPaused: false, reelHeld: false, sol: 0, solPaused: false, cycle: 0, word: 0, wordIn: true, faqOpen: 0 };
+  state = { heroTab: 0, sol: 0, cycle: 0, word: 0, wordIn: true, faqOpen: 0 };
   gridRef = React.createRef();
 
   componentDidMount() {
@@ -467,8 +467,8 @@ class Component extends DCLogic {
   startTimers() {
     clearInterval(this._t1); clearInterval(this._t2);
     if (!(this.props.autoCycle ?? true)) return;
-    this._t1 = setInterval(() => { if (!this.state.reelPaused && !this.state.reelHeld) this.setState(s => ({ heroTab: (s.heroTab + 1) % 4 })); }, 7000);
-    this._t2 = setInterval(() => { if (!this.state.solPaused) this.setState(s => ({ sol: (s.sol + 1) % 4, cycle: s.cycle + 1 })); }, 5200);
+    this._t1 = setInterval(() => { this.setState(s => ({ heroTab: (s.heroTab + 1) % 4 })); }, 7000);
+    this._t2 = setInterval(() => { this.setState(s => ({ sol: (s.sol + 1) % 4, cycle: s.cycle + 1 })); }, 5200);
     this._t3 = setInterval(() => { this.setState({ wordIn: false }); setTimeout(() => this.setState(s => ({ word: (s.word + 1) % 4, wordIn: true })), 320); }, 2600);
   }
   componentDidUpdate(prev) { if (prev.autoCycle !== this.props.autoCycle) this.startTimers(); }
@@ -486,11 +486,11 @@ class Component extends DCLogic {
       const active = i === this.state.heroTab;
       return {
         ...s,
-        liveSrc: (window.matchMedia && window.matchMedia('(max-width: 900px)').matches && !this.state.armed) ? undefined : ((i === this.state.heroTab || i === (this.state.heroTab + 1) % scenes.length) ? s.src : undefined),
+        liveSrc: ((i === this.state.heroTab || i === (this.state.heroTab + 1) % scenes.length) ? s.src : undefined),
         select: () => this.setState({ heroTab: i }),
         style: { position: 'absolute', inset: 0, opacity: active ? 1 : 0, transform: active ? 'scale(1)' : 'scale(1.03)', transition: 'opacity .7s cubic-bezier(.22,1,.36,1), transform 1.2s cubic-bezier(.22,1,.36,1)', pointerEvents: active ? 'auto' : 'none' },
         tabStyle: { position: 'relative', overflow: 'hidden', minHeight: 34, padding: '0 16px', border: 0, borderRadius: 999, background: active ? 'rgba(255,255,255,.14)' : 'transparent', color: '#fff', fontSize: 13, fontWeight: 500, letterSpacing: '.01em', cursor: 'pointer', transition: 'background .3s ease' },
-        progress: active && auto && !this.state.reelPaused && !this.state.reelHeld ? h('span', { key: 'p' + i + '-' + this.state.heroTab, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: '#fff', transformOrigin: 'left', animation: 'progress 7s linear both' } }) : null
+        progress: active && auto ? h('span', { key: 'p' + i + '-' + this.state.heroTab, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: '#fff', transformOrigin: 'left', animation: 'progress 7s linear both' } }) : null
       };
     });
     const solutionData = [
@@ -510,7 +510,7 @@ class Component extends DCLogic {
         noteStyle: { color: '#5f687a', fontSize: 14, lineHeight: 1.5, maxHeight: active ? 60 : 0, opacity: active ? 1 : 0, overflow: 'hidden', transition: 'max-height .5s cubic-bezier(.16,1,.3,1), opacity .4s ease' },
         arrowStyle: { justifySelf: 'end', color: active ? '#2459d3' : '#5f687a', transform: active ? 'translateX(0)' : 'translateX(-6px)', opacity: active ? 1 : .4, transition: 'transform .4s cubic-bezier(.16,1,.3,1), opacity .3s ease' },
         imageStyle: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: active ? 1 : 0, transform: active ? 'scale(1)' : 'scale(1.04)', transition: 'opacity .7s ease, transform 1.4s cubic-bezier(.16,1,.3,1)' },
-        progress: active && auto && !this.state.solPaused ? h('span', { key: 'sp' + this.state.cycle, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: -1, height: 2, background: '#3f7afe', transformOrigin: 'left', animation: 'progress 5.2s linear both' } }) : null
+        progress: active && auto ? h('span', { key: 'sp' + this.state.cycle, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: -1, height: 2, background: '#3f7afe', transformOrigin: 'left', animation: 'progress 5.2s linear both' } }) : null
       };
     });
     const industries = [
@@ -534,25 +534,18 @@ class Component extends DCLogic {
       heroSlides,
       activeSceneKicker: scenes[this.state.heroTab].kicker,
       activeSceneTitle: scenes[this.state.heroTab].title,
-      armVideo: () => { if (!this.state.armed) this.setState({ armed: true }); },
-      pauseReel: () => this.setState({ reelPaused: true }),
-      toggleReel: () => { const held = !this.state.reelHeld; this.setState({ reelHeld: held }); document.querySelectorAll('video').forEach(v => held ? v.pause() : v.play().catch(() => {})); },
-      reelHeld: this.state.reelHeld, reelBtnLabel: this.state.reelHeld ? 'Play scenes' : 'Pause scenes', reelBtnIcon: this.state.reelHeld ? '▶' : '❚❚',
-      resumeReel: () => this.setState({ reelPaused: false }),
       runsOn: [['Edge', 'next to cameras and machines'], ['On-Premise', 'inside your facility'], ['Private Cloud', 'in your own tenant'], ['Hybrid', 'local execution, central control']].map(([label, note]) => ({ label, note })),
       pulseIn: pulse('flow-x', '#2459d3'),
       pulseOut: pulse('flow-x', '#6eb8a9'),
       ringA: h('span', { 'aria-hidden': true, style: { position: 'absolute', inset: -3, borderRadius: '50%', border: '1px solid #2459d3', animation: 'pulse-ring 2s ease-out infinite' } }),
       solutions,
       activeSolution: solutions[this.state.sol],
-      pauseSolutions: () => this.setState({ solPaused: true }),
-      resumeSolutions: () => this.setState({ solPaused: false, cycle: this.state.cycle + 1 }),
       industries: industries.map(([title, slug, summary, image], i) => ({ title, summary, image, num: '0' + (i + 1), href: 'industry.html?industry=' + slug })),
       footerGroups: [
         { title: 'Models', links: [['AllusONE', 'model-detail.html?model=allusone'], ['AllusFlow', 'model-detail.html?model=allusflow'], ['AllusEdge', 'model-detail.html?model=allusedge']] },
         { title: 'Solutions', links: solutionData.map(s => [s[1], 'solution.html?solution=' + s[4]]) },
         { title: 'Industries', links: industries.map(([t, s]) => [t, 'industry.html?industry=' + s]) },
-        { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy and Security', 'privacy.html'], ['Contact Us', 'connect.html?intent=demo']] }
+        { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy', 'privacy.html'], ['Terms', 'terms.html'], ['Contact Us', 'connect.html?intent=demo']] }
       ].map(g => ({ title: g.title, links: g.links.map(([label, href]) => ({ label, href })) }))
     };
   }

@@ -24,7 +24,9 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Allus AI","url":"https://allus-ai.github.io/allus-ai-website/","logo":"https://allus-ai.github.io/allus-ai-website/assets/allus-logo-navy.svg","sameAs":[],"address":{"@type":"PostalAddress","addressLocality":"Atlanta","addressRegion":"GA","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","email":"contact@allus.ai","contactType":"sales"}}</script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://formspree.io https://api.hsforms.com https://hooks.zapier.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io mailto:;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="stylesheet" href="responsive.css">
+<link rel="stylesheet" href="responsive.css?v=mtlssvou">
+<link rel="stylesheet" href="mobile.css?v=mtlssvou">
+<script src="mobile.js?v=mtlssvou" defer></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -47,7 +49,6 @@ button { font: inherit; }
 @keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 a > span[aria-hidden="true"] { display: inline-block; transition: transform .4s cubic-bezier(.16,1,.3,1); }
 a:hover > span[aria-hidden="true"] { transform: translateX(4px); }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 @keyframes parallax-y { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
 @keyframes orb-a { from { transform: translate(0, 0) scale(1); } to { transform: translate(14vw, 12vh) scale(1.18); } }
 @keyframes orb-b { from { transform: translate(0, 0) scale(1.1); } to { transform: translate(-12vw, -14vh) scale(.92); } }
@@ -236,7 +237,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
       </div>
       <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">
         <span>© 2026 Allus AI Inc. · Atlanta, Georgia</span>
-        <div style="display: flex; gap: 20px;"><a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a><a href="https://trust.allus.ai" style-hover="color: #fff;">Trust Center</a></div>
+        <div style="display: flex; gap: 20px;"><a href="privacy.html" style-hover="color: #fff;">Privacy</a><a href="terms.html" style-hover="color: #fff;">Terms</a><a href="https://trust.allus.ai" style-hover="color: #fff;">Trust Center</a></div>
       </div>
     </div>
   </footer>
@@ -249,7 +250,7 @@ class Component extends DCLogic {
   componentDidMount() { this.start(); }
   componentWillUnmount() { clearInterval(this._t); }
   componentDidUpdate(p) { if (p.autoCycle !== this.props.autoCycle) this.start(); }
-  start() { clearInterval(this._t); if (this.props.autoCycle ?? true) this._t = setInterval(() => { if (!this.state.paused) this.setState(s => ({ step: (s.step + 1) % 5, cycle: s.cycle + 1 })); }, 3800); }
+  start() { clearInterval(this._t); if (this.props.autoCycle ?? true) this._t = setInterval(() => { this.setState(s => ({ step: (s.step + 1) % 5, cycle: s.cycle + 1 })); }, 3800); }
   renderBase() {
     const h = React.createElement;
     const auto = this.props.autoCycle ?? true;
@@ -279,7 +280,7 @@ class Component extends DCLogic {
           numStyle: { color: active ? (last ? '#3f7f72' : '#2459d3') : '#5f687a', fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, letterSpacing: '.08em' },
           dotStyle: { display: 'block', width: 10, height: 10, borderRadius: '50%', background: active ? (last ? '#6eb8a9' : '#3f7afe') : 'transparent', border: '1px solid ' + (last ? '#6eb8a9' : '#3f7afe'), transition: 'background .3s ease' },
           noteStyle: { color: '#5f687a', fontSize: 14, lineHeight: 1.5, opacity: active ? 1 : .55, transition: 'opacity .35s ease' },
-          progress: active && auto && !this.state.paused ? h('span', { key: 'p' + this.state.cycle, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: last ? '#6eb8a9' : '#3f7afe', transformOrigin: 'left', animation: 'progress 3.8s linear both' } }) : null
+          progress: active && auto ? h('span', { key: 'p' + this.state.cycle, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: last ? '#6eb8a9' : '#3f7afe', transformOrigin: 'left', animation: 'progress 3.8s linear both' } }) : null
         };
       }),
       pause: () => this.setState({ paused: true }),
@@ -299,7 +300,7 @@ class Component extends DCLogic {
         { title: 'Models', links: [['AllusONE', 'model-detail.html?model=allusone'], ['AllusFlow', 'model-detail.html?model=allusflow'], ['AllusEdge', 'model-detail.html?model=allusedge']] },
         { title: 'Solutions', links: [['Operational Knowledge & Guidance', 'solution.html?solution=operational-knowledge-guidance'], ['Production & Process Intelligence', 'solution.html?solution=production-process-intelligence'], ['Equipment & Asset Intelligence', 'solution.html?solution=equipment-asset-intelligence'], ['Industrial Safety & Site Intelligence', 'solution.html?solution=industrial-safety-site-intelligence']] },
         { title: 'Industries', links: [['Electronics Assembly', 'industry.html?industry=electronics-assembly'], ['FMCG', 'industry.html?industry=fmcg'], ['Food & Beverage', 'industry.html?industry=food-beverage'], ['Advanced Materials', 'industry.html?industry=advanced-materials'], ['Automotive', 'industry.html?industry=automotive']] },
-        { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy and Security', 'privacy.html'], ['Contact Us', 'connect.html?intent=demo']] }
+        { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy', 'privacy.html'], ['Contact Us', 'connect.html?intent=demo']] }
       ].map(g => ({ title: g.title, links: g.links.map(([label, href]) => ({ label, href })) }))
     };
   }

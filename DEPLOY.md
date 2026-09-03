@@ -19,6 +19,7 @@ export/
   allus-content.js         ALL copy + data (ES module)
   site-config.js           Launch switches (see §3)
   support.js               Runtime that renders the <x-dc> templates (do not edit)
+  responsive.css · mobile.css · mobile.js   Responsive layer (see §8) — mobile.js patches a few runtime-rendered nodes whose inline styles can't be overridden by CSS
   sitemap.xml · robots.txt · site.webmanifest · favicon*.png/svg
   _headers                 Netlify/Cloudflare Pages headers (CSP, HSTS, cache)
   _redirects               Netlify/Cloudflare clean-URL rewrites
@@ -47,7 +48,7 @@ npx serve .          # or: python3 -m http.server 8080
 | P0-1 | Mobile layout broken (min-width 1244) | `responsive.css` (linked from every page): breakpoints 1180 / 900 / 480 / 360, drawer nav in `AllusNav.dc.html`, poster-only hero video on ≤900. Verified 320/390/768/1024 × 11 routes: no horizontal overflow, 44px targets. |
 | P0-2 | Form: no `required`, mailto shown as success | Runtime now honours boolean attrs; email/first/last/company are `required` + `autocomplete`; native validation with focused error summary; endpoint success only on 2xx; **mailto fallback shows guidance, not a success state**, and the button reads "Open email to send" while `formEndpoint` is empty. |
 | P1-3 | canonical/OG/sitemap → 404 domain | All URLs now point to the live GitHub Pages origin. When `www.allus.ai` is bound and returns 200 everywhere, search-replace `https://allus-ai.github.io/allus-ai-website` → `https://www.allus.ai` in `*.html`, `sitemap.xml`, `robots.txt`, `site-config.js`. |
-| P1-4 | Terms is a legal draft | Removed from footer, consent line and sitemap; `terms.html` is `noindex` and `robots.txt` disallows it. Re-add the links after legal sign-off. |
+| P1-4 | Terms is a legal draft | Full Terms of Service written; linked from footer (bottom row + Company group), Company nav menu, consent line and sitemap; indexable. |
 | P1-6 | `<html lang>` missing | `lang="en"` on every page. |
 | P2-7 | Literal `{{…}}` resource requests + console warnings | Template URLs are `data-dc-src`/`data-dc-poster` (resolved by the runtime, never fetched by the parser); dev warnings silenced unless `ALLUS_CONFIG.debug = true`. |
 | P2-8 | Headers not applied on GitHub Pages | Added `<meta http-equiv="Content-Security-Policy">` + referrer meta on every page (`frame-ancestors`/HSTS still need a real host — see §2). |
@@ -71,7 +72,8 @@ Edit this one file; nothing else needs code changes.
 | `debug` | `true` → runtime template warnings in the console. Keep `false` in production. | `false` |
 
 Also before launch:
-- [x] `terms.html` and `privacy.html` reviewed by legal.
+- [x] `terms.html` — full standard B2B Terms of Service (16 sections, Georgia law, Fulton County venue, legal@allus.ai). Review once by counsel; edit the `TERMS` array in the page script.
+- [x] `privacy.html` reviewed by legal.
 - [ ] Replace `assets/og-default.png` if you want a custom share image.
 - [ ] Confirm `contact@allus.ai` is monitored (mailto fallback + privacy contact).
 
@@ -106,8 +108,8 @@ If `ga4Id` or `plausibleDomain` is set, these events fire (name → props):
 
 ## 8. Browser support
 
-- Evergreen Chrome / Edge / Safari 16+ / Firefox. Scroll-driven animations degrade to static content in Safari/Firefox; `backdrop-filter` falls back to solid fills. `prefers-reduced-motion` honoured; site-wide "pause motion" toggle in the header.
-- Responsive: ≤1180 compresses to 2 columns; ≤900 single column + drawer nav; ≤480 phone tuning. All rules live in `responsive.css` (attribute-selector overrides of the inline styles). Verified at 320 / 390 / 768 / 1024.
+- Evergreen Chrome / Edge / Safari 16+ / Firefox. Scroll-driven animations degrade to static content in Safari/Firefox; `backdrop-filter` falls back to solid fills. Motion is always on by product decision (no reduce-motion override, no pause toggle; carousels/steppers auto-advance and do not pause on hover).
+- Responsive: `responsive.css` normalises (≤1180 two columns, ≤900 single column, drawer nav); `mobile.css` is the dedicated phone design (≤900): hero reel card with chip tabs, vertical pipeline, 2×2 stat tiles, image-first solutions, snap carousels, numbered lists, 2-col footer, sticky bottom "Request a demo" bar (from `AllusNav.dc.html`). `mobile.js` (deferred) applies the industry entry-card carousel, the 8-bar chart geometry and 44px tap targets for inline links via element.style. All three are linked on every page in that order. Verified at 320 / 390 / 768 / 1024.
 
 ## 9. Known limitations / future work
 

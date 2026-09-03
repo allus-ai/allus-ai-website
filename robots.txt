@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /terms.html
 Allow: /
 Disallow: /AllusNav.dc.html
 Sitemap: https://allus-ai.github.io/allus-ai-website/sitemap.xml

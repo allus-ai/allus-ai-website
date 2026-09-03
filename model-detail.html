@@ -25,7 +25,9 @@
 <script>(function(){var t={"allusone":"AllusONE — Industrial Perception & Reasoning","allusflow":"AllusFlow — Video to Steps, Timing and Evidence","allusedge":"AllusEdge — Optimize and Deploy on Edge Hardware"};var v=new URLSearchParams(location.search).get('model');if(v&&t[v]){document.title=t[v]+' | Allus AI';var og=document.querySelector('meta[property="og:title"]');if(og)og.content=document.title;var c=document.querySelector('link[rel=canonical]');if(c)c.href=c.href.split('?')[0]+'?model='+v;}})();</script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://formspree.io https://api.hsforms.com https://hooks.zapier.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io mailto:;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="stylesheet" href="responsive.css">
+<link rel="stylesheet" href="responsive.css?v=mtlssvou">
+<link rel="stylesheet" href="mobile.css?v=mtlssvou">
+<script src="mobile.js?v=mtlssvou" defer></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -50,7 +52,6 @@ button { font: inherit; }
 @keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 a > span[aria-hidden="true"] { display: inline-block; transition: transform .4s cubic-bezier(.16,1,.3,1); }
 a:hover > span[aria-hidden="true"] { transform: translateX(4px); }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 @keyframes parallax-y { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
 @keyframes orb-a { from { transform: translate(0, 0) scale(1); } to { transform: translate(14vw, 12vh) scale(1.18); } }
 @keyframes orb-b { from { transform: translate(0, 0) scale(1.1); } to { transform: translate(-12vw, -14vh) scale(.92); } }
@@ -136,7 +137,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
     <section style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding: 40px 0 0;">
       <nav aria-label="Allus model system" style="display: flex; gap: 4px; width: max-content; margin-inline: auto; padding: 5px; border: 1px solid rgba(16,24,40,.14); border-radius: 999px; background: #fcfbf8; animation: fade-up .6s cubic-bezier(.16,1,.3,1) both;">
         <sc-for list="{{ rail }}" as="r" hint-placeholder-count="3">
-          <a href="{{ r.href }}" onClick="{{ r.select }}" style="{{ r.style }}"><small style="{{ r.kindStyle }}">{{ r.kind }}</small>{{ r.title }}</a>
+          <a href="{{ r.href }}" onClick="{{ r.select }}" style="{{ r.style }}"><i aria-hidden="true" style="{{ r.dot }}"></i>{{ r.title }}</a>
         </sc-for>
       </nav>
       <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; padding: 56px 0 40px;">
@@ -182,7 +183,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
           </div>
           <p style="max-width: 40ch; color: #5f687a; font-size: 17px; line-height: 1.55;">{{ m.howCaption }}</p>
         </header>
-        <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 20px; align-items: stretch; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;" onMouseEnter="{{ pause }}" onMouseLeave="{{ resume }}" onKeyDown="{{ stepKeys }}">
+        <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 20px; align-items: stretch; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;" onKeyDown="{{ stepKeys }}">
           <figure style="position: relative; margin: 0; min-height: 460px; overflow: hidden; border-radius: 26px; background: #111318;">
             <img data-dc-src="{{ m.image }}" alt="{{ m.alt }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%;" loading="eager" fetchpriority="high" decoding="async">
             <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.05) 40%, rgba(13,20,36,.8) 100%);"></span>
@@ -289,7 +290,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
       </div>
       <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">
         <span>© 2026 Allus AI Inc. · Atlanta, Georgia</span>
-        <div style="display: flex; gap: 20px;"><a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a><a href="https://trust.allus.ai" style-hover="color: #fff;">Trust Center</a></div>
+        <div style="display: flex; gap: 20px;"><a href="privacy.html" style-hover="color: #fff;">Privacy</a><a href="terms.html" style-hover="color: #fff;">Terms</a><a href="https://trust.allus.ai" style-hover="color: #fff;">Trust Center</a></div>
       </div>
     </div>
   </footer>
@@ -302,7 +303,7 @@ class Component extends DCLogic {
   componentDidMount() { this.start(); }
   componentWillUnmount() { clearInterval(this._t); }
   componentDidUpdate(p) { if (p.autoCycle !== this.props.autoCycle) this.start(); }
-  start() { clearInterval(this._t); if (this.props.autoCycle ?? true) this._t = setInterval(() => { if (!this.state.paused) this.setState(s => ({ step: (s.step + 1) % 4, cycle: s.cycle + 1 })); }, 5000); }
+  start() { clearInterval(this._t); if (this.props.autoCycle ?? true) this._t = setInterval(() => { this.setState(s => ({ step: (s.step + 1) % 4, cycle: s.cycle + 1 })); }, 5000); }
 
   renderBase() {
     const id = this.state.model || new URLSearchParams(location.search).get('model') || this.props.model || 'allusone';
@@ -380,7 +381,7 @@ class Component extends DCLogic {
           style: { position: 'relative', display: 'grid', gridTemplateColumns: '44px 1fr', gap: 14, alignItems: 'start', width: '100%', padding: '22px 18px', border: 0, borderBottom: '1px solid rgba(16,24,40,.16)', background: active ? 'rgba(255,255,255,.72)' : 'transparent', color: 'inherit', textAlign: 'left', cursor: 'pointer', transition: 'background .3s ease', overflow: 'hidden' },
           numStyle: { color: active ? '#2459d3' : '#5f687a', fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, letterSpacing: '.08em', paddingTop: 6 },
           noteStyle: { color: '#5f687a', fontSize: 14, lineHeight: 1.5, maxHeight: active ? 80 : 0, opacity: active ? 1 : 0, overflow: 'hidden', transition: 'max-height .5s cubic-bezier(.16,1,.3,1), opacity .35s ease' },
-          progress: active && auto && !this.state.paused ? h('span', { key: 'p' + this.state.cycle, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: -1, height: 2, background: '#3f7afe', transformOrigin: 'left', animation: 'progress 5s linear both' } }) : null
+          progress: active && auto ? h('span', { key: 'p' + this.state.cycle, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: -1, height: 2, background: '#3f7afe', transformOrigin: 'left', animation: 'progress 5s linear both' } }) : null
         };
       }),
       specs: src.specs.map(([title, note], i) => ({ title, num: num(i), points: note.split(' · ').map(text => ({ text })), style: { padding: '26px 28px 30px', borderLeft: i ? '1px solid rgba(16,24,40,.12)' : 0 } })),
@@ -398,13 +399,13 @@ class Component extends DCLogic {
         return { kind, title, href: 'model-detail.html?model=' + key,
           select: e => { e.preventDefault(); this.setState({ model: key, step: 0, hover: null, cycle: this.state.cycle + 1 }); },
           style: { display: 'inline-flex', alignItems: 'center', gap: 10, minHeight: 44, padding: '0 20px', borderRadius: 999, background: cur ? '#111318' : 'transparent', color: cur ? '#fff' : '#25324a', fontSize: 15, fontWeight: 600, transition: 'background .25s ease, color .25s ease' },
-          kindStyle: { fontFamily: "'IBM Plex Mono', monospace", fontSize: 9, letterSpacing: '.1em', textTransform: 'uppercase', color: cur ? 'rgba(255,255,255,.6)' : '#5f687a' } };
+          dot: { width: 8, height: 8, borderRadius: '50%', background: { allusone: '#3f7afe', allusflow: '#6eb8a9', allusedge: '#df855d' }[key], flex: 'none' } };
       }),
       footerGroups: [
         { title: 'Models', links: [['AllusONE', 'model-detail.html?model=allusone'], ['AllusFlow', 'model-detail.html?model=allusflow'], ['AllusEdge', 'model-detail.html?model=allusedge']] },
         { title: 'Solutions', links: [['Operational Knowledge & Guidance', 'solution.html?solution=operational-knowledge-guidance'], ['Production & Process Intelligence', 'solution.html?solution=production-process-intelligence'], ['Equipment & Asset Intelligence', 'solution.html?solution=equipment-asset-intelligence'], ['Industrial Safety & Site Intelligence', 'solution.html?solution=industrial-safety-site-intelligence']] },
         { title: 'Industries', links: [['Electronics Assembly', 'industry.html?industry=electronics-assembly'], ['FMCG', 'industry.html?industry=fmcg'], ['Food & Beverage', 'industry.html?industry=food-beverage'], ['Advanced Materials', 'industry.html?industry=advanced-materials'], ['Automotive', 'industry.html?industry=automotive']] },
-        { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy and Security', 'privacy.html'], ['Contact Us', 'connect.html?intent=demo']] }
+        { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy', 'privacy.html'], ['Contact Us', 'connect.html?intent=demo']] }
       ].map(g => ({ title: g.title, links: g.links.map(([label, href]) => ({ label, href })) }))
     };
   }

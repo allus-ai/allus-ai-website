@@ -55,8 +55,20 @@
     if (/^https?:/.test(a.href) && !a.href.startsWith(location.origin)) { a.rel = 'noopener noreferrer'; a.target = a.target || '_blank'; }
     if (/connect\.html/.test(a.getAttribute('href') || '')) window.allusTrack('cta_click', { label: a.textContent.trim().slice(0, 60), page: location.pathname });
   }, true);
+  // ── Hero video autoplay: src is assigned by the runtime after mount, which skips the browser's
+  // autoplay pass; re-arm load()+play() on every src change and when the tab becomes visible.
+  function heroVideoAutoplay() {
+    var kick = function (v) { if (!v.getAttribute('src')) return; v.muted = true; v.playsInline = true; try { if (v.readyState === 0) v.load(); } catch (e) {} var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+    var arm = function (v) { if (v.__armed) return; v.__armed = true; kick(v); new MutationObserver(function () { kick(v); }).observe(v, { attributes: true, attributeFilter: ['src'] }); v.addEventListener('loadedmetadata', function () { kick(v); }); };
+    var scan = function () { document.querySelectorAll('video[autoplay], video[autoPlay]').forEach(arm); };
+    scan(); new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) document.querySelectorAll('video[autoplay]').forEach(kick); });
+    // some engines only allow play() after any user gesture if power-saver is on — retry once on first touch/click
+    var once = function () { document.querySelectorAll('video[autoplay]').forEach(kick); document.removeEventListener('pointerdown', once); }; document.addEventListener('pointerdown', once, { passive: true });
+  }
+  document.addEventListener('DOMContentLoaded', heroVideoAutoplay);
 
-  // ── Accessibility: skip link, pause-motion toggle, feature-detect fallbacks ──
+  // ── Accessibility: skip link, feature-detect fallbacks ──
   function a11y() {
     if (!document.getElementById('skip-link')) {
       const skip = document.createElement('a'); skip.id = 'skip-link'; skip.href = '#main'; skip.textContent = 'Skip to content';
@@ -64,19 +76,6 @@
       skip.addEventListener('focus', () => skip.style.top = '12px'); skip.addEventListener('blur', () => skip.style.top = '-100px');
       document.body.prepend(skip);
       const main = document.querySelector('main'); if (main && !main.id) { main.id = 'main'; main.tabIndex = -1; }
-    }
-    const MKEY = 'allus-motion';
-    const reduce = () => { document.documentElement.classList.add('reduce-motion'); document.querySelectorAll('video').forEach(v => { v.pause(); v.removeAttribute('autoplay'); }); };
-    const pref = localStorage.getItem(MKEY) || (matchMedia('(prefers-reduced-motion: reduce)').matches ? 'off' : 'on');
-    if (pref === 'off') reduce();
-    if (!document.getElementById('motion-toggle')) {
-      const b = document.createElement('button'); b.id = 'motion-toggle'; b.type = 'button';
-      b.setAttribute('aria-pressed', pref === 'off'); b.title = 'Pause animations';
-      b.style.cssText = 'position:fixed;right:20px;bottom:20px;z-index:55;display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid rgba(16,24,40,.16);border-radius:10px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);color:#101828;font:600 12px Manrope,sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(16,24,40,.1)';
-      const label = () => b.innerHTML = (localStorage.getItem(MKEY) || pref) === 'off' ? '<span aria-hidden="true">▶</span> Motion off' : '<span aria-hidden="true">❚❚</span> Motion on';
-      label();
-      b.addEventListener('click', () => { const cur = (localStorage.getItem(MKEY) || pref) === 'off' ? 'on' : 'off'; localStorage.setItem(MKEY, cur); b.setAttribute('aria-pressed', cur === 'off'); label(); if (cur === 'off') reduce(); else location.reload(); });
-      document.body.appendChild(b);
     }
     // Feature fallbacks: browsers without scroll-driven animations must not hide "rise-in" content
     if (!CSS.supports('animation-timeline: view()')) document.documentElement.classList.add('no-scroll-timeline');

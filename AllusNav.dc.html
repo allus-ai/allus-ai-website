@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://formspree.io https://api.hsforms.com https://hooks.zapier.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io mailto:;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="stylesheet" href="responsive.css">
+<link rel="stylesheet" href="responsive.css?v=mtlssvou">
+<link rel="stylesheet" href="mobile.css?v=mtlssvou">
+<script src="mobile.js?v=mtlssvou" defer></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -112,21 +114,27 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
   </sc-if>
   <a href="connect.html?intent=demo" data-nav-cta style="justify-self: end; display: inline-flex; align-items: center; gap: 10px; height: 38px; padding: 0 16px; color: #fcfbf8; border-radius: 10px; background: #111318; font-size: 14px; font-weight: 600; letter-spacing: -.01em; transition: background .25s cubic-bezier(.4,0,.2,1), transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease;" style-hover="background: #2459d3; transform: translateY(-1px); box-shadow: 0 10px 24px rgba(36,89,211,.24);" style-active="transform: translateY(0) scale(.985);">Request a demo <span aria-hidden="true" style="display: inline-block; font-size: 15px; transition: transform .3s cubic-bezier(.16,1,.3,1);">→</span></a>
 </header>
+<div data-mobile-cta aria-hidden="{{ ctaHidden }}" style="{{ mobileCtaStyle }}"><a href="connect.html?intent=demo" data-btn="primary" style="position: relative; display: flex; align-items: center; justify-content: center; gap: 12px; height: 50px; color: #fcfbf8; border-radius: 14px; background: #2459d3; font-size: 15px; font-weight: 600; letter-spacing: -.01em; box-shadow: 0 10px 26px rgba(36,89,211,.26);">Request a demo <span aria-hidden="true" style="position: absolute; right: 10px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,.16); color: #fff; font-size: 14px; line-height: 1;">→</span></a></div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:420},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;model&quot;,&quot;options&quot;:[&quot;&quot;,&quot;model&quot;,&quot;solutions&quot;,&quot;industries&quot;,&quot;stories&quot;,&quot;company&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { open: null, drawer: false };
-  componentWillUnmount() { clearTimeout(this._t); document.body.style.overflow = ''; }
+  state = { open: null, drawer: false, cta: false };
+  componentDidMount() {
+    this._onScroll = () => { const y = window.scrollY, rest = document.documentElement.scrollHeight - y - window.innerHeight; const show = y > 560 && rest > 720 && !this.state.drawer; if (show !== this.state.cta) this.setState({ cta: show }); };
+    window.addEventListener('scroll', this._onScroll, { passive: true }); this._onScroll();
+  }
+  componentWillUnmount() { clearTimeout(this._t); document.body.style.overflow = ''; window.removeEventListener('scroll', this._onScroll); }
   setDrawer(v) { this.setState({ drawer: v }); document.body.style.overflow = v ? 'hidden' : ''; }
   renderVals() {
     const active = this.props.active || '';
+    const cta = this.state.cta && !this.state.drawer;
     const open = this.state.open;
     const menus = [
       ['model', 'Model', 'model.html', 'Model overview', [['AllusONE', 'Core model — sees and reasons', 'model-detail.html?model=allusone'], ['AllusFlow', 'Video → steps, timing, evidence', 'model-detail.html?model=allusflow'], ['AllusEdge', 'Runs on your hardware', 'model-detail.html?model=allusedge']]],
       ['solutions', 'Solutions', 'solutions.html', 'All solutions', [['Knowledge & Guidance', 'Expert know-how at the station', 'solution.html?solution=operational-knowledge-guidance'], ['Process Intelligence', 'Every cycle on a timeline', 'solution.html?solution=production-process-intelligence'], ['Asset Intelligence', 'Condition tied to the record', 'solution.html?solution=equipment-asset-intelligence'], ['Site Intelligence', 'Governed, human-reviewed events', 'solution.html?solution=industrial-safety-site-intelligence']]],
       ['industries', 'Industries', 'industry.html?industry=electronics-assembly', '', [['Electronics Assembly', '', 'industry.html?industry=electronics-assembly'], ['Automotive', '', 'industry.html?industry=automotive'], ['FMCG', '', 'industry.html?industry=fmcg'], ['Food & Beverage', '', 'industry.html?industry=food-beverage'], ['Advanced Materials', '', 'industry.html?industry=advanced-materials']]],
       ['stories', 'Customer Stories', 'story.html?story=advanced-materials', '', [['Advanced Materials', 'Specialist knowledge, preserved', 'story.html?story=advanced-materials'], ['Electronics Assembly', 'Variant context at the station', 'story.html?story=electronics-assembly'], ['Biscuit Production', 'Changeover steps, one context', 'story.html?story=biscuit-production']]],
-      ['company', 'Company', 'company.html', '', [['About Us', '', 'company.html'], ['Privacy & Security', '', 'privacy.html'], ['Connect', '', 'connect.html?intent=demo']]]
+      ['company', 'Company', 'company.html', '', [['About Us', '', 'company.html'], ['Privacy', '', 'privacy.html'], ['Terms', '', 'terms.html'], ['Connect', '', 'connect.html?intent=demo']]]
     ];
     const openMenu = key => { clearTimeout(this._t); if (this.state.open !== key) this.setState({ open: key }); };
     return {
@@ -143,6 +151,8 @@ class Component extends DCLogic {
       bar3: { position: 'absolute', width: 18, height: 2, borderRadius: 1, background: 'currentColor', transition: 'transform .3s cubic-bezier(.16,1,.3,1)', transform: this.state.drawer ? 'rotate(-45deg)' : 'translateY(6px)' },
       scheduleClose: () => { clearTimeout(this._t); this._t = setTimeout(() => this.setState({ open: null }), 140); },
       cancelClose: () => clearTimeout(this._t),
+      ctaHidden: !cta,
+      mobileCtaStyle: { display: 'none', position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 50, padding: '10px 16px calc(10px + env(safe-area-inset-bottom))', background: 'rgba(252,251,248,.94)', backdropFilter: 'blur(12px)', borderTop: '1px solid rgba(16,24,40,.1)', transform: cta ? 'translateY(0)' : 'translateY(110%)', transition: 'transform .45s cubic-bezier(.16,1,.3,1)', pointerEvents: cta ? 'auto' : 'none' },
       onKey: e => {
         if (e.key === 'Escape') { if (this.state.drawer) { this.setDrawer(false); const b = e.currentTarget.querySelector('[data-nav-toggle]'); if (b) b.focus(); return; } const t = e.currentTarget.querySelector('a[aria-expanded="true"]'); this.setState({ open: null }); if (t) t.focus(); return; }
         const menu = e.target.closest && e.target.closest('[data-menu]'); if (!menu) return;

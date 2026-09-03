@@ -25,7 +25,9 @@
 <script>(function(){var t={"operational-knowledge-guidance":"Operational Knowledge & Guidance","production-process-intelligence":"Production & Process Intelligence","equipment-asset-intelligence":"Equipment & Asset Intelligence","industrial-safety-site-intelligence":"Industrial Safety & Site Intelligence"};var v=new URLSearchParams(location.search).get('solution');if(v&&t[v]){document.title=t[v]+' | Allus AI';var og=document.querySelector('meta[property="og:title"]');if(og)og.content=document.title;var c=document.querySelector('link[rel=canonical]');if(c)c.href=c.href.split('?')[0]+'?solution='+v;}})();</script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://formspree.io https://api.hsforms.com https://hooks.zapier.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io mailto:;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="stylesheet" href="responsive.css">
+<link rel="stylesheet" href="responsive.css?v=mtlssvou">
+<link rel="stylesheet" href="mobile.css?v=mtlssvou">
+<script src="mobile.js?v=mtlssvou" defer></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -51,7 +53,6 @@ button, input { font: inherit; }
 @keyframes bob { 0%, 100% { margin-top: 0; } 50% { margin-top: 4px; } }
 a > span[aria-hidden="true"] { display: inline-block; transition: transform .4s cubic-bezier(.16,1,.3,1); }
 a:hover > span[aria-hidden="true"] { transform: translateX(4px); }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 @keyframes parallax-y { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
 @keyframes orb-a { from { transform: translate(0, 0) scale(1); } to { transform: translate(14vw, 12vh) scale(1.18); } }
 @keyframes orb-b { from { transform: translate(0, 0) scale(1.1); } to { transform: translate(-12vw, -14vh) scale(.92); } }
@@ -184,7 +185,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
           </div>
           <p style="max-width: 36ch; color: #5f687a; font-size: 16px; line-height: 1.55;">← → to step through.</p>
         </header>
-        <div style="{{ stageGridStyle }}" onMouseEnter="{{ pause }}" onMouseLeave="{{ resume }}" onKeyDown="{{ stepKeys }}">
+        <div style="{{ stageGridStyle }}" onKeyDown="{{ stepKeys }}">
           <sc-for list="{{ s.stages }}" as="st" hint-placeholder-count="4">
             <button type="button" onClick="{{ st.select }}" onMouseEnter="{{ st.select }}" style="{{ st.style }}">
               <span style="display: flex; justify-content: space-between; align-items: center;"><span style="{{ st.numStyle }}">{{ st.num }}</span><i aria-hidden="true" style="{{ st.dot }}"></i></span>
@@ -339,7 +340,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
       </div>
       <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">
         <span>© 2026 Allus AI Inc. · Atlanta, Georgia</span>
-        <div style="display: flex; gap: 20px;"><a href="privacy.html" style-hover="color: #fff;">Privacy and Security</a><a href="https://trust.allus.ai" style-hover="color: #fff;">Trust Center</a></div>
+        <div style="display: flex; gap: 20px;"><a href="privacy.html" style-hover="color: #fff;">Privacy</a><a href="terms.html" style-hover="color: #fff;">Terms</a><a href="https://trust.allus.ai" style-hover="color: #fff;">Trust Center</a></div>
       </div>
     </div>
   </footer>
@@ -353,7 +354,7 @@ class Component extends DCLogic {
   componentWillUnmount() { clearInterval(this._t); cancelAnimationFrame(this._raf); }
   tween(t) { const key = JSON.stringify(t); if (this._tKey === key) return; this._tKey = key; const from = this.state.tw || Object.fromEntries(Object.keys(t).map(k => [k, 0])); const t0 = performance.now(); cancelAnimationFrame(this._raf); const step = now => { const p = Math.min(1, (now - t0) / 900), e = 1 - Math.pow(1 - p, 3); const cur = {}; for (const k in t) cur[k] = from[k] + (t[k] - from[k]) * e; this.setState({ tw: cur }); if (p < 1) this._raf = requestAnimationFrame(step); }; this._raf = requestAnimationFrame(step); }
   componentDidUpdate(p) { if (p.autoCycle !== this.props.autoCycle) this.start(); }
-  start() { clearInterval(this._t); if (this.props.autoCycle ?? true) this._t = setInterval(() => { if (!this.state.paused) this.setState(s => ({ step: s.step + 1, cycle: s.cycle + 1 })); }, 4200); }
+  start() { clearInterval(this._t); if (this.props.autoCycle ?? true) this._t = setInterval(() => { this.setState(s => ({ step: s.step + 1, cycle: s.cycle + 1 })); }, 4200); }
   renderBase() {
     const d = this.state.data;
     const h = React.createElement;
@@ -377,7 +378,7 @@ class Component extends DCLogic {
           numStyle: { color: active ? '#2459d3' : '#5f687a', fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, letterSpacing: '.08em' },
           dot: { display: 'block', width: 10, height: 10, borderRadius: '50%', background: active ? src.color : 'transparent', border: '1px solid ' + src.color, transition: 'background .3s ease' },
           noteStyle: { color: '#5f687a', fontSize: 14, lineHeight: 1.5, opacity: active ? 1 : .55, transition: 'opacity .35s ease' },
-          progress: active && auto && !this.state.paused ? h('span', { key: 'p' + this.state.cycle, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: src.color, transformOrigin: 'left', animation: 'progress 4.2s linear both' } }) : null };
+          progress: active && auto ? h('span', { key: 'p' + this.state.cycle, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: src.color, transformOrigin: 'left', animation: 'progress 4.2s linear both' } }) : null };
       }),
       sections: src.sections.map(([title, note, children], i, arr) => ({ title, note, num: num(i), hasChildren: !!children, children: (children || []).map(([t, nn]) => ({ title: t, note: nn })), style: { display: 'grid', alignContent: 'start', padding: '28px 30px 32px', border: '1px solid rgba(16,24,40,.16)', borderRadius: 22, background: '#fff', gridColumn: (i === arr.length - 1 && arr.length % 2 === 1) ? '1 / -1' : 'auto' } }))
     };

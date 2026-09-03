@@ -346,11 +346,11 @@ export const footerGroups6 = [
   { title: 'Solutions', links: solutionOrder.map(s => [solutions[s].title, 'solution.html?solution=' + s]) },
   { title: 'Industries', links: industryOrder.map(s => [industries[s].title, 'industry.html?industry=' + s]) },
   { title: 'Use Cases', links: [['Advanced Materials', 'story.html?story=advanced-materials'], ['Electronics Assembly', 'story.html?story=electronics-assembly'], ['Biscuit Production', 'story.html?story=biscuit-production']] },
-  { title: 'Company', links: [['About Us', 'company.html'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy and Security', 'privacy.html']] },
+  { title: 'Company', links: [['About Us', 'company.html'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy', 'privacy.html'], ['Terms', 'terms.html']] },
   { title: 'Connect', links: [['Contact Us', 'connect.html?intent=demo']] }
 ].map(g => ({ title: g.title, links: g.links.map(([label, href]) => ({ label, href })) }));
 
 export const footerGroups4 = [
   footerGroups6[0], footerGroups6[1], footerGroups6[2],
-  { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy and Security', 'privacy.html'], ['Contact Us', 'connect.html?intent=demo']].map(([label, href]) => ({ label, href })) }
+  { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy', 'privacy.html'], ['Terms', 'terms.html'], ['Contact Us', 'connect.html?intent=demo']].map(([label, href]) => ({ label, href })) }
 ];

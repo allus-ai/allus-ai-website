@@ -25,7 +25,9 @@
 <script>(function(){var t={"electronics-assembly":"Electronics Assembly","fmcg":"FMCG","food-beverage":"Food & Beverage","advanced-materials":"Advanced Materials","automotive":"Automotive"};var v=new URLSearchParams(location.search).get('industry');if(v&&t[v]){document.title=t[v]+' | Allus AI';var og=document.querySelector('meta[property="og:title"]');if(og)og.content=document.title;var c=document.querySelector('link[rel=canonical]');if(c)c.href=c.href.split('?')[0]+'?industry='+v;}})();</script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://formspree.io https://api.hsforms.com https://hooks.zapier.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io mailto:;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="stylesheet" href="responsive.css">
+<link rel="stylesheet" href="responsive.css?v=mtlssvou">
+<link rel="stylesheet" href="mobile.css?v=mtlssvou">
+<script src="mobile.js?v=mtlssvou" defer></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -51,7 +53,6 @@ a:hover > span[aria-hidden="true"] { transform: translateX(4px); }
 @keyframes bar-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes orb-drift { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-46%) translateY(18px); } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 @keyframes parallax-y { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
 @keyframes orb-a { from { transform: translate(0, 0) scale(1); } to { transform: translate(14vw, 12vh) scale(1.18); } }
 @keyframes orb-b { from { transform: translate(0, 0) scale(1.1); } to { transform: translate(-12vw, -14vh) scale(.92); } }
@@ -136,7 +137,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
     <!-- 1. Hero: category + rotating result word -->
     <section style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; padding: 56px 0 0;">
       <nav aria-label="Industries" style="display: flex; gap: 4px; width: max-content; margin-inline: auto; padding: 5px; border: 1px solid rgba(16,24,40,.14); border-radius: 999px; background: #fcfbf8; animation: fade-up .6s cubic-bezier(.16,1,.3,1) both;">
-        <sc-for list="{{ rail }}" as="r" hint-placeholder-count="5"><a href="{{ r.href }}" onClick="{{ r.select }}" style="{{ r.style }}">{{ r.title }}</a></sc-for>
+        <sc-for list="{{ rail }}" as="r" hint-placeholder-count="5"><a href="{{ r.href }}" onClick="{{ r.select }}" style="{{ r.style }}"><i aria-hidden="true" style="{{ r.dot }}"></i><span>{{ r.title }}</span><span data-short>{{ r.short }}</span></a></sc-for>
       </nav>
       <div style="display: grid; justify-items: center; gap: 22px; max-width: 880px; margin: 48px auto 0; text-align: center;">
         <h1 style="font-family: 'Manrope', sans-serif; font-size: 64px; font-weight: 600; letter-spacing: -.045em; line-height: 1.02; text-wrap: balance; animation: fade-up .8s cubic-bezier(.16,1,.3,1) .1s both;">{{ story.headline }}</h1>
@@ -239,7 +240,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
         <div style="display: grid; gap: 18px; align-content: start;"><a href="index.html" style="display: block; width: max-content;"><img src="assets/allus-logo-white.svg" alt="Allus AI" style="display: block; width: 132px; height: auto;"></a><p style="max-width: 26ch; color: rgba(255,255,255,.58); font-size: 15px; line-height: 1.45;">Industrial foundation models and model-powered solutions for the physical world.</p><p style="color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;">Cupertino · Atlanta</p></div>
         <sc-for list="{{ footerGroups }}" as="g" hint-placeholder-count="4"><div style="display: grid; align-content: start; gap: 8px;"><h3 style="margin: 0 0 6px; color: rgba(255,255,255,.42); font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase;">{{ g.title }}</h3><sc-for list="{{ g.links }}" as="l" hint-placeholder-count="3"><a href="{{ l.href }}" style="display: block; min-height: 26px; color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.35;" style-hover="color: #fff;">{{ l.label }}</a></sc-for></div></sc-for>
       </div>
-      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;"><span>© 2026 Allus AI Inc. · Atlanta, Georgia</span><div style="display: flex; gap: 20px;"><a href="privacy.html">Privacy and Security</a><a href="https://trust.allus.ai">Trust Center</a></div></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.48); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em;"><span>© 2026 Allus AI Inc. · Atlanta, Georgia</span><div style="display: flex; gap: 20px;"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://trust.allus.ai">Trust Center</a></div></div>
     </div>
   </footer>
 </div>
@@ -303,7 +304,7 @@ class Component extends DCLogic {
       word: w.slice(0, this.state.typed),
       wordStyle: { color: '#3f7afe', fontStyle: 'italic', fontWeight: 400 },
       storyHref: ind.story ? ind.story.href : 'story.html?story=advanced-materials',
-      rail: d.industryOrder.map(key => { const cur = key === id; return { title: d.industries[key].title, href: 'industry.html?industry=' + key, select: e => { e.preventDefault(); this.setState({ industry: key, word: 0, typed: 0, active: 0 }); }, style: { display: 'inline-flex', alignItems: 'center', minHeight: 44, padding: '0 20px', borderRadius: 999, background: cur ? '#111318' : 'transparent', color: cur ? '#fff' : '#25324a', fontSize: 15, fontWeight: 600, transition: 'background .25s ease, color .25s ease' } }; }),
+      rail: d.industryOrder.map((key, i) => { const cur = key === id, c = ['#3f7afe', '#6eb8a9', '#df855d', '#8c7ac9', '#101828'][i]; return { title: d.industries[key].title, short: key === 'automotive' ? 'Auto' : d.industries[key].title, dot: { width: 8, height: 8, borderRadius: '50%', background: c, flex: 'none' }, href: 'industry.html?industry=' + key, select: e => { e.preventDefault(); this.setState({ industry: key, word: 0, typed: 0, active: 0 }); }, style: { display: 'inline-flex', alignItems: 'center', gap: 10, minHeight: 44, padding: '0 20px', borderRadius: 999, background: cur ? '#111318' : 'transparent', color: cur ? '#fff' : '#25324a', fontSize: 15, fontWeight: 600, transition: 'background .25s ease, color .25s ease' } }; }),
       entries: mix.map(slug => ({ short: d.solutionShort[slug], tagline: d.solutionTagline[slug], icon: d.solutionIcons[slug], image: d.solutions[slug].image2, href: '#ch-' + slug, jump: jumpTo('ch-' + slug) })),
       sqdc: d.sqdc.map(([label, title, value, unit, note]) => ({ label, title, unit, note, shown: typeof value === 'number' ? Math.round(value * p) : value, numStyle: { marginTop: 6, color: '#2459d3', fontFamily: "'Manrope', sans-serif", fontSize: typeof value === 'number' ? 52 : 36, fontWeight: 600, letterSpacing: '-.04em', lineHeight: 1 } })),
       ticker: [...mix.map(s => d.solutions[s].outcome), 'Runs inside your boundary', 'People stay in the decision', ...mix.map(s => d.solutions[s].outcome), 'Runs inside your boundary', 'People stay in the decision'].map(text => ({ text })),
