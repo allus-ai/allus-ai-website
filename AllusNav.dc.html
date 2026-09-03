@@ -120,10 +120,14 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
 class Component extends DCLogic {
   state = { open: null, drawer: false, cta: false };
   componentDidMount() {
+    this._mq = window.matchMedia('(max-width: 900px)');
+    this._onResize = () => { const desktop = window.innerWidth > 900; if (desktop) { document.body.style.overflow = ''; document.documentElement.style.overflow = ''; if (this.state.drawer || this.state.open) this.setState({ drawer: false, open: null }); } };
+    this._mq.addEventListener ? this._mq.addEventListener('change', this._onResize) : this._mq.addListener(this._onResize);
+    window.addEventListener('resize', this._onResize, { passive: true });
     this._onScroll = () => { const y = window.scrollY, rest = document.documentElement.scrollHeight - y - window.innerHeight; const show = y > 560 && rest > 720 && !this.state.drawer; if (show !== this.state.cta) this.setState({ cta: show }); };
     window.addEventListener('scroll', this._onScroll, { passive: true }); this._onScroll();
   }
-  componentWillUnmount() { clearTimeout(this._t); document.body.style.overflow = ''; window.removeEventListener('scroll', this._onScroll); }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); if (this._mq) { this._mq.removeEventListener ? this._mq.removeEventListener('change', this._onResize) : this._mq.removeListener(this._onResize); } clearTimeout(this._t); document.body.style.overflow = ''; window.removeEventListener('scroll', this._onScroll); }
   setDrawer(v) { this.setState({ drawer: v }); document.body.style.overflow = v ? 'hidden' : ''; }
   renderVals() {
     const active = this.props.active || '';

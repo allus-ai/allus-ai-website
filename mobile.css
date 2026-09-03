@@ -4,6 +4,24 @@
 @keyframes flow-y { from { top: -14%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } to { top: 100%; opacity: 0; } }
 
 @media (max-width: 900px) {
+  /* industry tile titles may wrap on phones */
+  a[href*="industry.html"] > strong[style*="white-space: nowrap"] { white-space: normal !important; font-size: 22px !important; }
+  /* terms h1 single line */
+  [data-screen-label]:not([data-screen-label="Home v2"]) main h1[data-inline] em { display: inline !important; }
+  /* heading rule (all pages except Home): black line first, blue phrase on its own line */
+  [data-screen-label]:not([data-screen-label="Home v2"]) :is(h1, h2, h3) em[style*="#3f7afe"],
+  [data-screen-label]:not([data-screen-label="Home v2"]) :is(h1, h2, h3) em[style*="#9db9ff"],
+  [data-screen-label]:not([data-screen-label="Home v2"]) :is(h1, h2, h3) em[style*="rgb(63, 122, 254)"],
+  [data-screen-label]:not([data-screen-label="Home v2"]) :is(h1, h2, h3) em[style*="rgb(157, 185, 255)"] { display: block !important; }
+  [data-screen-label]:not([data-screen-label="Home v2"]) :is(h1, h2, h3) { text-wrap: balance; }
+  [data-screen-label]:not([data-screen-label="Home v2"]) main h1 { font-size: 34px !important; line-height: 1.1 !important; }
+  [data-screen-label]:not([data-screen-label="Home v2"]) main h2[style*="font-size: 4"], [data-screen-label]:not([data-screen-label="Home v2"]) main h2[style*="font-size: 5"] { font-size: 28px !important; line-height: 1.12 !important; }
+  /* privacy/terms definition rows → stacked (title above text) */
+  main article[style*="grid-template-columns: 240px"] { grid-template-columns: 1fr !important; gap: 8px !important; padding: 18px 0 !important; }
+  main article[style*="grid-template-columns: 240px"] > h3 { font-size: 17px !important; }
+  main article[style*="grid-template-columns: 240px"] > p { font-size: 15px !important; line-height: 1.55 !important; }
+  /* privacy/terms doc bottom gap */
+  main > section[style*="grid-template-columns: 260px"] { padding-bottom: 40px !important; }
   /* first-screen top padding: tighten under the header on phones (56/40px → 24px) */
   main > section:first-of-type[style*="padding: 56px 0 0"], main > section:first-of-type[style*="padding: 56px 0px 0px"], main > section:first-of-type[style*="padding: 40px 0 0"], main > section:first-of-type[style*="padding: 40px 0px 0px"] { padding-top: 24px !important; }
   /* status-bar / notch clearance: real devices report it via safe-area; the preview frame sets --mob-top */
@@ -338,7 +356,9 @@
   section[aria-labelledby="how-title"] ol[role="tablist"] > li > button > span:last-of-type { display: block !important; min-width: 0; }
   section[aria-labelledby="how-title"] ol[role="tablist"] strong { display: block !important; font-family: Manrope, sans-serif !important; font-size: 13px !important; font-weight: 600 !important; letter-spacing: -.01em !important; line-height: 1.25 !important; white-space: normal !important; }
   section[aria-labelledby="how-title"] ol[role="tablist"] > li > button > span:last-of-type > span:last-child { display: none !important; max-height: 0 !important; }
-  section[aria-labelledby="how-title"] ol[role="tablist"] > li > button { max-height: 56px !important; }
+  section[aria-labelledby="how-title"] ol[role="tablist"] > li > button > span:last-of-type { align-self: center !important; }
+  section[aria-labelledby="how-title"] ol[role="tablist"] > li > button { max-height: none !important; align-items: center !important; }
+  section[aria-labelledby="how-title"] ol[role="tablist"] > li > button > span:first-child { align-self: center !important; line-height: 1 !important; }
   section[aria-labelledby="how-title"] ol[role="tablist"] > li > button > span[aria-hidden] { display: none !important; }
   section[aria-labelledby="spec-title"] > div > div[style*="grid-template-columns: repeat(3"] > div { border-left: 0 !important; border-top: 1px solid rgba(16,24,40,.12); }
   section[aria-labelledby="spec-title"] > div > div[style*="grid-template-columns: repeat(3"] > div:first-child { border-top: 0; }
@@ -364,6 +384,11 @@
   section[aria-labelledby="caps-title"] article { grid-column: auto !important; }
   section[aria-labelledby="nar-title"] div[style*="grid-template-columns: 300px minmax(0, 1fr)"] > div:last-child, section[aria-labelledby="nar-title"] div[style*="grid-template-columns: 300px minmax(0, 1fr)"] > div:last-child { grid-template-rows: auto auto !important; }
   section[aria-labelledby="nar-title"] div[style*="grid-template-columns: repeat(4"] { grid-template-columns: 1fr 1fr !important; }
+  /* ROI wave card: fixed compact height, seamless wave */
+  section[aria-labelledby="nar-title"] div[style*="min-height: 200px"][style*="overflow: hidden"] { min-height: 0 !important; height: 168px !important; }
+  section[aria-labelledby="nar-title"] div[style*="min-height: 200px"][style*="overflow: hidden"] > div[aria-hidden] { max-height: 70% !important; }
+  section[aria-labelledby="nar-title"] div[style*="min-height: 200px"][style*="overflow: hidden"] > div[aria-hidden] svg { width: 300% !important; max-width: none !important; animation-name: wave-m, bob !important; }
+  section[aria-labelledby="nar-title"] div[aria-hidden] > svg[viewBox="0 0 800 60"] { width: 300% !important; max-width: none !important; }
   section[aria-labelledby="nar-title"] figure { min-height: 0 !important; aspect-ratio: 16 / 10; }
 
   /* ── INDUSTRY (v3) ── */

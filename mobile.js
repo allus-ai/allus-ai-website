@@ -3,7 +3,24 @@
 (function () {
   var mq = window.matchMedia('(max-width: 900px)');
   function S(el, o) { if (el) for (var k in o) el.style[k] = o[k]; }
+  // ── Accordions (FAQ etc.), all viewports: runtime pins grid-template-rows so 0fr never collapses → drive open/closed via max-height/opacity ──
+  function accordions() {
+    document.querySelectorAll('button[aria-expanded]').forEach(function (b) {
+      if (b.closest('header, nav, [data-nav-toggle]') || b.hasAttribute('data-nav-toggle')) return;
+      var body = b.nextElementSibling; if (!body || body.tagName === 'BUTTON' || body.getAttribute('role') === 'dialog') return;
+      var inner = body.firstElementChild; if (!inner) return;
+      var open = b.getAttribute('aria-expanded') === 'true';
+      var h = inner.scrollHeight;
+      var mh = open ? (h + 24) + 'px' : '0px'; if (body.style.maxHeight === mh && body.style.opacity === (open ? '1' : '0')) return;
+      S(body, { display: 'block', gridTemplateRows: 'none', overflow: 'hidden', maxHeight: mh, opacity: open ? '1' : '0', transition: 'max-height .38s cubic-bezier(.16,1,.3,1), opacity .25s ease' });
+      S(b, { cursor: 'pointer' });
+    });
+  }
+  var busy = false;
   function fix() {
+    if (busy) return; busy = true; try { fixInner(); } finally { setTimeout(function () { busy = false; }, 0); }
+  }
+  function fixInner() {
     accordions();
     document.querySelectorAll('[data-marquee]').forEach(function (m) { m.style.animationPlayState = 'running'; m.style.animationName = m.style.animationName || (m.getAttribute('style').indexOf('marquee-right') > -1 ? 'marquee-right' : 'marquee-left'); });
     if (!mq.matches) return;
@@ -39,24 +56,21 @@
     });
     // company: drop 112px spacer in "why we exist"
     document.querySelectorAll('main section > div[style="height: 112px;"]').forEach(function (d) { S(d, { height: '32px' }); });
-  // ── Accordions (FAQ etc.), all viewports: runtime pins grid-template-rows so 0fr never collapses → drive open/closed via max-height/opacity ──
-  function accordions() {
-    document.querySelectorAll('button[aria-expanded]').forEach(function (b) {
-      var body = b.nextElementSibling; if (!body || body.tagName === 'BUTTON' || body.getAttribute('role') === 'dialog') return;
-      var inner = body.firstElementChild; if (!inner) return;
-      var open = b.getAttribute('aria-expanded') === 'true';
-      var h = inner.scrollHeight;
-      S(body, { display: 'block', gridTemplateRows: 'none', overflow: 'hidden', maxHeight: open ? (h + 24) + 'px' : '0px', opacity: open ? '1' : '0', transition: 'max-height .38s cubic-bezier(.16,1,.3,1), opacity .25s ease' });
-      S(b, { cursor: 'pointer' });
-    });
-  }
     // model detail: step chips — hide note, mark active (runtime pins inline styles)
     document.querySelectorAll('section[aria-labelledby="how-title"] ol[role="tablist"] > li > button').forEach(function (b) {
       var spans = b.querySelectorAll(':scope > span:last-of-type > span'); spans.forEach(function (s) { S(s, { display: 'none', maxHeight: '0' }); });
       var active = !!b.querySelector(':scope > span[aria-hidden]') || b.getAttribute('aria-selected') === 'true';
       if (active) b.setAttribute('data-mob-active', ''); else b.removeAttribute('data-mob-active');
-      S(b, { minHeight: '56px', height: 'auto' });
+      S(b, { minHeight: '56px', height: 'auto', maxHeight: 'none' });
       var num = b.querySelector(':scope > span:first-child'); if (num) S(num, { color: active ? '#2459d3' : '#5f687a' });
+    });
+    // roi wave: seamless loop + compact card
+    document.querySelectorAll('section[aria-labelledby="nar-title"] span').forEach(function (lab) {
+      if (lab.textContent.trim() !== 'Year-one ROI') return;
+      var card = lab.parentElement; while (card && !(card.style && /hidden/.test(card.style.overflow))) card = card.parentElement; if (!card) return;
+      S(card, { minHeight: '0', height: '168px' });
+      var wave = card.querySelector(':scope > div[aria-hidden]'); if (wave) S(wave, { maxHeight: '70%' });
+      card.querySelectorAll(':scope > div[aria-hidden] svg').forEach(function (svg) { S(svg, { width: '300%', maxWidth: 'none', animationName: /bob/.test(svg.style.animation || svg.style.animationName) ? 'wave-m, bob' : 'wave-m' }); });
     });
     // inline text links → tap targets
     document.querySelectorAll('main a[href], footer a[href], a[href^="mailto:"]').forEach(function (a) {
@@ -68,7 +82,7 @@
   var t; function schedule() { clearTimeout(t); t = setTimeout(fix, 80); }
   fix(); [300, 900, 1800, 3500].forEach(function (ms) { setTimeout(fix, ms); });
   window.addEventListener('load', fix); window.addEventListener('resize', schedule);
-  new MutationObserver(schedule).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['aria-expanded'] });
+  new MutationObserver(function (muts) { for (var i = 0; i < muts.length; i++) { if (muts[i].addedNodes.length) { schedule(); return; } } }).observe(document.documentElement, { childList: true, subtree: true });
   document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('button[aria-expanded]')) { requestAnimationFrame(accordions); setTimeout(accordions, 60); } }, true);
   window.__allusMobileFix = fix;
 })();

@@ -106,6 +106,9 @@ If `ga4Id` or `plausibleDomain` is set, these events fire (name → props):
   `ffmpeg -i in.mp4 -vf scale=1280:-2 -c:v libx264 -crf 28 -preset slow -an -movflags +faststart out.mp4`
   (and optionally a WebM/VP9 variant). Keep the same filenames or update paths in `index.html`.
 
+### Caching
+`_headers` sets `no-cache` for shared runtime files (AllusNav.dc.html, mobile.css, responsive.css, site.js, allus-content.js) so updates propagate immediately; media under `assets/` is immutable-cached. Mirror these rules on nginx/CloudFront if not using Netlify/Cloudflare Pages. (no-cache for shared)
+
 ## 8. Browser support
 
 - Evergreen Chrome / Edge / Safari 16+ / Firefox. Scroll-driven animations degrade to static content in Safari/Firefox; `backdrop-filter` falls back to solid fills. Motion is always on by product decision (no reduce-motion override, no pause toggle; carousels/steppers auto-advance and do not pause on hover).

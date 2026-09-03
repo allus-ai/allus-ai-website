@@ -3,6 +3,10 @@
 
 html, body { max-width: 100%; overflow-x: clip; }
 img, video, svg { max-width: 100%; }
+/* roi wave strips must stay 3× wide for a seamless loop */
+section[aria-labelledby="nar-title"] div[aria-hidden] > svg[viewBox="0 0 800 60"] { max-width: none; }
+/* switcher short labels are mobile-only */
+nav[aria-label="Industries"] a > span[data-short] { display: none; }
 [data-screen-label] { min-width: 0 !important; }
 
 /* ───────── ≤ 1180px : compress the 1180 container, 4/5 columns → 2 ───────── */
@@ -136,3 +140,6 @@ img, video, svg { max-width: 100%; }
   header img[alt="Allus AI"] { width: 100px !important; }
   [style*="font-size: 10px"][style*="letter-spacing: .12em"] { letter-spacing: .06em !important; }
 }
+
+/* drawer never renders on desktop, whatever its state */
+@media (min-width: 901px) { [data-drawer], [data-drawer-backdrop], [data-nav-toggle] { display: none !important; } }
