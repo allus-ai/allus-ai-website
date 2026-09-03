@@ -106,6 +106,9 @@ If `ga4Id` or `plausibleDomain` is set, these events fire (name → props):
   `ffmpeg -i in.mp4 -vf scale=1280:-2 -c:v libx264 -crf 28 -preset slow -an -movflags +faststart out.mp4`
   (and optionally a WebM/VP9 variant). Keep the same filenames or update paths in `index.html`.
 
+### Shared motion
+`motion.js` applies the pipeline design language site-wide: numbered lists and chip rows light up sequentially on a 900 ms clock, the active item glows blue. It detects groups by structure (01/02 or a/b/c labels; pill rows) and excludes nav, footer, forms, steppers and the Home/Model pipeline itself. Remove the `<script src="motion.js">` tag on any page to opt out.
+
 ### Caching
 `_headers` sets `no-cache` for shared runtime files (AllusNav.dc.html, mobile.css, responsive.css, site.js, allus-content.js) so updates propagate immediately; media under `assets/` is immutable-cached. Mirror these rules on nginx/CloudFront if not using Netlify/Cloudflare Pages. (no-cache for shared)
 

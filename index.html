@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="responsive.css?v=mtlssvou">
 <link rel="stylesheet" href="mobile.css?v=mtlssvou">
 <script src="mobile.js?v=mtlssvou" defer></script>
+<script src="motion.js?v=2" defer></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -51,6 +52,8 @@ button { font: inherit; }
 @keyframes orb-drift { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-46%) translateY(18px); } }
 @keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes pulse-ring { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.9); opacity: 0; } }
+@keyframes edge-ring { 0% { transform: scale(.5); opacity: .7; } 100% { transform: scale(1.6); opacity: 0; } }
+@keyframes bar-bob { 0%, 100% { transform: scaleY(.55); } 50% { transform: scaleY(1); } }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 a > span[aria-hidden="true"] { display: inline-block; transition: transform .4s cubic-bezier(.16,1,.3,1); }
 a:hover > span[aria-hidden="true"] { transform: translateX(4px); }
@@ -201,71 +204,61 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
     </section>
 
     <!-- 02 How it works -->
-    <section aria-labelledby="how-title" style="position: relative; padding-block: 136px 120px;">
+    <section aria-labelledby="how-title" style="position: relative; padding-block: 88px 72px;">
       <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto;">
-        <header style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 48px; align-items: end; margin-bottom: 64px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;">
+        <header style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 48px; align-items: end; margin-bottom: 40px; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;">
           <div>
             <p style="margin: 0 0 16px; color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;">How it works</p>
             <h2 id="how-title" style="max-width: 16ch; color: #101828; font-family: 'Manrope', sans-serif; font-size: 54px; font-weight: 500; letter-spacing: -.045em; line-height: 1.04;">From tribal knowledge into<br><em style="color: #3f7afe; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400;">verified, optimized execution.</em></h2>
           </div>
-          <p style="max-width: 40ch; color: #5f687a; font-size: 17px; line-height: 1.55;">One model. Two products. Time and edge.</p>
         </header>
 
-        <!-- Pipeline -->
-        <div style="display: grid; grid-template-columns: 200px 56px minmax(0, 1fr) 56px 220px; align-items: stretch; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
+        <!-- Pipeline (animated) -->
+        <div style="display: grid; grid-template-columns: 220px 64px minmax(0, 1fr) 64px 240px; grid-template-rows: auto auto; row-gap: 12px; align-items: stretch; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
           <!-- Inputs -->
-          <div style="display: grid; align-content: center; gap: 12px; padding: 28px 24px; border: 1px dashed rgba(16,24,40,.28); border-radius: 22px; background: #fcfbf8;">
-            <span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Inputs</span>
-            <strong style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3;">What the plant already has</strong>
-            <ul style="display: grid; gap: 8px; margin: 6px 0 0; padding: 0; list-style: none; color: #25324a; font-size: 14px;">
-              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #5f687a;"></i>Cameras &amp; video</li>
-              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #5f687a;"></i>Procedures &amp; manuals</li>
-              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #5f687a;"></i>Machine &amp; MES context</li>
-            </ul>
+          <div style="grid-row: 1 / 3; display: grid; align-content: center; gap: 10px; padding: 24px 20px; border: 1px dashed rgba(16,24,40,.22); border-radius: 22px; background: #fcfbf8;">
+            <span style="margin-bottom: 6px; color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Inputs</span>
+            <sc-for list="{{ flowInputs }}" as="c" hint-placeholder-count="3">
+              <div style="{{ c.style }}"><i aria-hidden="true" style="{{ c.dot }}"></i>{{ c.label }}</div>
+            </sc-for>
           </div>
-          <!-- connector -->
-          <div aria-hidden="true" style="position: relative; align-self: center; height: 1px; background: rgba(16,24,40,.22);">{{ pulseIn }}</div>
+          <!-- connector in -->
+          <div aria-hidden="true" style="grid-row: 1; position: relative; align-self: center; height: 2px; background: rgba(16,24,40,.12); overflow: visible;"><span style="{{ flowLineIn }}"></span>{{ pulseIn }}</div>
 
           <!-- Model system -->
-          <div style="position: relative; display: grid; grid-template-rows: auto auto; gap: 14px;">
-            <a href="model-detail.html?model=allusone" style="position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 24px; padding: 30px 32px; border: 1px solid rgba(16,24,40,.16); border-radius: 24px; background: radial-gradient(circle at 100% 0%, rgba(223,232,255,.7), transparent 46%), #fff; overflow: hidden; transition: border-color .18s ease, box-shadow .4s ease;" style-hover="border-color: rgba(16,24,40,.3); box-shadow: 0 18px 44px rgba(17,19,24,.08);">
-              <div style="display: grid; gap: 10px; align-content: center;">
+          <a href="model-detail.html?model=allusone" style="grid-column: 3; grid-row: 1; position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 28px; align-items: center; padding: 28px 30px; border: 1px solid rgba(63,122,254,.3); border-radius: 24px; background: radial-gradient(circle at 100% 0%, rgba(223,232,255,.8), transparent 50%), #fff; overflow: hidden; transition: border-color .18s ease, box-shadow .4s ease;" style-hover="border-color: rgba(16,24,40,.3); box-shadow: 0 18px 44px rgba(17,19,24,.08);">
+              <span aria-hidden="true" style="{{ coreGlow }}"></span>
+              <div style="position: relative; display: grid; gap: 8px;">
                 <span style="display: inline-flex; align-items: center; gap: 8px; color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;"><i aria-hidden="true" style="position: relative; display: block; width: 8px; height: 8px; border-radius: 50%; background: #2459d3;">{{ ringA }}</i>01 · Core model</span>
-                <h3 style="color: #101828; font-family: 'Newsreader', Georgia, serif; font-size: 44px; font-weight: 400; letter-spacing: -.035em; line-height: 1;">AllusONE</h3>
-                <p style="max-width: 34ch; color: #5f687a; font-size: 15px; line-height: 1.5;">Sees people, parts, tools, equipment and state in image and video — then reasons over them with the plant's own terminology.</p>
+                <h3 style="color: #101828; font-family: 'Newsreader', Georgia, serif; font-size: 48px; font-weight: 400; letter-spacing: -.035em; line-height: 1;">AllusONE</h3>
+                <p style="color: #5f687a; font-size: 15px; line-height: 1.4;">Sees the work. Reasons in your terms.</p>
               </div>
-              <ul style="display: grid; align-content: center; gap: 0; margin: 0; padding: 0; border-left: 1px solid rgba(16,24,40,.16); list-style: none;">
-                <li style="display: grid; grid-template-columns: 28px 1fr; align-items: center; min-height: 44px; padding-left: 18px; border-bottom: 1px solid rgba(16,24,40,.12); font-size: 14px; font-weight: 500;"><span style="color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px;">a</span>Perceive the scene</li>
-                <li style="display: grid; grid-template-columns: 28px 1fr; align-items: center; min-height: 44px; padding-left: 18px; border-bottom: 1px solid rgba(16,24,40,.12); font-size: 14px; font-weight: 500;"><span style="color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px;">b</span>Relate the context</li>
-                <li style="display: grid; grid-template-columns: 28px 1fr; align-items: center; min-height: 44px; padding-left: 18px; font-size: 14px; font-weight: 500;"><span style="color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px;">c</span>Return structured output</li>
-              </ul>
+              <ol style="position: relative; display: grid; gap: 6px; margin: 0; padding: 0 0 0 24px; border-left: 1px solid rgba(63,122,254,.22); list-style: none;">
+                <sc-for list="{{ coreSteps }}" as="st" hint-placeholder-count="3">
+                  <li style="{{ st.style }}"><span style="{{ st.num }}">{{ st.k }}</span>{{ st.label }}<span aria-hidden="true" style="{{ st.bar }}"></span></li>
+                </sc-for>
+              </ol>
             </a>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-              <a href="model-detail.html?model=allusflow" style="position: relative; display: grid; gap: 8px; align-content: start; padding: 24px 26px; border: 1px solid rgba(16,24,40,.16); border-radius: 22px; background: #fff; transition: border-color .18s ease, box-shadow .4s ease, transform .4s cubic-bezier(.16,1,.3,1);" style-hover="border-color: rgba(16,24,40,.3); box-shadow: 0 18px 44px rgba(17,19,24,.08); transform: translateY(-3px);">
-                <span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">02 · Time</span>
-                <h3 style="color: #101828; font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 400; letter-spacing: -.03em; line-height: 1;">AllusFlow</h3>
-                <p style="color: #5f687a; font-size: 14px; line-height: 1.5;">Turns long recordings into steps, cycle times and interruptions — each linked back to its source moment.</p>
+            <div style="grid-column: 3; grid-row: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <a href="model-detail.html?model=allusflow" style="position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 18px 22px; border: 1px solid rgba(16,24,40,.16); border-radius: 20px; background: #fff; overflow: hidden; transition: border-color .18s ease, box-shadow .4s ease, transform .4s cubic-bezier(.16,1,.3,1);" style-hover="border-color: rgba(16,24,40,.3); box-shadow: 0 18px 44px rgba(17,19,24,.08); transform: translateY(-3px);">
+                <span style="display: grid; gap: 4px;"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">02 · Time</span><h3 style="color: #101828; font-family: 'Newsreader', Georgia, serif; font-size: 28px; font-weight: 400; letter-spacing: -.03em; line-height: 1;">AllusFlow</h3><span style="color: #5f687a; font-size: 13px;">Video → steps &amp; timing</span></span>
+                <span aria-hidden="true" style="position: relative; display: grid; grid-auto-flow: column; gap: 4px; align-items: end; height: 40px; width: 64px;"><sc-for list="{{ flowBars }}" as="fb" hint-placeholder-count="6"><i style="{{ fb.style }}"></i></sc-for></span>
               </a>
-              <a href="model-detail.html?model=allusedge" style="position: relative; display: grid; gap: 8px; align-content: start; padding: 24px 26px; border: 1px solid rgba(16,24,40,.16); border-radius: 22px; background: #fff; transition: border-color .18s ease, box-shadow .4s ease, transform .4s cubic-bezier(.16,1,.3,1);" style-hover="border-color: rgba(16,24,40,.3); box-shadow: 0 18px 44px rgba(17,19,24,.08); transform: translateY(-3px);">
-                <span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">03 · Edge</span>
-                <h3 style="color: #101828; font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 400; letter-spacing: -.03em; line-height: 1;">AllusEdge</h3>
-                <p style="color: #5f687a; font-size: 14px; line-height: 1.5;">Compresses and validates the models for the cameras, servers and power limits already on site.</p>
+              <a href="model-detail.html?model=allusedge" style="position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 18px 22px; border: 1px solid rgba(16,24,40,.16); border-radius: 20px; background: #fff; overflow: hidden; transition: border-color .18s ease, box-shadow .4s ease, transform .4s cubic-bezier(.16,1,.3,1);" style-hover="border-color: rgba(16,24,40,.3); box-shadow: 0 18px 44px rgba(17,19,24,.08); transform: translateY(-3px);">
+                <span style="display: grid; gap: 4px;"><span style="color: #5f687a; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">03 · Edge</span><h3 style="color: #101828; font-family: 'Newsreader', Georgia, serif; font-size: 28px; font-weight: 400; letter-spacing: -.03em; line-height: 1;">AllusEdge</h3><span style="color: #5f687a; font-size: 13px;">Runs on your hardware</span></span>
+                <span aria-hidden="true" style="position: relative; display: grid; place-items: center; width: 64px; height: 40px;"><span style="{{ edgeRingA }}"></span><span style="{{ edgeRingB }}"></span><i style="position: relative; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid #101828; background: #fff;"><i style="width: 8px; height: 8px; border-radius: 2px; background: #2459d3;"></i></i></span>
               </a>
             </div>
-          </div>
 
-          <div aria-hidden="true" style="position: relative; align-self: center; height: 1px; background: rgba(16,24,40,.22);">{{ pulseOut }}</div>
+          <!-- connector out -->
+          <div aria-hidden="true" style="grid-row: 1; position: relative; align-self: center; height: 2px; background: rgba(16,24,40,.12); overflow: visible;"><span style="{{ flowLineOut }}"></span>{{ pulseOut }}</div>
 
           <!-- Outputs -->
-          <div style="display: grid; align-content: center; gap: 12px; padding: 28px 24px; border: 1px solid rgba(16,24,40,.16); border-radius: 22px; background: #111318; color: #fcfbf8;">
-            <span style="color: rgba(255,255,255,.6); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Outputs</span>
-            <strong style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3;">Reviewable, structured, source-linked</strong>
-            <ul style="display: grid; gap: 8px; margin: 6px 0 0; padding: 0; list-style: none; color: rgba(255,255,255,.78); font-size: 14px;">
-              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #3f7afe;"></i>Step-by-step guidance</li>
-              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #6eb8a9;"></i>Process timelines</li>
-              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #df855d;"></i>Asset condition records</li>
-              <li style="display: flex; gap: 10px; align-items: center;"><i aria-hidden="true" style="width: 5px; height: 5px; border-radius: 50%; background: #8c7ac9;"></i>Governed site event review</li>
-            </ul>
+          <div style="grid-row: 1 / 3; display: grid; align-content: center; gap: 10px; padding: 24px 20px; border-radius: 22px; background: #111318; color: #fcfbf8;">
+            <span style="margin-bottom: 6px; color: rgba(255,255,255,.6); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;">Outputs</span>
+            <sc-for list="{{ flowOutputs }}" as="c" hint-placeholder-count="4">
+              <div style="{{ c.style }}"><i aria-hidden="true" style="{{ c.dot }}"></i>{{ c.label }}</div>
+            </sc-for>
           </div>
         </div>
       </div>
@@ -273,7 +266,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
 
 
     <!-- Proof band -->
-    <section aria-label="Results" style="padding-block: 96px 0;">
+    <section aria-label="Results" style="padding-block: 16px 0;">
       <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 40px; align-items: center; padding: 40px; border-radius: 28px; background: #ebf1fb; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
         <div style="display: grid; gap: 14px; align-content: start;"><span style="justify-self: start; padding: 6px 12px; border-radius: 999px; background: #fff; color: #2459d3; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase;">Proven results</span><h2 style="font-family: 'Manrope', sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -.045em; line-height: 1.04;">Safety. Quality. Delivery. Cost.</h2><p style="color: #5f687a; font-size: 15px; line-height: 1.5;">The numbers plants track every shift.</p></div>
         <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-self: center;">
@@ -435,7 +428,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
 <script type="text/x-dc" data-dc-script data-props="{&quot;autoCycle&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;heroHeadline&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;manufacturing&quot;,&quot;options&quot;:[&quot;manufacturing&quot;,&quot;physical-world&quot;],&quot;tsType&quot;:&quot;'manufacturing' | 'physical-world'&quot;,&quot;section&quot;:&quot;Copy&quot;},&quot;showBackedBy&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
 class Component extends DCLogic {
   renderVals() { const v = this.renderBase(); const k = (key, n) => e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; e.preventDefault(); this.setState(s => ({ [key]: (s[key] + d + n) % n, cycle: s.cycle + 1 })); }; v.solKeys = k('sol', 4); v.reelKeys = k('heroTab', 4); return v; }
-  state = { heroTab: 0, sol: 0, cycle: 0, word: 0, wordIn: true, faqOpen: 0 };
+  state = { heroTab: 0, sol: 0, cycle: 0, word: 0, wordIn: true, faqOpen: 0, flow: 0 };
   gridRef = React.createRef();
 
   componentDidMount() {
@@ -460,13 +453,14 @@ class Component extends DCLogic {
     };
     this._ro = new ResizeObserver(resize); this._ro.observe(wrap); resize();
   }
-  componentWillUnmount() { this._ro && this._ro.disconnect(); clearInterval(this._t1); clearInterval(this._t2); clearInterval(this._t3); }
+  componentWillUnmount() { this._ro && this._ro.disconnect(); clearInterval(this._t1); clearInterval(this._t2); clearInterval(this._t3); clearInterval(this._t4); }
 
   startTimers() {
     clearInterval(this._t1); clearInterval(this._t2);
     if (!(this.props.autoCycle ?? true)) return;
     this._t1 = setInterval(() => { this.setState(s => ({ heroTab: (s.heroTab + 1) % 4 })); }, 7000);
     this._t2 = setInterval(() => { this.setState(s => ({ sol: (s.sol + 1) % 4, cycle: s.cycle + 1 })); }, 5200);
+    this._t4 = setInterval(() => this.setState(s => ({ flow: (s.flow + 1) % 10 })), 900);
     this._t3 = setInterval(() => { this.setState({ wordIn: false }); setTimeout(() => this.setState(s => ({ word: (s.word + 1) % 4, wordIn: true })), 320); }, 2600);
   }
   componentDidUpdate(prev) { if (prev.autoCycle !== this.props.autoCycle) this.startTimers(); }
@@ -533,8 +527,23 @@ class Component extends DCLogic {
       activeSceneKicker: scenes[this.state.heroTab].kicker,
       activeSceneTitle: scenes[this.state.heroTab].title,
       runsOn: [['Edge', 'next to cameras and machines'], ['On-Premise', 'inside your facility'], ['Private Cloud', 'in your own tenant'], ['Hybrid', 'local execution, central control']].map(([label, note]) => ({ label, note })),
-      pulseIn: pulse('flow-x', '#2459d3'),
-      pulseOut: pulse('flow-x', '#6eb8a9'),
+      ...(() => {
+        const f = this.state.flow; // 0-2 inputs light, 3 pulse in, 4-6 core steps, 7 pulse out, 8-9 outputs light
+        const T = '.45s cubic-bezier(.16,1,.3,1)';
+        const chip = (on, dark, color) => ({ display: 'flex', alignItems: 'center', gap: 10, minHeight: 44, whiteSpace: 'nowrap', padding: '0 12px', borderRadius: 12, fontSize: 14, fontWeight: 500, color: dark ? (on ? '#fff' : 'rgba(255,255,255,.55)') : (on ? '#101828' : '#5f687a'), background: on ? (dark ? 'rgba(255,255,255,.1)' : '#fff') : 'transparent', boxShadow: on ? (dark ? 'inset 0 0 0 1px rgba(255,255,255,.18)' : '0 6px 18px rgba(36,89,211,.12), inset 0 0 0 1px rgba(63,122,254,.35)') : 'none', transform: on ? 'translateX(4px)' : 'none', transition: 'all ' + T });
+        const dot = (on, color) => ({ width: 8, height: 8, borderRadius: '50%', background: color, opacity: on ? 1 : .35, boxShadow: on ? '0 0 0 4px ' + color + '33' : 'none', flex: 'none', transition: 'all ' + T });
+        const inputs = ['Cameras & video', 'SOPs & manuals', 'Machine & MES data'].map((label, i) => { const on = f <= 3 && i <= f; return { label, style: chip(on, false), dot: dot(on, '#2459d3') }; });
+        const outColors = ['#3f7afe', '#6eb8a9', '#df855d', '#8c7ac9'];
+        const outputs = ['Step-by-step guidance', 'Process timelines', 'Asset condition records', 'Governed site review'].map((label, i) => { const on = f >= 8 ? (i <= (f - 8) * 2 + 1) : false; return { label, style: chip(on, true), dot: dot(on, outColors[i]) }; });
+        const coreOn = f >= 4 && f <= 6;
+        const coreSteps = [['a', 'Perceive the scene'], ['b', 'Relate the context'], ['c', 'Return structured output']].map(([k, label], i) => { const on = coreOn && i === f - 4; const done = coreOn && i < f - 4; return { k, label, style: { position: 'relative', display: 'grid', gridTemplateColumns: '26px 1fr', alignItems: 'center', minHeight: 42, padding: '0 14px', borderRadius: 12, fontSize: 14, fontWeight: 500, color: on ? '#101828' : (done ? '#25324a' : '#5f687a'), background: on ? '#fff' : 'transparent', boxShadow: on ? '0 8px 22px rgba(36,89,211,.14), inset 0 0 0 1px rgba(63,122,254,.4)' : 'none', overflow: 'hidden', transition: 'all ' + T }, num: { color: on || done ? '#2459d3' : '#8a92a3', fontFamily: "'IBM Plex Mono', monospace", fontSize: 10, transition: 'color ' + T }, bar: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: '#3f7afe', transformOrigin: 'left', transform: 'scaleX(' + (on ? 1 : (done ? 1 : 0)) + ')', opacity: on ? 1 : (done ? .35 : 0), transition: 'transform .85s linear, opacity .3s ease' } }; });
+        const line = (on, color) => ({ position: 'absolute', inset: 0, background: color, transformOrigin: 'left', transform: 'scaleX(' + (on ? 1 : 0) + ')', transition: on ? 'transform .8s linear' : 'transform .2s ease', opacity: .9 });
+        const puls = (on, color) => on ? h('span', { key: 'p' + f, 'aria-hidden': true, style: { position: 'absolute', top: -4, width: 10, height: 10, borderRadius: '50%', background: color, boxShadow: '0 0 0 4px ' + color + '33', animation: 'flow-x .85s cubic-bezier(.4,0,.6,1) both' } }) : null;
+        const glowOn = f >= 3 && f <= 7;
+        return { flowInputs: inputs, flowOutputs: outputs, coreSteps, flowLineIn: line(f === 3 || (f >= 4 && f <= 7), '#2459d3'), flowLineOut: line(f === 7 || f >= 8, '#6eb8a9'), pulseIn: puls(f === 3, '#2459d3'), pulseOut: puls(f === 7, '#6eb8a9'), coreGlow: { position: 'absolute', inset: 0, borderRadius: 24, boxShadow: glowOn ? 'inset 0 0 0 1px rgba(63,122,254,.55), 0 20px 60px rgba(63,122,254,.18)' : 'inset 0 0 0 0 transparent', transition: 'box-shadow .6s ease', pointerEvents: 'none' },
+          flowBars: [62, 40, 88, 52, 74, 46].map((hgt, i) => ({ style: { display: 'block', width: 6, height: hgt + '%', borderRadius: 3, background: i === 2 ? '#2459d3' : '#dfe8ff', transformOrigin: 'bottom', animation: 'bar-bob ' + (2.2 + i * .3) + 's ease-in-out ' + (i * .18) + 's infinite' } })),
+          edgeRingA: { position: 'absolute', width: 28, height: 28, borderRadius: 8, border: '1px solid #2459d3', animation: 'edge-ring 2.4s ease-out infinite' }, edgeRingB: { position: 'absolute', width: 28, height: 28, borderRadius: 8, border: '1px solid #2459d3', animation: 'edge-ring 2.4s ease-out 1.2s infinite' } };
+      })(),
       ringA: h('span', { 'aria-hidden': true, style: { position: 'absolute', inset: -3, borderRadius: '50%', border: '1px solid #2459d3', animation: 'pulse-ring 2s ease-out infinite' } }),
       solutions,
       activeSolution: solutions[this.state.sol],

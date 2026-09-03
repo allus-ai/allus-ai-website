@@ -138,19 +138,30 @@
   section[aria-labelledby="home-title"] > div[style*="grid-template-columns: auto 1fr"] li > span[style*="font-weight: 400"] { display: none !important; }
   section[aria-labelledby="home-title"] > div[style*="grid-template-columns: auto 1fr"] li:first-child { display: none !important; }
 
-  /* ── HOW IT WORKS: vertical pipeline ────────────────────────────────── */
-  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 200px 56px"] { grid-template-columns: 1fr !important; gap: 0 !important; }
-  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 200px 56px"] > div[aria-hidden][style*="height: 1px"] { width: 1px !important; height: 40px !important; justify-self: center; background: linear-gradient(180deg, rgba(16,24,40,.05), rgba(16,24,40,.25), rgba(16,24,40,.05)) !important; }
-  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 200px 56px"] > div[aria-hidden] > span { top: auto !important; left: -3px !important; width: 7px !important; height: 7px !important; animation: flow-y 2.2s cubic-bezier(.4,0,.6,1) infinite !important; }
-  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 200px 56px"] > div[style*="padding: 28px 24px"] { padding: 20px !important; }
-  section[aria-labelledby="how-title"] a[href*="allusone"] { grid-template-columns: 1fr !important; gap: 14px !important; padding: 20px !important; }
-  section[aria-labelledby="how-title"] a[href*="allusone"] h3 { font-size: 32px !important; }
-  section[aria-labelledby="how-title"] a[href*="allusone"] ul { border-left: 0 !important; border-top: 1px solid rgba(16,24,40,.12); padding-top: 4px; }
-  section[aria-labelledby="how-title"] a[href*="allusone"] li { min-height: 40px !important; }
-  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
-  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 1fr 1fr"] > a { padding: 16px !important; gap: 6px !important; }
-  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 1fr 1fr"] > a h3 { font-size: 22px !important; }
-  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 1fr 1fr"] > a p { font-size: 13px !important; }
+  /* ── HOW IT WORKS: vertical pipeline (Inputs → AllusONE → Flow/Edge → Outputs) ─── */
+  section[aria-labelledby="how-title"] { padding-block: 56px 32px !important; }
+  section[aria-labelledby="how-title"] header { margin-bottom: 24px !important; }
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] { grid-template-columns: 1fr !important; grid-template-rows: none !important; row-gap: 0 !important; }
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > * { grid-column: 1 !important; grid-row: auto !important; }
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > div[style*="grid-row: 1 / 3"] { padding: 18px 16px !important; align-content: start !important; }
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > div[style*="grid-row: 1 / 3"] > div { min-height: 44px !important; }
+  /* horizontal connectors → short vertical ticks, dot travels vertically */
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > div[aria-hidden][style*="height: 2px"] { width: 2px !important; height: 36px !important; justify-self: center !important; align-self: auto !important; margin: 0 !important; }
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > div[aria-hidden][style*="height: 2px"] > span:first-child { width: 2px !important; height: 100% !important; transform-origin: top !important; }
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > div[aria-hidden][style*="height: 2px"] > span[style*="border-radius: 50%"] { left: -3px !important; top: auto !important; animation-name: flow-y !important; }
+  /* core card: stack copy above steps */
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > a[href*="allusone"] { grid-template-columns: 1fr !important; gap: 14px !important; padding: 20px 18px !important; }
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > a[href*="allusone"] h3 { font-size: 34px !important; }
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > a[href*="allusone"] ol { padding: 12px 0 0 !important; border-left: 0 !important; border-top: 1px solid rgba(63,122,254,.22) !important; }
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > a[href*="allusone"] ol li { min-height: 44px !important; }
+  /* products: two cards side by side, compact */
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr 1fr !important; gap: 10px !important; margin-top: 10px !important; }
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > div[style*="grid-template-columns: 1fr 1fr"] > a { grid-template-columns: 1fr !important; gap: 10px !important; padding: 14px 14px 16px !important; }
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > div[style*="grid-template-columns: 1fr 1fr"] > a h3 { font-size: 22px !important; }
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > div[style*="grid-template-columns: 1fr 1fr"] > a > span[aria-hidden] { justify-self: start; }
+  /* outputs */
+  section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > div[style*="grid-row: 1 / 3"][style*="background: #111318"], section[aria-labelledby="how-title"] div[style*="grid-template-columns: 220px 64px"] > div[style*="grid-row: 1 / 3"][style*="rgb(17, 19, 24)"] { padding: 18px 16px !important; }
+
 
   /* ── RESULTS: 2×2 stat tiles ────────────────────────────────────────── */
   section[aria-label="Results"] > div { grid-template-columns: 1fr !important; gap: 20px !important; padding: 22px !important; box-sizing: border-box !important; width: calc(100% - 40px) !important; }
