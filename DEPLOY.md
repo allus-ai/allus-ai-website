@@ -75,13 +75,13 @@ Also before launch:
 - [x] `terms.html` — full standard B2B Terms of Service (16 sections, Georgia law, Fulton County venue, legal@allus.ai). Review once by counsel; edit the `TERMS` array in the page script.
 - [x] `privacy.html` reviewed by legal.
 - [ ] Replace `assets/og-default.png` if you want a custom share image.
-- [ ] Confirm `contact@allus.ai` is monitored (mailto fallback + privacy contact).
+- [ ] Confirm `contact@allus.ai` is monitored (privacy contact).
 
 ## 4. Form (`connect.html`)
 
 - POSTs JSON `{ name, email, company, context, intent, page, ts }` to `formEndpoint`.
 - Honeypot field `website` — reject submissions where it is non-empty.
-- Expects `2xx` for success; anything else shows an inline error and offers the mailto fallback.
+- Expects `2xx` for success; anything else shows an inline error. With no `formEndpoint` set, the page shows the success state and logs the payload to the console (no email client is opened).
 - Compatible out of the box with Formspree / Basin / HubSpot Forms API / a Cloudflare Worker. Add the endpoint origin to CSP `connect-src`.
 
 ## 5. Analytics events
@@ -105,9 +105,6 @@ If `ga4Id` or `plausibleDomain` is set, these events fire (name → props):
 - Hero videos (`assets/media/allus-hero-{1..4}.mp4`, ~8.6 MB total) are `preload="none"`, poster-first; only current + next scene load on desktop, poster-only on mobile. **Recommended before launch:** re-encode with ffmpeg to reduce size, e.g.
   `ffmpeg -i in.mp4 -vf scale=1280:-2 -c:v libx264 -crf 28 -preset slow -an -movflags +faststart out.mp4`
   (and optionally a WebM/VP9 variant). Keep the same filenames or update paths in `index.html`.
-
-### Shared motion
-`motion.js` applies the pipeline design language site-wide: numbered lists and chip rows light up sequentially on a 900 ms clock, the active item glows blue. It detects groups by structure (01/02 or a/b/c labels; pill rows) and excludes nav, footer, forms, steppers and the Home/Model pipeline itself. Remove the `<script src="motion.js">` tag on any page to opt out.
 
 ### Caching
 `_headers` sets `no-cache` for shared runtime files (AllusNav.dc.html, mobile.css, responsive.css, site.js, allus-content.js) so updates propagate immediately; media under `assets/` is immutable-cached. Mirror these rules on nginx/CloudFront if not using Netlify/Cloudflare Pages. (no-cache for shared)

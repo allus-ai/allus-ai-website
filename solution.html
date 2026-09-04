@@ -28,7 +28,6 @@
 <link rel="stylesheet" href="responsive.css?v=mtlssvou">
 <link rel="stylesheet" href="mobile.css?v=mtlssvou">
 <script src="mobile.js?v=mtlssvou" defer></script>
-<script src="motion.js?v=2" defer></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -355,8 +354,22 @@ class Component extends DCLogic {
   componentDidMount() { import('./allus-content.js').then(data => this.setState({ data })); this.start(); }
   componentWillUnmount() { clearInterval(this._t); cancelAnimationFrame(this._raf); }
   tween(t) { const key = JSON.stringify(t); if (this._tKey === key) return; this._tKey = key; const from = this.state.tw || Object.fromEntries(Object.keys(t).map(k => [k, 0])); const t0 = performance.now(); cancelAnimationFrame(this._raf); const step = now => { const p = Math.min(1, (now - t0) / 900), e = 1 - Math.pow(1 - p, 3); const cur = {}; for (const k in t) cur[k] = from[k] + (t[k] - from[k]) * e; this.setState({ tw: cur }); if (p < 1) this._raf = requestAnimationFrame(step); }; this._raf = requestAnimationFrame(step); }
-  componentDidUpdate(p) { if (p.autoCycle !== this.props.autoCycle) this.start(); }
-  start() { clearInterval(this._t); if (this.props.autoCycle ?? true) this._t = setInterval(() => { this.setState(s => ({ step: s.step + 1, cycle: s.cycle + 1 })); }, 4200); }
+  componentDidUpdate(p, ps) {
+    if (p.autoCycle !== this.props.autoCycle) this.start();
+    if (ps && (ps.step !== this.state.step || ps.solution !== this.state.solution)) this.scrollStep();
+  }
+  scrollStep() {
+    if (!(window.matchMedia && window.matchMedia('(max-width: 900px)').matches)) return;
+    const root = document.querySelector('section[aria-labelledby="loop-title"]');
+    if (!root) return;
+    const btns = [...root.querySelectorAll('button[type="button"]')];
+    if (!btns.length) return;
+    const n = btns.length; const i = ((this.state.step % n) + n) % n; const b = btns[i]; const sc = b.parentElement;
+    if (!sc || sc.scrollWidth <= sc.clientWidth) return;
+    const left = b.offsetLeft - (sc.clientWidth - b.offsetWidth) / 2;
+    sc.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+  }
+  start() { clearInterval(this._t); if (this.props.autoCycle ?? true) this._t = setInterval(() => { this.setState(s => ({ step: s.step + 1, cycle: s.cycle + 1 })); setTimeout(() => this.scrollStep(), 60); }, 4200); }
   renderBase() {
     const d = this.state.data;
     const h = React.createElement;
@@ -399,7 +412,7 @@ class Component extends DCLogic {
       stageGridStyle: { display: 'grid', gridTemplateColumns: 'repeat(' + n + ', minmax(0,1fr))', border: '1px solid rgba(16,24,40,.16)', borderRadius: 24, background: '#fcfbf8', overflow: 'hidden' },
       pause: () => this.setState({ paused: true }),
       resume: () => this.setState({ paused: false, cycle: this.state.cycle + 1 }),
-      rail: d.solutionOrder.map(key => { const cur = key === id, c = d.solutions[key].color; return { short: shorts[key], href: 'solution.html?solution=' + key, select: e => { e.preventDefault(); this.setState({ solution: key, step: 0, cycle: this.state.cycle + 1 }); }, style: { display: 'inline-flex', alignItems: 'center', gap: 10, minHeight: 44, padding: '0 20px', borderRadius: 999, background: cur ? '#111318' : 'transparent', color: cur ? '#fff' : '#25324a', fontSize: 15, fontWeight: 600, transition: 'background .25s ease, color .25s ease' }, dot: { width: 8, height: 8, borderRadius: '50%', background: c } }; }),
+      rail: d.solutionOrder.map(key => { const cur = key === id, c = d.solutions[key].color; return { short: shorts[key], href: 'solution.html?solution=' + key, select: e => { e.preventDefault(); this.setState({ solution: key, step: 0, cycle: this.state.cycle + 1 }); setTimeout(() => this.scrollStep(), 60); }, style: { display: 'inline-flex', alignItems: 'center', gap: 10, minHeight: 44, padding: '0 20px', borderRadius: 999, background: cur ? '#111318' : 'transparent', color: cur ? '#fff' : '#25324a', fontSize: 15, fontWeight: 600, transition: 'background .25s ease, color .25s ease' }, dot: { width: 8, height: 8, borderRadius: '50%', background: c } }; }),
       isRoi: src.narrative.kind === 'roi', isSteps: src.narrative.kind === 'steps',
       narrativeSteps: (src.narrative.steps || []).map(([title, note], i) => ({ title, note, num: num(i) })),
       roi: {

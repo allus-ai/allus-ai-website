@@ -9,7 +9,7 @@ export const solutions = {
     image: 'assets/media/allus-knowledge-guidance.webp', image2: 'assets/media/allus-guided-work-handoff.webp', image3: 'assets/media/allus-completed-work-evidence.webp',
     stages: [['Capture', 'Expert demo + SOP'], ['Approve', 'Steps + evidence'], ['Guide', 'Right work context'], ['Return', 'Completion + feedback']],
     stageCaption: 'Record once. Approve. Guide. Learn.',
-    visualEyebrow: 'ILLUSTRATIVE KNOWLEDGE LOOP', visualMeta: 'Fixture changeover · AX-4 · Line 04',
+    visualEyebrow: 'KNOWLEDGE LOOP', visualMeta: 'Fixture changeover · AX-4 · Line 04',
     sections: [
       ['Capture Expert Work', 'Record video and narration; add approved procedures and manuals'],
       ['Structure & Approve', 'Long recordings become timestamped, source-linked steps'],
@@ -151,7 +151,7 @@ const solutionStatsQual = {
   'industrial-safety-site-intelligence': [['Governed', 'review', 'Within your retention rules.'], ['Human', 'in the loop', 'People confirm every response.']]
 };
 export const solutionStats = APPROVED ? solutionStatsRaw : solutionStatsQual;
-export const solutionIcons = { 'operational-knowledge-guidance': '▶', 'production-process-intelligence': '◔', 'equipment-asset-intelligence': '◍', 'industrial-safety-site-intelligence': '◈' };
+export const solutionIcons = {"operational-knowledge-guidance":"<svg viewBox=\"0 0 20 20\" width=\"18\" height=\"18\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M6 4.5v11l9-5.5z\"/></svg>","production-process-intelligence":"<svg viewBox=\"0 0 20 20\" width=\"18\" height=\"18\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"><circle cx=\"10\" cy=\"10\" r=\"6.5\"/><path d=\"M10 6v4l2.5 2.5\"/></svg>","equipment-asset-intelligence":"<svg viewBox=\"0 0 20 20\" width=\"18\" height=\"18\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12.5 3.5 16.5 7.5l-8 8-4.5.5.5-4.5z\"/><path d=\"M11 5l4 4\"/></svg>","industrial-safety-site-intelligence":"<svg viewBox=\"0 0 20 20\" width=\"18\" height=\"18\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linejoin=\"round\"><path d=\"M10 3l6 2.5v4.5c0 3.5-2.5 6-6 7.5-3.5-1.5-6-4-6-7.5V5.5z\"/></svg>"};
 export const solutionShort = { 'operational-knowledge-guidance': 'Knowledge & Guidance', 'production-process-intelligence': 'Process Intelligence', 'equipment-asset-intelligence': 'Asset Intelligence', 'industrial-safety-site-intelligence': 'Site Intelligence' };
 export const solutionTagline = { 'operational-knowledge-guidance': 'Turn expert recordings into structured, searchable guidance.', 'production-process-intelligence': 'Structure every cycle into steps, timing and evidence.', 'equipment-asset-intelligence': 'Read visible condition into the maintenance record.', 'industrial-safety-site-intelligence': 'Governed, human-reviewed site events.' };
 export const industryStory = {
@@ -352,5 +352,5 @@ export const footerGroups6 = [
 
 export const footerGroups4 = [
   footerGroups6[0], footerGroups6[1], footerGroups6[2],
-  { title: 'Company', links: [['About Us', 'company.html'], ['Customer Stories', 'story.html?story=advanced-materials'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy', 'privacy.html'], ['Terms', 'terms.html'], ['Contact Us', 'connect.html?intent=demo']].map(([label, href]) => ({ label, href })) }
+  { title: 'Company', links: [['About Us', 'company.html'], ['Trust Center', 'https://trust.allus.ai'], ['Privacy', 'privacy.html'], ['Terms', 'terms.html'], ['Contact Us', 'connect.html?intent=demo']].map(([label, href]) => ({ label, href })) }
 ];

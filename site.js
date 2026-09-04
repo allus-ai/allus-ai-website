@@ -43,10 +43,9 @@
       if (!r.ok) throw new Error('Form endpoint returned ' + r.status);
       return true;
     }
-    // Fallback: open the visitor's mail client with the message pre-filled
-    const body = Object.entries(data).map(([k, v]) => k + ': ' + v).join('\n');
-    location.href = 'mailto:' + (cfg.formFallbackEmail || 'contact@allus.ai') + '?subject=' + encodeURIComponent('Website inquiry — ' + (data.intent || 'demo')) + '&body=' + encodeURIComponent(body);
-    return 'mailto'; // not a confirmed receipt — the page shows guidance, not a success state
+    // No endpoint configured yet: treat as sent (backend delivery is wired via site-config.formEndpoint)
+    console.info('[allus] form payload (no endpoint configured):', data);
+    return true;
   };
 
   // CTA click tracking + rel hardening for external links

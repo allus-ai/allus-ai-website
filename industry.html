@@ -28,7 +28,6 @@
 <link rel="stylesheet" href="responsive.css?v=mtlssvou">
 <link rel="stylesheet" href="mobile.css?v=mtlssvou">
 <script src="mobile.js?v=mtlssvou" defer></script>
-<script src="motion.js?v=2" defer></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -155,7 +154,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
           <a href="{{ e.href }}" onClick="{{ e.jump }}" style="position: relative; display: grid; align-content: end; gap: 8px; min-height: 300px; padding: 22px; overflow: hidden; border-radius: 22px; background: #111318; color: #fff; transition: transform .45s cubic-bezier(.16,1,.3,1);" style-hover="transform: translateY(-6px);">
             <img data-dc-src="{{ e.image }}" alt="{{ e.short }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.12; animation: parallax-y linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; opacity: .9;" loading="eager" fetchpriority="high" decoding="async">
             <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,36,.05) 30%, rgba(13,20,36,.9) 100%);"></span>
-            <span style="position: relative; margin-bottom: auto; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: rgba(255,255,255,.14); backdrop-filter: blur(6px); font-size: 16px;">{{ e.icon }}</span>
+            <span style="position: relative; margin-bottom: auto; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: rgba(255,255,255,.14); backdrop-filter: blur(6px); font-size: 16px;">{{ e.iconEl }}</span>
             <strong style="position: relative; font-size: 20px; font-weight: 600; letter-spacing: -.025em; line-height: 1.15;">{{ e.short }}</strong>
             <span style="position: relative; color: rgba(255,255,255,.75); font-size: 13px; line-height: 1.45;">{{ e.tagline }}</span>
           </a>
@@ -227,7 +226,7 @@ img[loading="lazy"] { animation: fade-up .6s var(--ease-out) both; }
       <div style="width: min(1180px, calc(100% - 64px)); margin-inline: auto; animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;">
         <h2 id="caps-title" style="text-align: center; font-family: 'Manrope', sans-serif; font-size: 36px; font-weight: 600; letter-spacing: -.04em; line-height: 1.06;">Allus capabilities used in {{ ind.title }}</h2>
         <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 36px;">
-          <sc-for list="{{ caps }}" as="c" hint-placeholder-count="4"><a href="{{ c.href }}" style="display: grid; gap: 10px; align-content: start; padding: 22px; border-radius: 18px; background: #ebf1fb; transition: transform .4s cubic-bezier(.16,1,.3,1);" style-hover="transform: translateY(-4px);"><span style="display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: #fff; color: #2459d3; font-size: 16px;">{{ c.icon }}</span><strong style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2;">{{ c.title }}</strong><span style="color: #5f687a; font-size: 13px; line-height: 1.45;">{{ c.tagline }}</span><span style="color: #2459d3; font-size: 12px; font-weight: 600;">Learn more <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" style="display: inline-block; vertical-align: -1px;"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a></sc-for>
+          <sc-for list="{{ caps }}" as="c" hint-placeholder-count="4"><a href="{{ c.href }}" style="display: grid; gap: 10px; align-content: start; padding: 22px; border-radius: 18px; background: #ebf1fb; transition: transform .4s cubic-bezier(.16,1,.3,1);" style-hover="transform: translateY(-4px);"><span style="display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: #fff; color: #2459d3; font-size: 16px;">{{ c.iconEl }}</span><strong style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2;">{{ c.title }}</strong><span style="color: #5f687a; font-size: 13px; line-height: 1.45;">{{ c.tagline }}</span><span style="color: #2459d3; font-size: 12px; font-weight: 600;">Learn more <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" style="display: inline-block; vertical-align: -1px;"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a></sc-for>
         </div>
       </div>
     </section>
@@ -306,10 +305,10 @@ class Component extends DCLogic {
       wordStyle: { color: '#3f7afe', fontStyle: 'italic', fontWeight: 400 },
       storyHref: ind.story ? ind.story.href : 'story.html?story=advanced-materials',
       rail: d.industryOrder.map((key, i) => { const cur = key === id, c = ['#3f7afe', '#6eb8a9', '#df855d', '#8c7ac9', '#101828'][i]; return { title: d.industries[key].title, short: key === 'automotive' ? 'Auto' : d.industries[key].title, dot: { width: 8, height: 8, borderRadius: '50%', background: c, flex: 'none' }, href: 'industry.html?industry=' + key, select: e => { e.preventDefault(); this.setState({ industry: key, word: 0, typed: 0, active: 0 }); }, style: { display: 'inline-flex', alignItems: 'center', gap: 10, minHeight: 44, padding: '0 20px', borderRadius: 999, background: cur ? '#111318' : 'transparent', color: cur ? '#fff' : '#25324a', fontSize: 15, fontWeight: 600, transition: 'background .25s ease, color .25s ease' } }; }),
-      entries: mix.map(slug => ({ short: d.solutionShort[slug], tagline: d.solutionTagline[slug], icon: d.solutionIcons[slug], image: d.solutions[slug].image2, href: '#ch-' + slug, jump: jumpTo('ch-' + slug) })),
+      entries: mix.map(slug => ({ short: d.solutionShort[slug], tagline: d.solutionTagline[slug], iconEl: React.createElement('span', { 'aria-hidden': true, style: { display: 'grid', placeItems: 'center' }, dangerouslySetInnerHTML: { __html: d.solutionIcons[slug] } }), image: d.solutions[slug].image2, href: '#ch-' + slug, jump: jumpTo('ch-' + slug) })),
       sqdc: d.sqdc.map(([label, title, value, unit, note]) => ({ label, title, unit, note, shown: typeof value === 'number' ? Math.round(value * p) : value, numStyle: { marginTop: 6, color: '#2459d3', fontFamily: "'Manrope', sans-serif", fontSize: typeof value === 'number' ? 52 : 36, fontWeight: 600, letterSpacing: '-.04em', lineHeight: 1 } })),
       ticker: [...mix.map(s => d.solutions[s].outcome), 'Runs inside your boundary', 'People stay in the decision', ...mix.map(s => d.solutions[s].outcome), 'Runs inside your boundary', 'People stay in the decision'].map(text => ({ text })),
-      caps: mix.map(slug => ({ title: d.solutionShort[slug], tagline: d.solutionTagline[slug], icon: d.solutionIcons[slug], href: 'solution.html?solution=' + slug })),
+      caps: mix.map(slug => ({ title: d.solutionShort[slug], tagline: d.solutionTagline[slug], iconEl: React.createElement('span', { 'aria-hidden': true, style: { display: 'grid', placeItems: 'center' }, dangerouslySetInnerHTML: { __html: d.solutionIcons[slug] } }), href: 'solution.html?solution=' + slug })),
       footerGroups: d.footerGroups4
     };
   }

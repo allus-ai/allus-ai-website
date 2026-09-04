@@ -4,6 +4,17 @@
 @keyframes flow-y { from { top: -14%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } to { top: 100%; opacity: 0; } }
 
 @media (max-width: 900px) {
+  /* solution: cost card spacing — balanced above/below */
+  section[aria-labelledby="cost-title"] { padding-block: 0 !important; margin-top: 8px !important; }
+  section[aria-labelledby="cost-title"] > div { gap: 12px !important; }
+  section[aria-labelledby="cost-title"] > div > div:first-child { padding: 24px 22px !important; gap: 14px !important; }
+  section[aria-labelledby="cost-title"] > div > div:first-child ul { gap: 10px !important; padding-top: 16px !important; }
+  main > section:first-of-type > div[style*="padding: 80px 0 32px"] { padding-bottom: 12px !important; }
+  /* scroll progress bar hidden on phones */
+  body > div > div[aria-hidden][style*="animation-timeline: scroll(root)"], [data-screen-label] > div[aria-hidden][style*="animation-timeline: scroll(root)"] { display: none !important; }
+  /* results cards: top-aligned so the big word sits at the same height in every card */
+  section[aria-label="Results"] > div > div > div { align-content: start !important; min-height: 0 !important; }
+  section[aria-label="Results"] > div > div > div > span:first-child { margin-bottom: 8px !important; }
   /* industry tile titles may wrap on phones */
   a[href*="industry.html"] > strong[style*="white-space: nowrap"] { white-space: normal !important; font-size: 22px !important; }
   /* terms h1 single line */
@@ -541,4 +552,14 @@
   section[aria-labelledby="home-title"] h1 { font-size: 38px !important; }
   section[aria-labelledby="industries-title"] div[style*="grid-template-columns: repeat(5"] > a { flex-basis: 78%; }
   section[aria-label="Results"] strong[style*="font-size"] { font-size: 32px !important; }
+  /* cost card: tight, balanced spacing (final override) */
+  section[aria-labelledby="cost-title"] { padding-block: 24px 0 !important; margin-top: 0 !important; }
+  section[aria-labelledby="cost-title"] > div { padding-top: 0 !important; margin-top: 0 !important; animation: none !important; gap: 16px !important; }
+  main > section:first-of-type[style] { padding-bottom: 0 !important; }
+  main > section:first-of-type > div:last-child { padding-bottom: 0 !important; }
+  /* company hero: fully centred (label, title incl. blue line, copy, buttons) */
+  main > section:first-of-type > div[style*="justify-items: center"] { justify-items: center !important; text-align: center !important; }
+  main > section:first-of-type > div[style*="justify-items: center"] > * { text-align: center !important; justify-self: center !important; }
+  main > section:first-of-type > div[style*="justify-items: center"] h1 em { text-align: center !important; margin-inline: auto !important; }
+  main > section:first-of-type > div[style*="justify-items: center"] > div[style*="display: flex"] { justify-content: center !important; width: 100%; }
 }
